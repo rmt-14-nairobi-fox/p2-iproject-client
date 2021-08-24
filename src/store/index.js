@@ -46,6 +46,19 @@ export default new Vuex.Store({
         data: data,
       });
     },
+    register(context, payload) {
+      const { email, password, username } = payload;
+      const data = {
+        email: email,
+        password: password,
+        username: username,
+      };
+      return baseUrl({
+        method: "post",
+        url: "/user/register",
+        data: data,
+      });
+    },
   },
   modules: {},
 });
