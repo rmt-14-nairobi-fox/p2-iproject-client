@@ -10,12 +10,15 @@
   </div>
 </template>
 <script>
-import NavBarPage from "./components/navbar.vue"
+import NavBarPage from "./components/navbar.vue";
 export default {
-  components:{
-    NavBarPage
-  }
-}
+  components: {
+    NavBarPage,
+  },
+  created() {
+    this.$store.commit("LOGIN_CHECK");
+  },
+};
 </script>
 
 <style>
@@ -185,7 +188,7 @@ body {
   font-size: 20px;
   letter-spacing: 2px;
   height: 50px;
-  
+
   padding-right: 20px;
   padding-left: 20px;
 }
@@ -283,5 +286,4 @@ main .cards {
   color: #888;
   color: #313131;
 }
-
 </style>
