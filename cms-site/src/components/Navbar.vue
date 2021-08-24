@@ -4,7 +4,7 @@
     <div class="relative w-1/2 flex justify-end">
       <ul class="flex">
         <li class="flex-1 mr-2" v-if="!isAuth">
-          <a
+          <button
             class="
               text-center
               block
@@ -19,10 +19,10 @@
             @click.prevent="registerClick"
           >
             Register
-          </a>
+          </button>
         </li>
         <li class="flex-1 mr-2" v-if="!isAuth">
-          <a
+          <button
             class="
               text-center
               block
@@ -37,25 +37,23 @@
             @click.prevent="loginClick"
           >
             Login
-          </a>
+          </button>
         </li>
         <li class="flex-1 mr-2" v-if="isAuth">
-          <a
+          <button
             class="
               text-center
               block
-              border border-blue-500
               rounded
               py-2
               px-4
-              bg-blue-500
-              hover:bg-blue-700
+              bg-btn-in-main-danger
               text-white
             "
             @click.prevent="logoutHandler"
           >
             Logout
-          </a>
+          </button>
         </li>
       </ul>
     </div>

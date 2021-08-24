@@ -9,18 +9,39 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("access_token")) {
+        next();
+      } else {
+        next({ name: "Login" });
+      }
+    },
   },
   {
     path: "/login",
     name: "Login",
     component: () =>
       import(/* webpackChunkName: "Login" */ "../views/Login.vue"),
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem("access_token")) {
+        next();
+      } else {
+        next({ name: "Home" });
+      }
+    },
   },
   {
     path: "/register",
     name: "Register",
     component: () =>
       import(/* webpackChunkName: "Login" */ "../views/Register.vue"),
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem("access_token")) {
+        next();
+      } else {
+        next({ name: "Home" });
+      }
+    },
   },
   {
     path: "/createaccommodation",
@@ -29,6 +50,39 @@ const routes = [
       import(
         /* webpackChunkName: "Login" */ "../views/CreateAccommodation.vue"
       ),
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("access_token")) {
+        next();
+      } else {
+        next({ name: "Login" });
+      }
+    },
+  },
+  {
+    path: "/editaccommodation/:id",
+    name: "EditAccommodation",
+    component: () =>
+      import(/* webpackChunkName: "Login" */ "../views/EditAccommodation.vue"),
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("access_token")) {
+        next();
+      } else {
+        next({ name: "Login" });
+      }
+    },
+  },
+  {
+    path: "/accommodation/:id",
+    name: "AccommodationDetails",
+    component: () =>
+      import(/* webpackChunkName: "Login" */ "../views/Accommodation.vue"),
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("access_token")) {
+        next();
+      } else {
+        next({ name: "Login" });
+      }
+    },
   },
 ];
 

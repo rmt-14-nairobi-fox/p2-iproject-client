@@ -6,7 +6,7 @@
           <div class="leading-loose">
             <form
               class="p-10 bg-white rounded shadow-xl"
-              @submit.prevent="createHandler"
+              @submit.prevent="editeHandler"
             >
               <p class="text-lg text-gray-800 font-medium pb-4">
                 Create your accommodation
@@ -23,7 +23,7 @@
                   required=""
                   placeholder="Title"
                   aria-label="Title"
-                  v-model="title"
+                  v-model="accommodation.title"
                 />
               </div>
 
@@ -39,7 +39,7 @@
                   required=""
                   placeholder="Street"
                   aria-label="Street"
-                  v-model="address"
+                  v-model="accommodation.address"
                 />
               </div>
               <div class="mt-2">
@@ -57,7 +57,7 @@
                   required=""
                   placeholder="City"
                   aria-label="City"
-                  v-model="city"
+                  v-model="accommodation.city"
                 />
               </div>
               <div class="mt-2">
@@ -75,7 +75,7 @@
                   required=""
                   placeholder="Zip Code"
                   aria-label="Zip_Code"
-                  v-model="zipCode"
+                  v-model="accommodation.zipCode"
                 />
               </div>
               <div class="">
@@ -93,7 +93,7 @@
                   required=""
                   placeholder="Description"
                   aria-label="Description"
-                  v-model="description"
+                  v-model="accommodation.description"
                 />
               </div>
               <div class="">
@@ -108,7 +108,7 @@
                   required=""
                   placeholder="Price"
                   aria-label="Price"
-                  v-model="price"
+                  v-model="accommodation.price"
                 />
               </div>
               <div class="">
@@ -130,7 +130,7 @@
                       appearance-none
                       focus:shadow-outline
                     "
-                    v-model="type"
+                    v-model="accommodation.type"
                     placeholder="Regular input"
                   >
                     <option value="" selected disabled>
@@ -154,7 +154,7 @@
                   "
                   type="submit"
                 >
-                  Create
+                  Update
                 </button>
               </div>
             </form>
@@ -167,31 +167,29 @@
 
 <script>
 export default {
-  data() {
-    return {
-      title: "",
-      address: "",
-      city: "",
-      zipCode: "",
-      description: "",
-      price: null,
-      type: "",
-    };
+  name: "EditAccommodation",
+  computed: {
+    accommodation() {
+      return this.$store.state.accommodation;
+    },
   },
-  name: "CreateAccommodation",
+  created() {
+    this.$store.dispatch("getAccommodationFunction", this.$route.params.id);
+  },
   methods: {
-    createHandler() {
+    editeHandler() {
       const payload = {
-        title: this.title,
-        address: this.address,
-        city: this.city,
-        zipCode: this.zipCode,
-        description: this.description,
-        price: this.price,
-        type: this.type,
+        id: this.accommodation.id,
+        title: this.accommodation.title,
+        address: this.accommodation.address,
+        city: this.accommodation.city,
+        zipCode: this.accommodation.zipCode,
+        description: this.accommodation.description,
+        price: this.accommodation.price,
+        type: this.accommodation.type,
       };
-      console.log(payload);
-      this.$store.dispatch("createFunction", payload);
+      //   console.log(payload);
+      this.$store.dispatch("editAccommodationFunction", payload);
     },
   },
 };

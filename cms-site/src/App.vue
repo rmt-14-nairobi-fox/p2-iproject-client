@@ -19,7 +19,7 @@ export default {
   },
   created: function () {
     if (localStorage.getItem("access_token")) {
-      this.$store.commit("FETHC_ISAUTH", true);
+      this.$store.commit("FETCH_ISAUTH", true);
     }
   },
   computed: {
@@ -44,8 +44,8 @@ export default {
   background: #53b8bb;
 }
 
-.bg-btn-in-main:hover {
-  background: #2b666898;
+.bg-btn-in-main-danger {
+  background: #f85555;
 }
 
 .bg-navbar {
@@ -76,5 +76,12 @@ export default {
 
 .account-link:hover {
   background: #3d68ff;
+}
+
+.row-table:hover,
+.bg-btn-in-main:hover,
+.bg-btn-in-main-danger:hover {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.13) 0 0);
+  cursor: pointer;
 }
 </style>
