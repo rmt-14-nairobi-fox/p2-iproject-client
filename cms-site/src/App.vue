@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="bg-home-main font-family-karla flex">
-    <sidebar></sidebar>
+    <sidebar v-if="isAuth"></sidebar>
     <div class="w-full flex flex-col h-screen overflow-y-hidden">
       <!-- Desktop Header -->
       <navbar></navbar>
@@ -16,6 +16,16 @@ export default {
   components: {
     Sidebar,
     Navbar,
+  },
+  created: function () {
+    if (localStorage.getItem("access_token")) {
+      this.$store.commit("FETHC_ISAUTH", true);
+    }
+  },
+  computed: {
+    isAuth() {
+      return this.$store.state.isAuth;
+    },
   },
 };
 </script>

@@ -3,7 +3,7 @@
     <div class="w-1/2"></div>
     <div class="relative w-1/2 flex justify-end">
       <ul class="flex">
-        <li class="flex-1 mr-2">
+        <li class="flex-1 mr-2" v-if="!isAuth">
           <a
             class="
               text-center
@@ -21,7 +21,7 @@
             Register
           </a>
         </li>
-        <li class="flex-1 mr-2">
+        <li class="flex-1 mr-2" v-if="!isAuth">
           <a
             class="
               text-center
@@ -39,7 +39,7 @@
             Login
           </a>
         </li>
-        <li class="flex-1 mr-2">
+        <li class="flex-1 mr-2" v-if="isAuth">
           <a
             class="
               text-center
@@ -52,7 +52,7 @@
               hover:bg-blue-700
               text-white
             "
-            href="#"
+            @click.prevent="logoutHandler"
           >
             Logout
           </a>
@@ -65,6 +65,11 @@
 <script>
 export default {
   name: "Navbar",
+  computed: {
+    isAuth() {
+      return this.$store.state.isAuth;
+    },
+  },
   methods: {
     loginClick() {
       this.$router
@@ -82,6 +87,10 @@ export default {
           name: "Register",
         })
         .catch(() => {});
+    },
+
+    logoutHandler() {
+      this.$store.dispatch("logoutFunction");
     },
   },
 };
