@@ -13,7 +13,7 @@
               </div>
 
               <div class="form-banner">
-                <input type="submit" value="Log-In" class="form-cl submit" />
+                 <router-link to="/register" class="button" aria-current="page"> Register</router-link> 
               </div>
             </div>
           </div>
@@ -30,12 +30,11 @@
     <main>
       <div class="cards justify-content-center">
         <div class="card-anime col-md-3">
-          <a href="">
+           <router-link to="/animereview" class="nav-link" aria-current="page">
             <img src="../assets/naruto.jpg" alt="Anime Image" />
             <h3>Naruto</h3>
-          </a>
+           </router-link> 
         </div>
-        
       </div>
     </main>
   </div>

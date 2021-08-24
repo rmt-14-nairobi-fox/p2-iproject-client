@@ -136,16 +136,23 @@ body {
 .form-banner {
   color: white;
 }
-.form-banner .submit {
+.form-banner a {
+  text-decoration: none;
+}
+.form-banner .button {
   background-color: #ff5722;
   border-color: transparent;
   color: #fff;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   font-size: 20px;
   letter-spacing: 2px;
   height: 50px;
   margin-top: 20px;
 }
-.form-banner .submit:hover {
+.form-banner .button:hover {
   background-color: #f44336;
   cursor: pointer;
 }
@@ -157,7 +164,7 @@ body {
   text-shadow: 2px 1px #474747;
 }
 .content {
-  margin: 8%;
+  margin: 1%;
   background-color: #8a8a8a;
   padding: 1rem 2rem 1rem 2rem;
   box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05);
@@ -171,7 +178,7 @@ body {
   font-size: 20px;
   letter-spacing: 2px;
   height: 50px;
-  margin-top: 20px;
+  
   padding-right: 20px;
   padding-left: 20px;
 }
@@ -193,17 +200,17 @@ body {
   padding-bottom: 40px;
 }
 .head-search h1 {
-  color: #888;
+  color: rgb(255, 255, 255);
   font-size: 42px;
   font-weight: 400;
   text-align: center;
   text-transform: uppercase;
 }
 .head-search strong {
-  color: #313131;
+  color: #8a8a8a;
 }
 .head-search h1:hover {
-  color: #313131;
+  color: #8a8a8a;
 }
 .head-search .search-box {
   display: flex;
@@ -263,7 +270,7 @@ main .cards {
 }
 .card-anime h3 {
   padding: 16px;
-  color: #888;
+  color: #fff;
   transition: 0.4s;
 }
 .card-anime :hover h3 {

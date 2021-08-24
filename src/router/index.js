@@ -1,6 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import AllReview from "../views/allReview.vue"
+import AnimeReview from "../views/reviewAnime.vue"
+import Login from "../views/login.vue"
+import Register from "../views/register.vue"
 
 Vue.use(VueRouter);
 
@@ -10,6 +14,27 @@ const routes = [
     name: "Home",
     component: Home,
   },
+  {
+    path: "/allreview",
+    name: "AllReview",
+    component: AllReview
+  },
+  { 
+    path: "/animereview",
+    name: "AnimeReview",
+    component: AnimeReview
+  },
+  { 
+    path: "/login",
+    name: "Login",
+    component: Login
+  },
+  { 
+    path: "/register",
+    name: "Register",
+    component: Register
+  },
+  
  
 ];
 

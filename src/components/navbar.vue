@@ -7,17 +7,17 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end me-3" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item">
-                <router-link to="/" class="nav-link active" aria-current="page"> <i class="bx bx-home"></i>Home</router-link> 
+            <li class="nav-item"> <router-link to="/" class="nav-link active" aria-current="page"> <i class="bx bx-home"></i>Home</router-link> 
+               
             </li>
             <li class="nav-item">
-              <a class="nav-link" href=""><i class="bx bx-book-open"></i>All Review</a>
+                 <router-link to="/allreview" class="nav-link" aria-current="page"> <i class="bx bx-book-open"></i>All Review</router-link> 
             </li>
             <li class="nav-item">
               <a class="nav-link" href=""><i class="bx bxl-discourse"></i> DISQUS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href=""><i class="bx bx-log-in"></i> LOG-IN</a>
+                <router-link to="/login" class="nav-link" aria-current="page"> <i class="bx bx-log-in"></i>LOG-IN</router-link> 
             </li>
             <li class="nav-item">
               <a class="nav-link" href=""><i class="bx bx-log-out"></i> LOG-OUT</a>
