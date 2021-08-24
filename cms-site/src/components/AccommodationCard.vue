@@ -1,5 +1,5 @@
 <template>
-  <tr class="row-table">
+  <tr class="row-table" @click="accommodationClick(accommodation.id)">
     <td class="text-left py-3 px-4 border-bold">{{ index + 1 }}</td>
     <td class="text-left py-3 px-4 capitalize">{{ accommodation.title }}</td>
     <td class="text-left py-3 px-4 capitalize">{{ accommodation.address }}</td>
@@ -15,6 +15,18 @@
 export default {
   name: "AccommodationCard",
   props: ["accommodation", "index"],
+  methods: {
+    accommodationClick(payload) {
+      this.$router
+        .push({
+          name: "AccommodationDetails",
+          params: {
+            id: +payload,
+          },
+        })
+        .catch(() => {});
+    },
+  },
 };
 </script>
 

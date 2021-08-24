@@ -15,11 +15,11 @@
             p-3
             mb-5
             rounded-lg
-            text-gray-800
+            text-white
           "
           @click="addClick"
         >
-          <i class="fas fa-plus mr-3 text-gray-800"></i>
+          <i class="fas fa-plus mr-3 text-white"></i>
           Add new accommodation
         </button>
 
@@ -89,7 +89,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("getAccommodationFunction");
+    this.$store.dispatch("getAccommodationsFunction");
   },
   components: {
     AccommodationCard,

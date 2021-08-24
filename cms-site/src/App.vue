@@ -19,7 +19,7 @@ export default {
   },
   created: function () {
     if (localStorage.getItem("access_token")) {
-      this.$store.commit("FETHC_ISAUTH", true);
+      this.$store.commit("FETCH_ISAUTH", true);
     }
   },
   computed: {
