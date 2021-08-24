@@ -13,7 +13,7 @@
               </div>
 
               <div class="form-banner">
-                <router-link to="/register" class="button" aria-current="page"> Register</router-link>
+                <router-link to="/register" class="button" aria-current="page" v-if="!this.$store.state.isLogin"> Register</router-link>
               </div>
             </div>
           </div>
@@ -30,10 +30,10 @@
     <main>
       <div class="cards justify-content-center">
         <div class="card-anime col-md-3" v-for="anime in dataAnimes" :key="anime.mal_id">
-          <router-link to="/animereview" class="nav-link" aria-current="page">
+          <a class="nav-link" aria-current="page" @click="animeReview(anime)">
             <img :src="anime.image_url" alt="Anime Image" />
             <h3>{{ anime.title }}</h3>
-          </router-link>
+          </a>
         </div>
       </div>
     </main>
@@ -58,6 +58,11 @@ export default {
   methods: {
     searchAnime() {
       this.$store.dispatch("findAnime", this.search);
+    },
+    animeReview(payload) {
+      console.log(payload);
+      this.$store.commit("ANIME_WILL_REVIEW", payload);
+      this.$router.push("/animereview");
     },
   },
 };

@@ -202,7 +202,8 @@ body {
   list-style: none;
 }
 .absolute {
-  bottom: -10px;
+  bottom: 0px;
+  padding-left: 0px !important;
   position: relative;
 }
 .head-search {
