@@ -10,6 +10,7 @@ export default new Vuex.Store({
     servicesData: [],
     productData: [],
     dataCheckout: [],
+    tokenTransaction: "",
   },
   mutations: {
     LOGIN_STATUS(state, payload) {
@@ -24,8 +25,25 @@ export default new Vuex.Store({
     COMMIT_CHECKOUT(state, payload) {
       state.dataCheckout = payload;
     },
+    COMMIT_TOKEN_TRANSACTION(state, payload) {
+      state.tokenTransaction = payload;
+    },
   },
   actions: {
+    async goCheckout(context, payload) {
+      try {
+        console.log(payload, "<<<<payloadd");
+        const response = await localhost({
+          method: "post",
+          url: `/checkout`,
+          data: payload,
+        });
+        console.log(response, "response");
+        context.commit("COMMIT_TOKEN_TRANSACTION", response.data);
+      } catch (error) {
+        console.log(error, "error checkout");
+      }
+    },
     async fetchProvider(context, payload) {
       try {
         const response = await localhost({

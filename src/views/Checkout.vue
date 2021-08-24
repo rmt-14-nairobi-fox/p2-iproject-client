@@ -245,7 +245,7 @@
             "
             >Total Cost</label
           >
-          <p>{{ this.$store.state.dataCheckout.cost }}</p>
+          <p>{{ this.$store.state.dataCheckout.price }}</p>
         </div>
         <div class="flex items-center justify-center md:gap-8 gap-4 pt-5 pb-5">
           <button
@@ -297,7 +297,7 @@ export default {
       phoneNumber: "",
       dateService: "",
       notes: "",
-      cost: 0,
+      price: 0,
     };
   },
   methods: {
