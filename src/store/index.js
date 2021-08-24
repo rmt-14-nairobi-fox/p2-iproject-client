@@ -18,7 +18,7 @@ export default new Vuex.Store({
       try {
         const response = await localhost({
           method: "post",
-          url: "/cust/login",
+          url: "/users/login",
           data: payload,
         });
 
