@@ -29,6 +29,19 @@ export default new Vuex.Store({
         router.push("/login");
       }
     },
+    async userRegist(context, payload) {
+      try {
+        const response = await localhost({
+          method: "post",
+          url: "/users/register",
+          data: payload,
+        });
+        console.log(response, "response regist");
+        router.push("/login");
+      } catch (error) {
+        console.log(error, "di error regist");
+      }
+    },
   },
   modules: {},
 });
