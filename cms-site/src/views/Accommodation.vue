@@ -64,28 +64,15 @@
             </div>
           </div>
           <div class="w-5/12 relative">
-            <div
-              class="
-                bg-pink-500
-                w-full
-                h-full
-                opacity-60
-                absolute
-                sm:rounded-bl-lg
-                rounded-bl-none rounded-tr-lg rounded-br-lg
-              "
-            ></div>
-            <img
-              class="
-                h-full
-                w-full
-                object-cover
-                sm:rounded-bl-lg
-                rounded-bl-none rounded-tr-lg rounded-br-lg
-              "
-              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=550&q=80"
-              alt="Banner Desktop"
-            />
+            <MglMap
+              :accessToken="accessToken"
+              :mapStyle.sync="mapStyle"
+              @load="onMapLoaded($event, accommodation.lat, accommodation.long)"
+            >
+              <MglNavigationControl position="top-right" />
+              <MglGeolocateControl position="top-right" />
+              <MglMarker :coordinates="coordinates" color="blue" />
+            </MglMap>
           </div>
         </div>
       </div>
@@ -123,11 +110,31 @@
 </template>
 
 <script>
+import Mapbox from "mapbox-gl";
+import {
+  MglMap,
+  MglMarker,
+  MglNavigationControl,
+  MglGeolocateControl,
+} from "vue-mapbox";
 export default {
   name: "Accommodation",
-
+  data() {
+    return {
+      accessToken: process.env.VUE_APP_MAPBOX_API,
+      mapStyle: "mapbox://styles/mapbox/streets-v11",
+      coordinates: [],
+    };
+  },
+  components: {
+    MglMap,
+    MglMarker,
+    MglNavigationControl,
+    MglGeolocateControl,
+  },
   created() {
     this.$store.dispatch("getAccommodationFunction", this.$route.params.id);
+    this.mapbox = Mapbox;
   },
   computed: {
     accommodation() {
@@ -147,6 +154,17 @@ export default {
     },
     deleteHandler(payload) {
       this.$store.dispatch("deleteAccommodationFunction", payload);
+    },
+    async onMapLoaded(event, lat, long) {
+      // Here we cathing 'load' map event
+      const asyncActions = event.component.actions;
+      this.coordinates = [long, lat];
+
+      await asyncActions.flyTo({
+        //   mapbox [long, lat]
+        center: [long, lat],
+        zoom: 17,
+      });
     },
   },
 };
