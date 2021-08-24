@@ -7,13 +7,29 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isLogin: false,
+    servicesData: [],
   },
   mutations: {
     LOGIN_STATUS(state, payload) {
       state.isLogin = payload;
     },
+    COMMIT_SERVICE(state, payload) {
+      state.servicesData = payload;
+    },
   },
   actions: {
+    async fetchServices(context) {
+      try {
+        const response = await localhost({
+          method: "get",
+          url: `/cust/services`,
+        });
+
+        context.commit("COMMIT_SERVICE", response.data);
+      } catch (error) {
+        console.log(error.response, "di fetchServ");
+      }
+    },
     async userLogin(context, payload) {
       try {
         const response = await localhost({
