@@ -8,6 +8,8 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     servicesData: [],
+    productData: [],
+    dataCheckout: [],
   },
   mutations: {
     LOGIN_STATUS(state, payload) {
@@ -16,13 +18,31 @@ export default new Vuex.Store({
     COMMIT_SERVICE(state, payload) {
       state.servicesData = payload;
     },
+    COMMIT_PRODUCT(state, payload) {
+      state.productData = payload;
+    },
+    COMMIT_CHECKOUT(state, payload) {
+      state.dataCheckout = payload;
+    },
   },
   actions: {
+    async fetchProvider(context, payload) {
+      try {
+        const response = await localhost({
+          method: "get",
+          url: `/cust/services/${payload}`,
+        });
+        console.log(response);
+        context.commit("COMMIT_PRODUCT", response.data);
+      } catch (error) {
+        console.log(error.response, "di fetchProv");
+      }
+    },
     async fetchServices(context) {
       try {
         const response = await localhost({
           method: "get",
-          url: `/cust/services`,
+          url: `/cust/services/`,
         });
 
         context.commit("COMMIT_SERVICE", response.data);
