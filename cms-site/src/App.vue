@@ -1,32 +1,80 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div id="app" class="bg-home-main font-family-karla flex">
+    <sidebar v-if="isAuth"></sidebar>
+    <div class="w-full flex flex-col h-screen overflow-y-hidden">
+      <!-- Desktop Header -->
+      <navbar></navbar>
+      <router-view />
     </div>
-    <router-view />
   </div>
 </template>
 
+<script>
+import Navbar from "./components/Navbar.vue";
+import Sidebar from "./components/Sidebar.vue";
+export default {
+  components: {
+    Sidebar,
+    Navbar,
+  },
+  created: function () {
+    if (localStorage.getItem("access_token")) {
+      this.$store.commit("FETHC_ISAUTH", true);
+    }
+  },
+  computed: {
+    isAuth() {
+      return this.$store.state.isAuth;
+    },
+  },
+};
+</script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import url("https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap");
+
+.font-family-karla {
+  font-family: alegreya;
 }
 
-#nav {
-  padding: 30px;
+.bg-home-main {
+  background: #fcf8ec;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.bg-btn-in-main {
+  background: #53b8bb;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.bg-btn-in-main:hover {
+  background: #2b666898;
+}
+
+.bg-navbar {
+  background: #fad687;
+}
+
+.some-text-color {
+  color: #fcf8ec;
+}
+
+.bg-sidebar {
+  background: #9ddac6;
+}
+
+.cta-btn {
+  color: #3d68ff;
+}
+
+.active-nav-link {
+  background: #fcf8ec;
+}
+
+.nav-item:hover {
+  background: #fcf8ec;
+  border-bottom-left-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+}
+
+.account-link:hover {
+  background: #3d68ff;
 }
 </style>
