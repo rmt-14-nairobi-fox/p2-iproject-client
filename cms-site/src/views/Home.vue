@@ -17,6 +17,7 @@
             rounded-lg
             text-gray-800
           "
+          @click="addClick"
         >
           <i class="fas fa-plus mr-3 text-gray-800"></i>
           Add new accommodation
@@ -210,5 +211,15 @@
 
 export default {
   name: "Home",
+  methods: {
+    addClick() {
+      this.$router
+        .push({
+          path: "/createaccommodation",
+          name: "CreateAccommodation",
+        })
+        .catch(() => {});
+    },
+  },
 };
 </script>
