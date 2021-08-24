@@ -190,7 +190,6 @@ export default {
         price: this.price,
         type: this.type,
       };
-      console.log(payload);
       this.$store.dispatch("createFunction", payload);
     },
   },
