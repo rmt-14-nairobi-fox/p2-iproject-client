@@ -103,6 +103,13 @@ body {
 .form-login ::placeholder {
   color: rgb(243, 243, 243);
 }
+.search-box .submit {
+  background-color: #ff5722;
+  border-color: transparent;
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
 .form-register {
   height: 900px;
   padding-top: 20%;
@@ -258,7 +265,6 @@ main .cards {
   text-align: center;
   flex: 1px 1px 33%;
   padding: 0 8px;
-  margin-bottom: 16%;
 }
 .card-anime img {
   border: 3px solid #888;

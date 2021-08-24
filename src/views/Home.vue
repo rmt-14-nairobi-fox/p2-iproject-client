@@ -23,16 +23,17 @@
     <!-- Anni Search -->
     <div class="head-search">
       <h1>The<strong>ANIME</strong>search</h1>
-      <form class="search-box">
-        <input type="search" class="search-field" placeholder="Search Anime" required />
+      <form class="search-box" @submit.prevent="searchAnime">
+        <input type="search" class="search-field" placeholder="Search Anime" required  v-model="search"/><button type="submit" class="submit"><i class='bx bx-search'></i></button> 
+
       </form>
     </div>
     <main>
       <div class="cards justify-content-center">
-        <div class="card-anime col-md-3">
+        <div class="card-anime col-md-3" v-for="anime in dataAnimes" :key="anime.mal_id">
            <router-link to="/animereview" class="nav-link" aria-current="page">
-            <img src="../assets/naruto.jpg" alt="Anime Image" />
-            <h3>Naruto</h3>
+            <img :src="anime.image_url" alt="Anime Image" />
+            <h3>{{anime.title}}</h3>
            </router-link> 
         </div>
       </div>
@@ -47,6 +48,22 @@
 
 export default {
   name: "Home",
+  data(){
+    return {
+      search:""
+    }
+
+  },
+  computed :{
+    dataAnimes(){
+      return this.$store.state.dataAnime
+    }
+  },
+  methods:{
+    searchAnime(){
+      this.$store.dispatch("findAnime", this.search)
+    }
+  }
   
 };
 </script>
