@@ -8,10 +8,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isAuth: false,
+    accommodations: [],
   },
   mutations: {
     FETHC_ISAUTH(state, payload) {
       state.isAuth = payload;
+    },
+    FETHC_ACCOMMODATIONS(state, payload) {
+      state.accommodations = payload;
     },
   },
   actions: {
@@ -38,6 +42,37 @@ export default new Vuex.Store({
       localStorage.clear();
       context.commit("FETHC_ISAUTH", false);
       router.push({ path: "/login" }).catch(() => {});
+    },
+
+    getAccommodationFunction(context) {
+      axios
+        .get("/accommodations", {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        })
+        .then(({ data }) => {
+          context.commit("FETHC_ACCOMMODATIONS", data);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    },
+
+    createFunction(context, payload) {
+      axios
+        .post("/accommodations", payload, {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        })
+        .then(({ data }) => {
+          router.push({ path: "/" }).catch(() => {});
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
     },
   },
   modules: {},
