@@ -54,7 +54,7 @@
       </div>
     </section>
     <section>
-      <div class="flex flex-row items-center justify-center mx-auto">
+      <div class="flex flex-row mx-auto">
         <CardService
           v-for="service in this.$store.state.servicesData"
           :key="service.id"
