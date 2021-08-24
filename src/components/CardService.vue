@@ -28,7 +28,7 @@
 
     <div class="flex items-center px-4 py-2 bg-gray-900">
       <button
-        @click.prevent="seeProvider(service)"
+        @click.prevent="seeProvider(service.id)"
         class="
           px-2
           py-1
@@ -58,8 +58,8 @@ export default {
   props: ["service"],
   methods: {
     seeProvider(service) {
-      this.$router.push("/providers");
-      this.$store.commit("SEE_PROVIDER", service);
+      this.$store.dispatch("fetchProvider", service);
+      this.$router.push(`/products/${service}`);
     },
   },
 };
