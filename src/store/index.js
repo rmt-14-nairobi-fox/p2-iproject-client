@@ -11,6 +11,7 @@ export default new Vuex.Store({
     productData: [],
     dataCheckout: [],
     tokenTransaction: "",
+    cartData: [],
   },
   mutations: {
     LOGIN_STATUS(state, payload) {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     COMMIT_PRODUCT(state, payload) {
       state.productData = payload;
+    },
+    COMMIT_ADD_CART(state, payload) {
+      state.cartData.push(payload);
     },
     COMMIT_CHECKOUT(state, payload) {
       state.dataCheckout = payload;
@@ -35,7 +39,8 @@ export default new Vuex.Store({
         console.log(payload, "<<<<payloadd");
         const response = await localhost({
           method: "post",
-          url: `/checkout`,
+          url: `/orders/checkout`,
+          headers: { access_token: localStorage.getItem("access_token") },
           data: payload,
         });
         console.log(response, "response");

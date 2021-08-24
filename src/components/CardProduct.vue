@@ -114,8 +114,8 @@ export default {
   props: ["prod"],
   methods: {
     checkoutHandler(product) {
-      this.$router.push("/checkout");
-      this.$store.commit("COMMIT_CHECKOUT", product);
+      this.$store.commit("COMMIT_ADD_CART", product);
+      this.$router.push("/orders");
     },
   },
 };

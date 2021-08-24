@@ -49,7 +49,16 @@
                     <label class="block text-sm text-gray-00" for="cus_name"
                       >Name</label
                     >
-                    <p>nama</p>
+                    <input
+                      class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
+                      id="cus_name"
+                      name="cus_name"
+                      type="text"
+                      required=""
+                      placeholder="Your Name"
+                      aria-label="Name"
+                      v-model="custName"
+                    />
                   </div>
                   <div class="mt-2">
                     <label class="block text-sm text-gray-600" for="cus_email"
@@ -233,35 +242,51 @@
   </div>
 </template>
 <script>
-// tokenTransaction
+import TableCart from "../components/TableCart.vue";
 export default {
-  name: "Checkout",
+  name: "Orders",
+  components: {
+    TableCart,
+  },
   data() {
     return {
-      fullName: "",
-      address: "",
+      custName: "",
       email: "",
+      street: "",
       city: "",
+      country: "",
+      zipCode: "",
       phoneNumber: "",
       dateService: "",
-      notes: "",
-      price: 0,
     };
+  },
+  computed: {
+    sumTotalPrice() {
+      let totalPrice = 0;
+      this.$store.state.cartData.map((el) => {
+        totalPrice += el.price;
+      });
+      return totalPrice;
+    },
   },
   methods: {
     checkoutHandler() {
-      let payload = {
-        full_name: this.fullName,
-        email: this.email,
-        phone: this.phoneNumber,
-        address: this.address,
-        city: this.city,
-        dateService: this.dateService,
-        notes: this.notes,
-        price: this.$store.state.dataCheckout.price,
+      let dataOrder = {
+        totalPrice: this.sumTotalPrice,
+        orderDetails: this.$store.state.cartData,
+        custDetails: {
+          custName: this.custName,
+          email: this.email,
+          street: this.street,
+          city: this.city,
+          country: this.country,
+          zipCode: this.zipCode,
+          phoneNumber: this.phoneNumber,
+          dateService: this.dateService,
+        },
       };
-      this.$router.push("/orders");
-      this.$store.dispatch("goCheckout", payload);
+      this.$router.push("/checkout");
+      this.$store.dispatch("goCheckout", dataOrder);
     },
   },
 };
