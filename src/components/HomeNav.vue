@@ -12,7 +12,7 @@
         :src="profile"
         alt=""
       />
-      <h3 class="m-0 mt-3 text-light text-center">{{ user_name }}</h3>
+      <h5 class="m-0 mt-3 text-light text-center">{{ user_name }}</h5>
     </div>
     <div class="flex-grow-1 w-100">
       <div
