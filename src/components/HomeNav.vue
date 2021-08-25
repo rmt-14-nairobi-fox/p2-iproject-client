@@ -10,6 +10,7 @@
         height="120"
         style="border-radius: 100%;"
         :src="profile"
+        referrerpolicy="no-referrer"
         alt=""
       />
       <h5 class="m-0 mt-3 text-light text-center">{{ user_name }}</h5>
