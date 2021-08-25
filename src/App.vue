@@ -1,13 +1,20 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Navbar></Navbar>
     <router-view/>
+    <HFooter></HFooter>
   </div>
 </template>
-
+<script>
+import HFooter from 'vue-hacktiv8-footer'
+import Navbar from "./components/Navbar.vue"
+export default {
+  components: {
+    HFooter,
+    Navbar
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
