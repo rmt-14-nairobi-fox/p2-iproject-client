@@ -58,7 +58,7 @@
       <div class="w-6/12 relative">
         <img
           class="h-full w-full object-cover"
-          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=550&q=80"
+          :src="accommodation.Images[0].imageUrl"
           alt="Banner Desktop"
         />
       </div>
@@ -70,6 +70,7 @@
 export default {
   name: "AccommodationsCard",
   props: ["accommodation"],
+
   methods: {
     detailClick(payload) {
       this.$router

@@ -14,7 +14,7 @@
       >
         <!-- CAROUSEL -->
         <div
-          v-if="images.length > 0"
+          v-if="images.length > 0 && images"
           class="rounded shadow-xl max-w-6xl relative"
         >
           <div class="w-full h-5/6">
@@ -129,7 +129,7 @@
                 </span>
                 /month
               </p>
-              <div class="flex">
+              <div class="flex mb-2">
                 <div class="mr-8">
                   <p class="text-xl capitalize">
                     <span>Street:&nbsp;</span>
@@ -149,6 +149,24 @@
                   </p>
                 </div>
               </div>
+              <p
+                class="
+                  text-xl
+                  font-light
+                  leading-relaxed
+                  mt-0
+                  mb-4
+                  text-gray-700
+                "
+              >
+                Today in {{ accommodation.city }} is currently in
+                <span class="font-bold">{{ accommodation.weatherDesc }}</span>
+                with temperature:
+                <span class="font-bold">
+                  {{ accommodation.temperature }}
+                </span>
+                degree celcius
+              </p>
             </div>
           </div>
         </div>
@@ -223,6 +241,9 @@
           </div>
         </div>
       </div>
+      <div
+        class="mt-10 content-center mx-auto w-10/12 p-8 gap-8 bg-sidebar"
+      ></div>
     </main>
   </div>
 </template>
