@@ -94,6 +94,8 @@ export default {
         });
       });
 
+      this.$store.commit('RESET_ALL');
+
       this.$router.push('/auth/login');
     },
   },

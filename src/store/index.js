@@ -15,8 +15,20 @@ export default new Vuex.Store({
     savednews: [],
     graph: {},
     weather: {},
+    posts: [],
+    myPosts: [],
   },
   mutations: {
+    RESET_ALL(state) {
+      state.isLogin = false;
+      state.profile = '';
+      state.user_name = '';
+      state.newsPrefs = [];
+      state.news = {};
+      state.savednews = [];
+      state.graph = {};
+      state.weather = {};
+    },
     SET_ISLOGIN(state, payload) {
       state.isLogin = payload;
     },
@@ -40,6 +52,12 @@ export default new Vuex.Store({
     },
     SET_WEATHER(state, payload) {
       state.weather = payload;
+    },
+    SET_POSTS(state, payload) {
+      state.posts = payload;
+    },
+    SET_MYPOSTS(state, payload) {
+      state.myPosts = payload;
     },
   },
   actions: {
@@ -210,6 +228,83 @@ export default new Vuex.Store({
         });
 
         context.commit('SET_NEWS', response.data);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
+
+    async fetchAllPost(context) {
+      try {
+        const response = await server.get('/posts', {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        context.commit('SET_POSTS', response.data);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
+
+    async fetchAllMyPost(context) {
+      try {
+        const response = await server.get('/posts/myposts', {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        context.commit('SET_MYPOSTS', response.data);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
+
+    async createPostForm(context, payload) {
+      try {
+        const response = await server.post('/posts', payload, {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        console.log(response.data);
+        context.dispatch('fetchAllMyPost');
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
+
+    async editPostForm(context, payload) {
+      try {
+        const response = await server.put(
+          '/posts/' + payload.post_id,
+          payload.form,
+          {
+            headers: {
+              access_token: localStorage.access_token,
+            },
+          }
+        );
+
+        console.log(response.data);
+        context.dispatch('fetchAllMyPost');
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
+
+    async deletePost(context, payload) {
+      try {
+        const response = await server.delete('/posts/' + payload, {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        console.log(response.data);
+        context.dispatch('fetchAllMyPost');
       } catch (err) {
         console.log(err.response.data);
       }

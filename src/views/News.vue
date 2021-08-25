@@ -2,12 +2,13 @@
   <div class="col-10 mh-100">
     <div class="row">
       <NewsList />
-      <PostList />
+      <PostList :posts="posts" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import NewsList from '../components/NewsList.vue';
 import PostList from '../components/PostList.vue';
 export default {
@@ -15,6 +16,17 @@ export default {
   components: {
     NewsList,
     PostList,
+  },
+  computed: {
+    ...mapState(['posts']),
+  },
+  methods: {
+    fetchAllPost() {
+      this.$store.dispatch('fetchAllPost');
+    },
+  },
+  created() {
+    this.fetchAllPost();
   },
 };
 </script>
@@ -72,6 +84,13 @@ export default {
 
 .image-header {
   height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.post-header {
+  height: 160px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
