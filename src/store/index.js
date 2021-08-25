@@ -270,7 +270,6 @@ export default new Vuex.Store({
         });
 
         console.log(response.data);
-        context.dispatch('fetchAllPost');
         context.dispatch('fetchAllMyPost');
       } catch (err) {
         console.log(err.response.data);
@@ -290,7 +289,6 @@ export default new Vuex.Store({
         );
 
         console.log(response.data);
-        context.dispatch('fetchAllPost');
         context.dispatch('fetchAllMyPost');
       } catch (err) {
         console.log(err.response.data);
