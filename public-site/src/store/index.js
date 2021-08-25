@@ -91,9 +91,23 @@ export default new Vuex.Store({
           },
         })
         .then(({ data }) => {
-          console.log(data.User);
           context.commit("FETCH_ACCOMMODATION", data);
           context.commit("FETCH_OWNERINFO", data.User);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    },
+
+    getAllImages(context, payload) {
+      axios
+        .get(`/public/${+payload}/images`, {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        })
+        .then(({ data }) => {
+          context.commit("FETCH_IMAGES", data);
         })
         .catch((err) => {
           console.log(err.response.data);
