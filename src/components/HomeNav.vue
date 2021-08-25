@@ -22,9 +22,9 @@
         <h5 class="m-0 ml-3">News</h5>
       </div>
       <div
-        @click="gotoSavedNews"
+        @click="gotoMySpace"
         class="w-100 text-light p-3 sidebar-item d-flex flex-row align-items-center"
-        :class="$route.name === 'SavedNews' ? 'sidebar-item-active' : ''"
+        :class="$route.name === 'MySpace' ? 'sidebar-item-active' : ''"
       >
         <b-icon-bookmark-fill />
         <h5 class="m-0 ml-3">My Space</h5>
@@ -49,7 +49,7 @@ export default {
     gotoNews() {
       this.$router.push('/news');
     },
-    gotoSavedNews() {
+    gotoMySpace() {
       this.$router.push('/myspace');
     },
     logout() {

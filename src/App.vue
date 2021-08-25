@@ -26,7 +26,7 @@ export default {
 }
 
 body {
-  background-color: #e6e6e6;
+  background-color: #dbdbdb;
 }
 
 .sidebar-width {
@@ -41,5 +41,10 @@ body {
 .sidebar-item:hover {
   cursor: pointer;
   background-color: #7e7e7e;
+}
+
+.content-height {
+  height: calc(100% - 85px);
+  max-height: calc(100% - 85px);
 }
 </style>

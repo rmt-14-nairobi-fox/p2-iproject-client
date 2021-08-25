@@ -1,6 +1,6 @@
 <template>
   <div class="h-100 d-flex flex-column">
-    <div class="row flex-grow-1">
+    <div class="row content-height">
       <HomeNav />
       <router-view />
     </div>
