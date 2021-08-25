@@ -1,5 +1,5 @@
 <template>
-  <div class="col mh-100">
+  <div class="col-10 mh-100">
     <div class="row">
       <SavedList />
       <PostList />
