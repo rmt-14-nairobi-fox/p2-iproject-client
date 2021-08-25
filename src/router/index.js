@@ -6,6 +6,7 @@ import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import GoogleSignIn from '../views/GoogleSignIn.vue';
 import News from '../views/News.vue';
+import SavedNews from '../views/SavedNews.vue';
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,11 @@ const routes = [
         path: 'news',
         name: 'News',
         component: News,
+      },
+      {
+        path: 'savednews',
+        name: 'SavedNews',
+        component: SavedNews,
       },
     ],
   },
