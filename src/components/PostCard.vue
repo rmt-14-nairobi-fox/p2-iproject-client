@@ -29,7 +29,7 @@
       <div class="align-self-start d-flex flex-column">
         <!-- Comment Button -->
         <div>
-          <a @click.prevent="toggleComment" href="#" class="h4 text-dark">
+          <a @click.prevent="toggleComment" href="#" class="h5 text-dark">
             <b-icon-chat />
             <!-- Comment count -->
             <span> 35</span>
