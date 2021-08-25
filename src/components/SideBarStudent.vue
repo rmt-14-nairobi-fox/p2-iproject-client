@@ -6,13 +6,13 @@
       <div class="flex flex-col my-12 space-y-8">
         <div class="uppercase space-y-4">
           <div class="mx-5">
-            <button>MY CLASS</button>
+            <button @click="myClass">MY CLASS</button>
           </div>
           <div class="mx-5">
-            <button>JOIN CLASS</button>
+            <button @click="joinClass">JOIN CLASS</button>
           </div>
           <div class="mx-5">
-            <button>WAITING CLASS</button>
+            <button @click="waitingClass">WAITING CLASS</button>
           </div>
           <div class="mx-5">
             <button>LOGOUT</button>
@@ -26,7 +26,23 @@
 <script>
 export default {
   name: "SideBarStudent",
-  methods: {},
+  methods: {
+    myClass() {
+      this.$router.push({
+        name: "MyClassStudent",
+      });
+    },
+    joinClass() {
+      this.$router.push({
+        name: "Join",
+      });
+    },
+    waitingClass() {
+      this.$router.push({
+        name: "Waiting",
+      });
+    },
+  },
 };
 </script>
 

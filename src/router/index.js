@@ -55,6 +55,26 @@ const routes = [
     path: '/teachers/add-class',
     name: 'AddClass',
     component: () => import('../views/DTAdd')
+  },
+  {
+    path: '/students/my-class',
+    name: 'MyClassStudent',
+    component: () => import('../views/DSMyClass')
+  },
+  {
+    path: '/students/my-score/:idClass',
+    name: 'MyScore',
+    component: () => import('../views/DSScore')
+  },
+  {
+    path: '/students/join-class',
+    name: 'Join',
+    component: () => import('../views/DSJoin')
+  },
+  {
+    path: '/students/waiting-class',
+    name: 'Waiting',
+    component: () => import('../views/DSWaiting')
   }
 
 ]
