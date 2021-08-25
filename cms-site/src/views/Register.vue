@@ -123,7 +123,7 @@
                   name="cus_name"
                   type="text"
                   required=""
-                  placeholder="Card Number MM/YY CVC"
+                  placeholder="Your Phone Number"
                   aria-label="Name"
                 />
               </div>
@@ -135,7 +135,7 @@
                     text-white
                     font-light
                     tracking-wider
-                    bg-gray-900
+                    bg-btn-in-main
                     rounded
                   "
                   type="submit"

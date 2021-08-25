@@ -18,7 +18,7 @@
     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
       <button
         class="
-          text-l text-center
+          text-xl text-center
           bg-btn-in-main-danger
           py-2
           px-4

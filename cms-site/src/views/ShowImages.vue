@@ -69,6 +69,7 @@
               tracking-wider
               bg-btn-in-main
               rounded
+              text-xl
             "
             type="submit"
           >

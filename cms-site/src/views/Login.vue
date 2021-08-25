@@ -49,7 +49,7 @@
                     text-white
                     font-light
                     tracking-wider
-                    bg-gray-900
+                    bg-btn-in-main
                     rounded
                   "
                   type="submit"
