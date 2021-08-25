@@ -93,4 +93,72 @@ const router = new VueRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  if (to.name === "Login" && localStorage.getItem("access_token")) {
+    next({ name: "Home" });
+    Vue.$toast.open({
+      message: "You already login!",
+      type: "info",
+      position: "top",
+    });
+  }
+  if (to.name === "Register" && localStorage.getItem("access_token")) {
+    next({ name: "Home" });
+    Vue.$toast.open({
+      message: "You already login!",
+      type: "info",
+      position: "top",
+    });
+  }
+  if (to.name === "Products" && !localStorage.getItem("access_token")) {
+    next({ name: "Home" });
+    Vue.$toast.open({
+      message: "Please login first!",
+      type: "info",
+      position: "top",
+    });
+  }
+  if (to.name === "Checkout" && !localStorage.getItem("access_token")) {
+    next({ name: "Home" });
+    Vue.$toast.open({
+      message: "Please login first!",
+      type: "info",
+      position: "top",
+    });
+  }
+  if (to.name === "Payment" && !localStorage.getItem("access_token")) {
+    next({ name: "Home" });
+    Vue.$toast.open({
+      message: "Please login first!",
+      type: "info",
+      position: "top",
+    });
+  }
+  if (to.name === "Orders" && !localStorage.getItem("access_token")) {
+    next({ name: "Home" });
+    Vue.$toast.open({
+      message: "Please login first!",
+      type: "info",
+      position: "top",
+    });
+  }
+  if (to.name === "OrderDetails" && !localStorage.getItem("access_token")) {
+    next({ name: "Home" });
+    Vue.$toast.open({
+      message: "Please login first!",
+      type: "info",
+      position: "top",
+    });
+  }
+  if (to.name === "Cart" && !localStorage.getItem("access_token")) {
+    next({ name: "Home" });
+    Vue.$toast.open({
+      message: "Please login first!",
+      type: "info",
+      position: "top",
+    });
+  }
+  next();
+});
+
 export default router;

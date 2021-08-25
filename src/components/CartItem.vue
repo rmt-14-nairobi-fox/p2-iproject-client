@@ -10,26 +10,27 @@
       </div>
     </div>
     <div class="flex justify-center items-center">
-      <!-- <div class="pr-10 flex">
-        <span class="text-xs">Date </span>
-        <input
-          type="date"
-          class="
-            focus:outline-none
-            w-full
-            h-6
-            bg-white
-            text-black
-            placeholder-gray-500
-            text-xs
-            py-2
-          "
-        />
-      </div> -->
       <div class="pr-8">
         <span class="text-xs font-medium">RP.{{ item.price }}</span>
       </div>
-      <div><i class="fa fa-close text-xs font-medium"></i></div>
+      <div>
+        <a
+          @click.prevent="deleteCartItem(item.id)"
+          href=""
+          class="
+            px-5
+            py-2
+            text-gray-100
+            transition-colors
+            duration-200
+            transform
+            bg-red-500
+            rounded-md
+            hover:bg-red-800
+          "
+          >Cancel</a
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +39,12 @@
 export default {
   name: "TableCart",
   props: ["item"],
+  methods: {
+    deleteCartItem(id) {
+      this.$store.commit("DELETE_CART_ITEM", id);
+      this.$emit("sumTotalPrice");
+    },
+  },
 };
 </script>
 

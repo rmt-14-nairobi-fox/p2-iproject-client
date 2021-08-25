@@ -28,6 +28,7 @@ import OrderItem from "../components/OrderItems.vue";
 export default {
   name: "Orders",
   created() {
+
     this.$store.dispatch("fetchOrders");
   },
   components: {

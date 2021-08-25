@@ -54,13 +54,15 @@
       </div>
     </section>
     <section>
-      <div class="flex flex-row mx-auto">
+      <div class="px-10 grid grid-cols-4 gap-4">
         <CardService
           v-for="service in this.$store.state.servicesData"
           :key="service.id"
           :service="service"
         ></CardService>
       </div>
+      <!-- <div class="flex flex-row mx-auto">
+      </div> -->
     </section>
   </div>
 </template>
@@ -74,6 +76,7 @@ export default {
   },
   created() {
     this.$store.dispatch("fetchServices");
+    // this.$store.dispatch("fetchUserLogin");
   },
   data() {
     return {

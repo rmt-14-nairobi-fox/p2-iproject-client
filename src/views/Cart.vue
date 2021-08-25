@@ -13,6 +13,7 @@
                   v-for="(item, index) in this.$store.state.cartData"
                   :key="index"
                   :item="item"
+                  @sumTotalPrice="sumTotalPrice"
                 ></CartItem>
 
                 <div class="flex justify-between items-center border-t">
@@ -20,11 +21,14 @@
                     <i class="fa fa-arrow-left text-sm pr-2"></i>
                   </div>
                   <div class="flex justify-center items-end">
-                    <span class="text-sm font-medium text-gray-400 mr-1"
-                      >Total:</span
-                    >
+                    Total:
+                    <span class="text-sm font-medium text-gray-400 mr-1">
+                    </span>
                     <span class="text-lg font-bold text-gray-800">
                       Rp. {{ sumTotalPrice }}</span
+                    >
+                    <span v-if="sumTotalPrice > 1"
+                      >($ {{ this.$store.state.currencyUSD.rates.USD }})</span
                     >
                   </div>
                 </div>
@@ -44,113 +48,23 @@
                   "
                 ></div>
                 <div class="flex justify-center flex-col pt-3">
-                  <label class="text-xs text-gray-500">Full Name</label>
-                  <input
-                    v-model="custName"
-                    type="text"
-                    class="
-                      focus:outline-none
-                      w-full
-                      h-6
-                      bg-white
-                      text-black
-                      placeholder-gray-500
-                      text-sm
-                      py-2
-                    "
-                    placeholder="Gregorius Verli Giga"
-                  />
+                  <label class="text-xs text-gray-500">Customer Name</label>
+                  <p>{{ this.$store.state.dataLogin.fullName }}</p>
                 </div>
                 <div class="flex justify-center flex-col pt-3">
                   <label class="text-xs text-gray-500">Email</label>
-                  <input
-                    v-model="email"
-                    type="email"
-                    class="
-                      focus:outline-none
-                      w-full
-                      h-6
-                      bg-white
-                      text-black
-                      placeholder-gray-500
-                      text-sm
-                      py-2
-                    "
-                    placeholder="your@mail.com"
-                  />
+                  <p>{{ this.$store.state.dataLogin.email }}</p>
                 </div>
                 <div class="grid grid-cols-3 gap-2 pt-2 mb-3">
                   <div class="col-span-2">
                     <label class="text-xs text-gray-500">Address</label>
-                    <div class="grid grid-cols-2 gap-2">
-                      <input
-                        v-model="district"
-                        type="text"
-                        class="
-                          focus:outline-none
-                          w-full
-                          h-6
-                          bg-white
-                          text-back
-                          placeholder-gray-500
-                          text-sm
-                          py-2
-                        "
-                        placeholder="district"
-                      />
-                      <input
-                        v-model="city"
-                        type="text"
-                        class="
-                          focus:outline-none
-                          w-full
-                          h-6
-                          bg-white
-                          text-black
-                          placeholder-gray-500
-                          text-sm
-                          py-2
-                        "
-                        placeholder="city"
-                      />
-                    </div>
-                  </div>
-                  <div class="">
-                    <label class="text-xs text-gray-500">Postal Code</label>
-                    <input
-                      v-model="zipCode"
-                      type="text"
-                      class="
-                        focus:outline-none
-                        w-full
-                        h-6
-                        bg-white
-                        text-black
-                        placeholder-gray-500
-                        text-sm
-                        py-2
-                      "
-                      placeholder="35372"
-                    />
+                    <p>{{ this.$store.state.dataLogin.address }}</p>
+                    <div class="grid grid-cols-2 gap-2"></div>
                   </div>
                 </div>
                 <div class="flex justify-center flex-col pt-3">
                   <label class="text-xs text-gray-500">Phone Number</label>
-                  <input
-                    v-model="phoneNumber"
-                    type="text"
-                    class="
-                      focus:outline-none
-                      w-full
-                      h-6
-                      bg-white
-                      text-black
-                      placeholder-gray-500
-                      text-sm
-                      py-2
-                    "
-                    placeholder="+62 821-2345-6789"
-                  />
+                  <p>{{ this.$store.state.dataLogin.phoneNumber }}</p>
                 </div>
                 <div class="flex justify-center flex-col pt-3">
                   <label class="text-xs text-gray-500">Date Service</label>
@@ -171,6 +85,20 @@
                 </div>
                 <div class="pt-5">
                   <button
+                    v-if="sumTotalPrice < 1"
+                    class="
+                      h-12
+                      w-full
+                      bg-gray-500
+                      rounded
+                      focus:outline-none
+                      text-black
+                    "
+                  >
+                    Checkout Services
+                  </button>
+                  <button
+                    v-if="sumTotalPrice > 1"
                     @click.prevent="checkoutHandler"
                     type="button"
                     class="
@@ -203,16 +131,12 @@ export default {
   },
   data() {
     return {
-      custName: "",
-      email: "",
-      district: "",
-      city: "",
-      zipCode: "",
-      phoneNumber: "",
       dateService: "",
     };
   },
   created() {
+    this.$store.dispatch("currencyAPI", this.sumTotalPrice);
+    this.$store.dispatch("fetchUserLogin");
     this.$store.dispatch("fetchOrderDetails");
   },
   computed: {
@@ -230,18 +154,14 @@ export default {
         totalPrice: this.sumTotalPrice,
         orderDetails: this.$store.state.cartData,
         custDetails: {
-          custName: this.custName,
-          email: this.email,
-          district: this.district,
-          city: this.city,
-          country: "Indonesia",
-          zipCode: this.zipCode,
-          phoneNumber: this.phoneNumber,
+          custName: this.$store.state.dataLogin.fullName,
+          email: this.$store.state.dataLogin.email,
+          address: this.$store.state.dataLogin.address,
+          phoneNumber: this.$store.state.dataLogin.phoneNumber,
           dateService: this.dateService,
         },
       };
       this.$store.dispatch("goCheckout", dataOrder);
-      // this.$store.commit("COMMIT_CHECKOUT", dataOrder);
     },
   },
 };

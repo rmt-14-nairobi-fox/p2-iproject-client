@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import localhost from "../APIS/axiosAPI";
+import axios from "axios";
 import router from "../router";
 Vue.use(Vuex);
 
@@ -15,6 +16,8 @@ export default new Vuex.Store({
     dataOrderDetail: [],
     dataForCheckout: [],
     dataOrder: [],
+    dataLogin: [],
+    currencyUSD: "",
   },
   mutations: {
     LOGIN_STATUS(state, payload) {
@@ -29,11 +32,15 @@ export default new Vuex.Store({
     COMMIT_ADD_CART(state, payload) {
       state.cartData.push(payload);
     },
+    COMMIT_RESET_CART(state, payload) {
+      state.cartData = payload;
+    },
     COMMIT_CHECKOUT(state, payload) {
       state.dataCheckout = payload;
     },
     COMMIT_TOKEN_TRANSACTION(state, payload) {
       state.tokenTransaction = payload;
+      router.push("/payment");
     },
     COMMIT_ORDER_DETAIL(state, payload) {
       state.dataOrderDetail = payload;
@@ -41,8 +48,56 @@ export default new Vuex.Store({
     COMMIT_DATA_ORDER(state, payload) {
       state.dataOrder = payload;
     },
+    COMMIT_USER_ONLINE(state, payload) {
+      state.dataLogin = payload;
+    },
+    COMMIT_CURRENCY(state, payload) {
+      state.currencyUSD = payload;
+    },
+    DELETE_CART_ITEM(state, payload) {
+      console.log(payload);
+      const newData = state.cartData.filter((el) => el.id !== payload);
+      state.cartData = newData;
+    },
   },
   actions: {
+    async currencyAPI(context, payload) {
+      try {
+        const response = await axios({
+          method: "get",
+          url: `https://api.frankfurter.app/latest?amount=${payload}&from=IDR&to=USD`,
+          headers: { access_token: localStorage.getItem("access_token") },
+        });
+        console.log(response, "currency");
+        context.commit("COMMIT_CURRENCY", response.data);
+      } catch (error) {
+        console.log(error, "crrency");
+      }
+    },
+    async goCancelOrder(context, payload) {
+      try {
+        await localhost({
+          method: "patch",
+          url: `/orders/${payload}`,
+          headers: { access_token: localStorage.getItem("access_token") },
+        });
+        context.dispatch("fetchOrders");
+      } catch (error) {
+        console.log(error, "error fetch order");
+      }
+    },
+    async fetchUserLogin(context) {
+      try {
+        const response = await localhost({
+          method: "get",
+          url: `/users`,
+          headers: { access_token: localStorage.getItem("access_token") },
+        });
+        context.commit("COMMIT_USER_ONLINE", response.data);
+      } catch (error) {
+        console.log(error, "error fetch order");
+      }
+    },
     async fetchOrdersDetail(context, payload) {
       console.log(payload);
       try {
@@ -79,6 +134,7 @@ export default new Vuex.Store({
           headers: { access_token: localStorage.getItem("access_token") },
           data: payload,
         });
+        context.commit("COMMIT_RESET_CART", []);
         context.commit("COMMIT_TOKEN_TRANSACTION", response.data);
         router.push("/payment");
       } catch (error) {

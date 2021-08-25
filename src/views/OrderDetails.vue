@@ -8,7 +8,7 @@
           <div class="w-full p-4 px-5 py-5">
             <div class="md:grid md:grid-cols-3 gap-2">
               <div class="col-span-2 p-5">
-                <h1 class="text-xl font-medium">Item Details</h1>
+                <h1 class="text-xl font-medium">Order Details</h1>
                 <DetailItem
                   v-for="order in this.$store.state.dataOrderDetail
                     .OrderDetails"
@@ -28,14 +28,18 @@
                       Rp.
                       {{ this.$store.state.dataOrderDetail.totalPrice }}</span
                     >
+                    <span
+                      v-if="this.$store.state.dataOrderDetail.totalPrice > 1"
+                    >
+                      ($ {{ this.$store.state.currencyUSD.rates.USD }})
+                    </span>
                   </div>
                 </div>
               </div>
               <div class="p-5 bg-red-200 rounded overflow-visible">
                 <span class="text-xl font-medium text-black block pb-3"
-                  >Order Details</span
+                  >Customer Information</span
                 >
-                <span class="text-xs text-gray-700">Customer Information</span>
                 <div
                   class="
                     overflow-visible
@@ -47,28 +51,47 @@
                 ></div>
                 <div class="flex justify-center flex-col pt-3">
                   <label class="text-xs text-gray-500">Full Name</label>
+                  <p>{{ this.$store.state.dataLogin.fullName }}</p>
                 </div>
                 <div class="flex justify-center flex-col pt-3">
                   <label class="text-xs text-gray-500">Email</label>
+                  <p>{{ this.$store.state.dataLogin.email }}</p>
                 </div>
                 <div class="grid grid-cols-3 gap-2 pt-2 mb-3">
                   <div class="col-span-2">
                     <label class="text-xs text-gray-500">Address</label>
+                    <p>{{ this.$store.state.dataLogin.address }}</p>
                     <div class="grid grid-cols-2 gap-2"></div>
-                  </div>
-                  <div class="">
-                    <label class="text-xs text-gray-500">Postal Code</label>
                   </div>
                 </div>
                 <div class="flex justify-center flex-col pt-3">
                   <label class="text-xs text-gray-500">Phone Number</label>
+                  <p>{{ this.$store.state.dataLogin.phoneNumber }}</p>
                 </div>
                 <div class="flex justify-center flex-col pt-3">
                   <label class="text-xs text-gray-500">Date Service</label>
                 </div>
                 <div class="pt-5">
                   <button
-                    @click.prevent="checkoutHandler"
+                    v-if="
+                      this.$store.state.dataOrderDetail.isPayment === 'PAID'
+                    "
+                    class="
+                      h-12
+                      w-full
+                      bg-gray-500
+                      rounded
+                      focus:outline-none
+                      text-black
+                    "
+                  >
+                    {{ this.$store.state.dataOrderDetail.isPayment }}
+                  </button>
+                  <button
+                    v-if="
+                      this.$store.state.dataOrderDetail.isPayment === 'PENDING'
+                    "
+                    @click.prevent="checkoutHandler()"
                     type="button"
                     class="
                       h-12
@@ -82,6 +105,22 @@
                   >
                     Checkout Services
                   </button>
+                  <button
+                    v-if="
+                      this.$store.state.dataOrderDetail.isPayment === 'CANCELED'
+                    "
+                    class="
+                      h-12
+                      w-full
+                      bg-gray-500
+                      rounded
+                      focus:outline-none
+                      text-black
+                      hover:bg-gray-700
+                    "
+                  >
+                    {{ this.$store.state.dataOrderDetail.isPayment }}
+                  </button>
                 </div>
               </div>
             </div>
@@ -90,31 +129,6 @@
       </div>
     </div>
   </div>
-  <!-- <div class="text-gray-900 bg-gray-200">
-    <div class="p-4 flex">
-      <h1 class="text-3xl">
-        Your Orders Details from order id :
-        {{ this.$store.state.dataOrderDetail.id }}
-      </h1>
-    </div>
-    <div class="px-3 py-4 flex justify-center">
-      <table class="w-full text-md bg-white shadow-md rounded mb-4">
-        <tbody>
-          <tr class="border-b">
-            <th class="text-left p-3 px-5">Service Name</th>
-            <th class="text-left p-3 px-5">Price</th>
-            <th class="text-left p-3 px-5">Create Order</th>
-            <th class="text-left p-3 px-5">Action</th>
-          </tr>
-          <DetailItem
-            v-for="order in this.$store.state.dataOrderDetail.OrderDetails"
-            :key="order.id"
-            :order="order"
-          ></DetailItem>
-        </tbody>
-      </table>
-    </div>
-  </div> -->
 </template>
 
 <script>
@@ -122,11 +136,21 @@ import DetailItem from "../components/DetailItems.vue";
 export default {
   name: "OrderDetails",
   created() {
-    console.log(this.$route.params);
+    // this.$store.dispatch("fetchUserLogin");
+    this.$store.dispatch(
+      "currencyAPI",
+      this.$store.state.dataOrderDetail.totalPrice
+    );
     this.$store.dispatch("fetchOrdersDetail", this.$route.params.id);
   },
   components: {
     DetailItem,
+  },
+  methods: {
+    checkoutHandler() {
+      const token = this.$store.state.dataOrderDetail.tokenPayment;
+      this.$store.commit("COMMIT_TOKEN_TRANSACTION", token);
+    },
   },
 };
 </script>

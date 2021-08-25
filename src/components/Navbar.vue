@@ -7,7 +7,7 @@
         srcset=""
         style="height: 50px"
       />
-      <div class="text-lg font-bold md:py-0 py-4">PENGANGGURANS</div>
+      <div class="text-2xl font-bold md:py-0 py-4">PENGANGGURANS</div>
       <ul
         class="
           md:px-2
@@ -30,6 +30,7 @@
         </li>
         <li>
           <a
+            v-if="this.$store.state.isLogin"
             href="#"
             class="flex md:inline-flex p-4 items-center hover:bg-gray-50"
           >
@@ -38,6 +39,7 @@
         </li>
         <li class="relative parent">
           <a
+            v-if="this.$store.state.isLogin"
             href="#"
             class="
               flex
@@ -61,6 +63,7 @@
             </svg>
           </a>
           <ul
+            v-if="this.$store.state.isLogin"
             class="
               child
               transition
@@ -73,24 +76,21 @@
               md:shadow-lg md:rounded-b
             "
           >
-            <li>
-              <a href="#" class="flex px-4 py-3 hover:bg-gray-50">
-                Web development
-              </a>
-            </li>
-            <li>
-              <a href="#" class="flex px-4 py-3 hover:bg-gray-50">
-                Web Design
-              </a>
-            </li>
-            <li>
-              <a href="#" class="flex px-4 py-3 hover:bg-gray-50">
-                Machine Learning
+            <li
+              v-for="service in this.$store.state.servicesData"
+              :key="service.id"
+            >
+              <a
+                @click.prevent="seeProvider(service.id)"
+                href="#"
+                class="flex px-4 py-3 hover:bg-red-100"
+              >
+                {{ service.name }}
               </a>
             </li>
           </ul>
         </li>
-        <li>
+        <li v-if="this.$store.state.isLogin">
           <a
             href="#"
             class="flex md:inline-flex p-4 items-center hover:bg-gray-50"
@@ -113,6 +113,61 @@
             ></span>
           </a>
         </li>
+
+        <li class="relative parent">
+          <a
+            v-if="this.$store.state.isLogin"
+            href="#"
+            class="
+              flex
+              justify-between
+              md:inline-flex
+              p-4
+              items-center
+              space-x-2
+            "
+          >
+            <img
+              :src="this.$store.state.dataLogin.imgUser"
+              alt=""
+              srcset=""
+              style="width: 30px"
+            />
+          </a>
+          <ul
+            v-if="this.$store.state.isLogin"
+            class="
+              child
+              transition
+              duration-300
+              md:absolute
+              top-full
+              right-0
+              md:w-48
+              bg-white
+              md:shadow-lg md:rounded-b
+            "
+          >
+            <li>
+              <a
+                @click.prevent="logoutHandler"
+                href="#"
+                class="flex px-4 py-3 hover:bg-red-100"
+              >
+                Logout
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a
+            v-if="!this.$store.state.isLogin"
+            href="#"
+            class="flex md:inline-flex p-4 items-center hover:bg-gray-50"
+          >
+            <span><router-link to="/login">Login</router-link></span>
+          </a>
+        </li>
       </ul>
       <div class="ml-auto md:hidden text-gray-500 cursor-pointer">
         <svg
@@ -132,6 +187,17 @@
 <script>
 export default {
   name: "Navbar",
+  methods: {
+    seeProvider(service) {
+      this.$store.dispatch("fetchProvider", service);
+      this.$router.push(`/products/${service}`);
+    },
+    logoutHandler() {
+      localStorage.clear();
+      this.$store.commit("LOGIN_STATUS", false);
+      this.$router.push("/login");
+    },
+  },
 };
 </script>
 
