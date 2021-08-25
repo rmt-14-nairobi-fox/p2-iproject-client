@@ -1,5 +1,5 @@
 <template>
-  <div class="col mh-100">
+  <div class="col-10 mh-100">
     <div class="row">
       <NewsList />
       <PostList />
@@ -26,6 +26,7 @@ export default {
   border-radius: 12px 12px 0 0;
   height: 100px;
   font-size: 24px;
+  border-bottom: 1px solid #c0c0c0;
 }
 
 .search-box:focus {
@@ -51,5 +52,21 @@ export default {
 
 .custom-rounded {
   border-radius: 12px;
+}
+
+.custom-rounded-top {
+  border-radius: 12px 12px 0 0;
+}
+
+.custom-rounded-sm {
+  border-radius: 4px;
+}
+
+.news-card {
+  width: 50%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 </style>

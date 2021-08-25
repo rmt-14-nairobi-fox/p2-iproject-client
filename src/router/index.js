@@ -9,6 +9,7 @@ import News from '../views/News.vue';
 import MySpace from '../views/MySpace.vue';
 import Weather from '../views/Weather.vue';
 import Corona from '../views/Corona.vue';
+import ReadNews from '../views/ReadNews.vue';
 
 Vue.use(VueRouter);
 
@@ -38,6 +39,11 @@ const routes = [
         path: 'corona',
         name: 'Corona',
         component: Corona,
+      },
+      {
+        path: 'readnews',
+        name: 'ReadNews',
+        component: ReadNews,
       },
     ],
   },

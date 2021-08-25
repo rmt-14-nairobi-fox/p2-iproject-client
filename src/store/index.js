@@ -11,6 +11,7 @@ export default new Vuex.Store({
     profile: '',
     user_name: '',
     newsPrefs: [],
+    news: {},
   },
   mutations: {
     SET_ISLOGIN(state, payload) {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     },
     SET_NEWSPREFS(state, payload) {
       state.newsPrefs = payload;
+    },
+    SET_NEWS(state, payload) {
+      state.news = payload;
     },
   },
   actions: {
@@ -88,6 +92,20 @@ export default new Vuex.Store({
           };
         });
         context.commit('SET_NEWSPREFS', newsPrefs);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
+
+    async fetchNews(context) {
+      try {
+        const response = await server.get('/news', {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        context.commit('SET_NEWS', response.data);
       } catch (err) {
         console.log(err.response.data);
       }
