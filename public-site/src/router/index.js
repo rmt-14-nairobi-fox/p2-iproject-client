@@ -56,6 +56,19 @@ const routes = [
       }
     },
   },
+  {
+    path: "/bookmarks",
+    name: "Bookmark",
+    component: () =>
+      import(/* webpackChunkName: "Login" */ "../views/Bookmark.vue"),
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("access_token")) {
+        next();
+      } else {
+        next({ name: "Login" });
+      }
+    },
+  },
 ];
 
 const router = new VueRouter({

@@ -215,6 +215,7 @@
                   text-white
                   mr-2
                 "
+                @click="saveHandler(accommodation.id)"
               >
                 Save
               </button>
@@ -281,6 +282,11 @@ export default {
         center: [long, lat],
         zoom: 17,
       });
+    },
+
+    saveHandler(payload) {
+      this.$store.dispatch("saveBookmarkFunction", payload);
+      // console.log(payload);
     },
   },
 };

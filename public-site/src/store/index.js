@@ -12,6 +12,7 @@ export default new Vuex.Store({
     images: [],
     accommodation: {},
     ownerInfo: {},
+    bookmarks: [],
   },
   mutations: {
     FETCH_ISAUTH(state, payload) {
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     },
     FETCH_OWNERINFO(state, payload) {
       state.ownerInfo = payload;
+    },
+    FETCH_BOOKMARKS(state, payload) {
+      state.bookmarks = payload;
     },
   },
   actions: {
@@ -75,7 +79,6 @@ export default new Vuex.Store({
           },
         })
         .then(({ data }) => {
-          console.log(data);
           context.commit("FETCH_ACCOMMODATIONS", data);
         })
         .catch((err) => {
@@ -108,6 +111,51 @@ export default new Vuex.Store({
         })
         .then(({ data }) => {
           context.commit("FETCH_IMAGES", data);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    },
+
+    getAllBookmark(context) {
+      axios
+        .get("/public/savedAccommodations", {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        })
+        .then(({ data }) => {
+          context.commit("FETCH_BOOKMARKS", data);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    },
+
+    saveBookmarkFunction(context, payload) {
+      axios
+        .post(`/public/${+payload}`, null, {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        })
+        .then(({ data }) => {
+          router.push({ path: "/bookmarks" }).catch(() => {});
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    },
+
+    unsaveBookmarkFunction(context, payload) {
+      axios
+        .delete(`/public/${+payload}`, {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        })
+        .then(() => {
+          context.dispatch("getAllBookmark");
         })
         .catch((err) => {
           console.log(err.response.data);

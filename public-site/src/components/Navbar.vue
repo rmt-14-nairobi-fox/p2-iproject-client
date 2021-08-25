@@ -11,6 +11,7 @@
               py-2
               px-4
               bg-btn-in-main
+              font-bold
               text-white
             "
             @click="homeClick"
@@ -26,9 +27,11 @@
               rounded
               py-2
               px-4
+              font-bold
               bg-btn-in-main
               text-white
             "
+            @click="bookmarksClick"
           >
             Bookmarks
           </button>
@@ -130,6 +133,15 @@ export default {
 
     logoutHandler() {
       this.$store.dispatch("logoutFunction");
+    },
+
+    bookmarksClick() {
+      this.$router
+        .push({
+          path: "/bookmarks",
+          name: "Bookmark",
+        })
+        .catch(() => {});
     },
   },
 };
