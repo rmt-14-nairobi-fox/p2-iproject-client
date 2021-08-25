@@ -37,7 +37,7 @@
       </div>
       <!-- News pic and title -->
       <div
-        class="image-header custom-rounded-top mt-3 d-flex flex-column justify-content-end"
+        class="post-header custom-rounded-top mt-3 d-flex flex-column justify-content-end"
         :style="`background-image: url(${post.SavedNew.image});`"
       >
         <div class="text-light" style="background-color: #00000080;">

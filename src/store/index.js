@@ -309,6 +309,19 @@ export default new Vuex.Store({
         console.log(err.response.data);
       }
     },
+
+    async sendEmail() {
+      try {
+        const response = await server.get('/news/email', {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+        console.log(response.data);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
   },
   modules: {},
 });
