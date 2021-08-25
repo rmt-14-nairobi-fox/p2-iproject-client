@@ -1,27 +1,23 @@
 <template>
   <div class="col d-flex align-items-center justify-content-center">
-    <b-card header="Login">
+    <b-card header="Login" class="w-50">
       <b-form>
-        <label for="inline-form-input-name">Name</label>
+        <label for="email">Email</label>
         <b-form-input
-          id="inline-form-input-name"
-          class="mb-2 mr-sm-2 mb-sm-0"
-          placeholder="Jane Doe"
+          id="email"
+          class="mb-2"
+          placeholder="type your email"
         ></b-form-input>
 
-        <label for="inline-form-input-username">Username</label>
-        <b-input-group prepend="@" class="mb-2 mr-sm-2 mb-sm-0">
-          <b-form-input
-            id="inline-form-input-username"
-            placeholder="Username"
-          ></b-form-input>
-        </b-input-group>
-
-        <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0"
-          >Remember me</b-form-checkbox
-        >
-
-        <b-button variant="primary">Save</b-button>
+        <label for="password">Password</label>
+        <b-form-input
+          id="password"
+          class="mb-3"
+          placeholder="type your password"
+        ></b-form-input>
+        <div class="d-flex justify-content-center">
+          <b-button type="submit" variant="dark">Login</b-button>
+        </div>
       </b-form>
     </b-card>
   </div>
