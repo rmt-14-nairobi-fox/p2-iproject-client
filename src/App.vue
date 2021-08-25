@@ -1,28 +1,21 @@
 <template>
-  <div id="app">
-    <router-view />
+  <div id="app" class="flex flex-col">
+    <div class="h-screen">
+      <router-view />
+    </div>
+    <h-footer></h-footer>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import HFooter from "vue-hacktiv8-footer";
 
-#nav {
-  padding: 30px;
-}
+export default {
+  name: "App",
+  components: {
+    HFooter
+  }
+};
+</script>
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<style></style>
