@@ -4,6 +4,20 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+  methods: {
+    checkToken() {
+      this.$store.dispatch('checkTokenAction');
+    },
+  },
+  created() {
+    this.checkToken();
+  },
+};
+</script>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@0;1&display=swap');
 
@@ -21,6 +35,7 @@ body {
 
 .sidebar-item-active {
   border-left: 4px solid white;
+  background-color: #1f1f1f;
 }
 
 .sidebar-item:hover {

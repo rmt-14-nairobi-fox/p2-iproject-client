@@ -5,6 +5,7 @@ import Auth from '../views/Auth.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import GoogleSignIn from '../views/GoogleSignIn.vue';
+import News from '../views/News.vue';
 
 Vue.use(VueRouter);
 
@@ -13,6 +14,13 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    children: [
+      {
+        path: 'news',
+        name: 'News',
+        component: News,
+      },
+    ],
   },
   {
     path: '/auth',
@@ -47,7 +55,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (!to.path.includes('/auth') && !localStorage.access_token) {
     next({ name: 'Login' });
-  } else if (to.name === 'Auth' && localStorage.access_token) {
+  } else if (to.path.includes('/auth') && localStorage.access_token) {
     next({ name: 'Home' });
   } else {
     next();

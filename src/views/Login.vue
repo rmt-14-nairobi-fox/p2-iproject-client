@@ -1,9 +1,10 @@
 <template>
   <div class="col d-flex align-items-center justify-content-center">
     <b-card header="Login" class="w-50">
-      <b-form>
+      <b-form @submit.prevent="login">
         <label for="email">Email</label>
         <b-form-input
+          v-model="form.email"
           id="email"
           class="mb-2"
           placeholder="type your email"
@@ -11,7 +12,9 @@
 
         <label for="password">Password</label>
         <b-form-input
+          v-model="form.password"
           id="password"
+          type="password"
           class="mb-3"
           placeholder="type your password"
         ></b-form-input>
@@ -26,6 +29,19 @@
 <script>
 export default {
   name: 'Login',
+  data() {
+    return {
+      form: {
+        email: '',
+        password: '',
+      },
+    };
+  },
+  methods: {
+    login() {
+      this.$store.dispatch('loginAction', this.form);
+    },
+  },
 };
 </script>
 
