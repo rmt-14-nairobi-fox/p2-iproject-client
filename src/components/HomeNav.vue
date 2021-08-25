@@ -2,7 +2,9 @@
   <nav
     class="col-2 p-0 bg-dark d-flex flex-column justify-content-center align-items-center"
   >
-    <div class="flex-grow-1 pt-3">
+    <div
+      class="flex-grow-1 d-flex flex-column align-items-center justify-content-start pt-3"
+    >
       <img
         width="120"
         height="120"
@@ -56,6 +58,14 @@
 
 <script>
 import { mapState } from 'vuex';
+import Vue from 'vue';
+import { LoaderPlugin } from 'vue-google-login';
+
+Vue.use(LoaderPlugin, {
+  client_id:
+    '439353409036-732353rj9n7utpg8uaostb71uborv2am.apps.googleusercontent.com',
+});
+
 export default {
   name: 'HomeNav',
   computed: {
@@ -76,6 +86,12 @@ export default {
     },
     logout() {
       localStorage.clear();
+
+      Vue.GoogleAuth.then((auth2) => {
+        auth2.signOut().then(function() {
+          console.log('User signed out.');
+        });
+      });
 
       this.$router.push('/auth/login');
     },

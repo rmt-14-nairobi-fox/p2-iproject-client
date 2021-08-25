@@ -1,5 +1,6 @@
 <template>
-  <div class="col d-flex align-items-center justify-content-center">
+  <div class="col d-flex flex-column align-items-center justify-content-center">
+    <h1 class="font-chomsky">The New Roman Times</h1>
     <b-card header="Login" class="w-50">
       <b-form @submit.prevent="login">
         <label for="email">Email</label>
