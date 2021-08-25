@@ -1,6 +1,11 @@
 <template>
   <div class="home">
     <SearchBar/>
+    <div v-show="fetchFishes.length === 0" style="display: flex; justify-content: center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only"></span>
+        </div>
+    </div>
     <div style="margin-top: 100px;
     margin-bottom: 100px;
     display: flex;

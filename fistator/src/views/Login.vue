@@ -28,6 +28,9 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+                <div class="google">
+                    <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
+                </div>
                 <div>
                     <p>Don't have an account yet? <a @click.prevent="toRegister" href="">Sign Up</a> here</p>
                 </div>
@@ -41,12 +44,25 @@
 </template>
 
 <script>
+import GoogleLogin from "vue-google-login";
+
 export default {
     name: "Login",
+    components: {
+        GoogleLogin
+    },
     data() {
         return {
             email: "",
-            password: ""
+            password: "",
+            params: {
+                client_id: "241740990990-6af197k57lj0bb879vvmr1l7k5ccetrp.apps.googleusercontent.com"
+            },
+            renderParams: {
+                width: 250,
+                height: 50,
+                longtitle: true
+            }
         }
     },
     methods: {
@@ -57,12 +73,25 @@ export default {
             })
         },
         toRegister() {
-            
-        }
+            this.$router.push("/register")
+        },
+        onSuccess(googleUser) {
+            console.log(googleUser);
+            console.log(googleUser.getBasicProfile());
+            this.$store.dispatch("googleLogin", googleUser)
+        },
+        onFailure() {
+    
+        },
     }
 }
 </script>
 
 <style>
-
+.google {
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 20px 0;
+}
 </style>

@@ -4,9 +4,9 @@
         <div style="display: flex">
             <div class="input-group">
                 <div class="form-outline" style="width: 350px;">
-                    <input type="search" id="form1" class="form-control" placeholder="Search here(ex: Tuna, Red Snapper, etc)">
+                    <input type="text" v-model="fishName" autocomplete="off" id="form1" class="form-control" placeholder="Search here (ex: Tuna, Red Snapper, etc)" >
                 </div>
-                <button type="button" class="btn btn-primary" style="margin-bottom: 50px;">
+                <button @click.prevent="toFish(fishName)" type="button" class="btn btn-primary" style="margin-bottom: 50px;">
                     <i class="fas fa-search">Submit</i>
                 </button>
             </div>
@@ -16,7 +16,29 @@
 
 <script>
 export default {
-    name: "SearchBar"
+    name: "SearchBar",
+    data() {
+        return {
+            fishName: "",
+            fishes: [],
+            filteredFishes: []
+        }
+    },
+    created() {
+        this.$store.dispatch("getFishes")
+        this.fishes = this.$store.state.fishes.map(el => {return el.name.split(" ").join("-").toLowerCase()})
+        },
+    computed: {
+        fetchFishes() {
+            return this.$store.state.fishes
+        },
+    },
+    methods: {
+        toFish(name) {
+            const formattedName = name.split(" ").join("-").toLowerCase()
+            this.$router.push(`/fish/${formattedName}`)
+        }
+    }
 }
 </script>
 

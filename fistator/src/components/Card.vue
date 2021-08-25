@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{fishes.name}}</h5>
                 <p class="card-text">Click to expand</p>
-                <a href="" class="btn btn-primary">Add to Fish-to-Catch</a>
+                <a href="" class="btn btn-primary" @click.prevent="addFish(fishes.name)">Add to Fish-to-Catch</a>
             </div>
         </div>
     </div>
@@ -21,7 +21,10 @@ export default {
     methods: {
         toFish(name) {
             this.$router.push(`/fish/${name}`)
-            // this.$store.dispatch("getFishes", name)
+        },
+        addFish(name) {
+            const formattedName = name.split(" ").join("-").toLowerCase()
+            this.$store.dispatch("addFish", formattedName)
         }
     },
     props: ["fishes"]

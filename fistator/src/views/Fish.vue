@@ -21,13 +21,14 @@
             <p v-else-if="fish.fishingRate === 'Reduced to end overfishing.'" class="card-text"><button type="button" class="btn btn-danger">Danger</button></p>
             <p v-else class="card-text"><button type="button" class="btn btn-warning">Warning</button></p>
             <p v-show="fish.fishingRate === null" class="card-text">Not Available</p>
-            <a href="" class="btn btn-primary" style="margin-bottom: 20px; margin-top: 100px;">Add to Fish-to-Catch</a>
-            <a href="" class="btn btn-secondary">Back to Home</a>
+            <a href="" class="btn btn-primary" @click.prevent="addFish(fish.name)" style="margin-bottom: 20px; margin-top: 100px;">Add to Fish-to-Catch</a>
+            <a href="" class="btn btn-secondary" @click.prevent="toHome">Back to Home</a>
         </div>
     </div>
 </template>
 
 <script>
+
 export default {
     name: "Fish",
     created() {
@@ -38,6 +39,15 @@ export default {
     computed: {
         fish() {
             return this.$store.state.selectedFish[0]
+        }
+    },
+    methods: {
+        addFish(name) {
+            const formattedName = name.split(" ").join("-").toLowerCase()
+            this.$store.dispatch("addFish", formattedName)
+        },
+        toHome() {
+            this.$router.push("/")
         }
     }
 }
