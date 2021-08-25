@@ -4,7 +4,9 @@
       <Navbar/>
     </div>
     <router-view/>
-    <HFooter/>  
+    <footer>
+    <HFooter style="align-content: flex-end;"/>
+    </footer>
   </div>
 </template>
 

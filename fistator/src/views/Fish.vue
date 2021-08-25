@@ -1,5 +1,10 @@
 <template>
   <div style="display: flex; flex-direction: column; align-items: center;">
+      <div v-show="fish === undefined" style="display: flex; justify-content: center; margin-top: 50px">
+            <div class="spinner-border" role="status">
+            <span class="sr-only"></span>
+            </div>
+        </div>
         <div class="card" style="width: 50rem; margin: 20px;">
             <img :src="fish.imageUrl" class="card-img-top" style="" alt="">
         </div>
