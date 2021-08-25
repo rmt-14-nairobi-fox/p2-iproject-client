@@ -13,7 +13,10 @@
         "
       >
         <!-- CAROUSEL -->
-        <div class="rounded shadow-xl max-w-6xl relative">
+        <div
+          v-if="images.length > 0"
+          class="rounded shadow-xl max-w-6xl relative"
+        >
           <div class="w-full h-5/6">
             <carousel
               :per-page="1"
@@ -32,6 +35,28 @@
                   class="object-center object-fill w-full"
                   style="height: 220px"
                   :src="image.imageUrl"
+                  alt=""
+                />
+              </slide>
+            </carousel>
+          </div>
+        </div>
+
+        <div v-else class="rounded shadow-xl max-w-6xl relative">
+          <div class="w-full h-5/6">
+            <carousel
+              :per-page="1"
+              :mouse-drag="false"
+              :pagination-padding="5"
+              :autoplay="true"
+              :loop="true"
+              :autoplay-timeout="4000"
+            >
+              <slide>
+                <img
+                  class="object-center object-fill w-full"
+                  style="height: 220px"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png"
                   alt=""
                 />
               </slide>
