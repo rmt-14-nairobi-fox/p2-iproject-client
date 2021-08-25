@@ -41,6 +41,58 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    loginStudent(context, payload) {
+      const { email, password } = payload
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/students/login',
+        data: {
+          email, password
+        }
+      })
+        .then(res => {
+          localStorage.setItem('access_token', res.data.access_token)
+          localStorage.setItem('role', res.data.role)
+          router.push({ name: 'MyClassStudent' })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    registerTeacher(context, payload) {
+      const { email, password, name, phoneNumber } = payload
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/teachers/register',
+        data: {
+          email, password, name, phoneNumber
+        }
+      })
+        .then(res => {
+          console.log(res.data)
+          context.dispatch('loginTeacher', { email, password })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    registerStudent(context, payload) {
+      const { email, password, name, phoneNumber } = payload
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/students/register',
+        data: {
+          email, password, name, phoneNumber
+        }
+      })
+        .then(res => {
+          console.log(res.data)
+          context.dispatch('loginStudent', { email, password })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
     getClassTeacher(context) {
       axios({
         method: 'get',

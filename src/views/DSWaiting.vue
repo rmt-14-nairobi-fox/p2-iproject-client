@@ -96,7 +96,6 @@
                               bg-yellow-400
                               text-green-800
                             "
-                            v-if="!isAdmin"
                           >
                             Waiting
                           </span>

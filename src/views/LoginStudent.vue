@@ -23,7 +23,7 @@
           </button>
         </p>
 
-        <form class="space-y-8">
+        <form class="space-y-8" @submit.prevent="loginStudent">
           <div>
             <label class="block mb-2" for="email">Email</label>
             <input
@@ -38,6 +38,7 @@
               type="text"
               id="email"
               placeholder="your@mail.com"
+              v-model="email"
             />
           </div>
           <div>
@@ -53,6 +54,7 @@
               "
               type="password"
               id="password"
+              v-model="password"
             />
           </div>
           <button
@@ -92,12 +94,25 @@
 <script>
 export default {
   name: "LoginStudent",
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
   methods: {
     pageLoginTeacher() {
       this.$router.push({ name: "LoginTeacher" });
     },
     pageRegisterStudent() {
       this.$router.push({ name: "RegisterStudent" });
+    },
+    loginStudent() {
+      const payload = {
+        email: this.email,
+        password: this.password,
+      };
+      this.$store.dispatch("loginStudent", payload);
     },
   },
 };

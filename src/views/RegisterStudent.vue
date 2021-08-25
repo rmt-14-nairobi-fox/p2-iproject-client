@@ -16,7 +16,7 @@
         <h2 class="text-3xl font-bold mb-10 text-center">
           Register as Student
         </h2>
-        <form class="space-y-8">
+        <form class="space-y-8" @submit.prevent="registerStudent">
           <div>
             <label class="block mb-2" for="email">Email</label>
             <input
@@ -31,6 +31,7 @@
               type="text"
               id="email"
               placeholder="your@mail.com"
+              v-model="email"
             />
           </div>
           <div>
@@ -46,6 +47,7 @@
               "
               type="password"
               id="password"
+              v-model="password"
             />
           </div>
           <div>
@@ -60,6 +62,7 @@
                 focus:border-blue-500
               "
               type="text"
+              v-model="name"
             />
           </div>
           <div>
@@ -74,6 +77,7 @@
                 focus:border-blue-500
               "
               type="text"
+              v-model="phoneNumber"
             />
           </div>
           <button
@@ -110,9 +114,26 @@
 <script>
 export default {
   name: "RegisterStudent",
+  data() {
+    return {
+      email: "",
+      password: "",
+      name: "",
+      phoneNumber: "",
+    };
+  },
   methods: {
     pageLoginStudent() {
       this.$router.push({ name: "LoginStudent" });
+    },
+    registerStudent() {
+      const payload = {
+        email: this.email,
+        password: this.password,
+        name: this.name,
+        phoneNumber: this.phoneNumber,
+      };
+      this.$store.dispatch("registerStudent", payload);
     },
   },
 };
