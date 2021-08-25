@@ -244,7 +244,6 @@ export default new Vuex.Store({
           headers: {access_token: localStorage.getItem(`access_token`)}
         })
         context.commit(`USER_DATA`, userData.data)
-        console.log(userData.data)
       } catch (err) {
         Swal.fire({
           icon: 'error',

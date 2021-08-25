@@ -90,7 +90,6 @@ export default {
     },
     data() {
         return {
-            toggleClass:``,
             params: {
                 client_id: "194356169649-a6l157kiil38vr2p5h0fqarf9h9b035j.apps.googleusercontent.com"
             },
@@ -105,11 +104,6 @@ export default {
         logoutInfo() {
             var auth2 = gapi.auth2.getAuthInstance();
             this.$store.dispatch(`logOut`, {access_token: null, auth: auth2})
-        },
-        togglerClass() {
-            this.toggleClass == `` ? this.toggleClass = `active` : this.toggleClass = ''
-            console.log(this.toggleClass)
-            this.$store.commit(`TOGGLE_SIDEBAR`, this.toggleClass)
         }
     },
     components: {
