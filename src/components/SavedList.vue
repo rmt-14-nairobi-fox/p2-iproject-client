@@ -6,13 +6,6 @@
       >
         <h1 class="font-chomsky">The New Roman Times</h1>
       </div>
-      <!-- <input
-        type="text"
-        name="search"
-        id="search"
-        placeholder="Search news"
-        class="search-box p-3"
-      /> -->
       <div class="bg-light item-height overflow-auto">
         <div>
           test <br />

@@ -29,6 +29,22 @@
         <b-icon-bookmark-fill />
         <h5 class="m-0 ml-3">My Space</h5>
       </div>
+      <div
+        @click="gotoWeather"
+        class="w-100 text-light p-3 sidebar-item d-flex flex-row align-items-center"
+        :class="$route.name === 'Weather' ? 'sidebar-item-active' : ''"
+      >
+        <b-icon-cloud-fill />
+        <h5 class="m-0 ml-3">Weather</h5>
+      </div>
+      <div
+        @click="gotoCorona"
+        class="w-100 text-light p-3 sidebar-item d-flex flex-row align-items-center"
+        :class="$route.name === 'Corona' ? 'sidebar-item-active' : ''"
+      >
+        <b-icon-graph-up />
+        <h5 class="m-0 ml-3">Covid Graph</h5>
+      </div>
     </div>
     <div class="flex-grow-1 d-flex flex-column justify-content-end pb-3">
       <b-button @click="logout" variant="danger"
@@ -47,10 +63,16 @@ export default {
   },
   methods: {
     gotoNews() {
-      this.$router.push('/news');
+      this.$router.push('/news').catch(() => {});
     },
     gotoMySpace() {
-      this.$router.push('/myspace');
+      this.$router.push('/myspace').catch(() => {});
+    },
+    gotoCorona() {
+      this.$router.push('/corona').catch(() => {});
+    },
+    gotoWeather() {
+      this.$router.push('/weather').catch(() => {});
     },
     logout() {
       localStorage.clear();

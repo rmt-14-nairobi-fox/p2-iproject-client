@@ -6,7 +6,7 @@
         name="search"
         id="search"
         placeholder="Search news"
-        class="search-box p-3"
+        class="search-box p-3 text-center"
       />
       <div class="bg-light item-height overflow-auto">
         <div>
