@@ -69,4 +69,11 @@ export default {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.image-header {
+  height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 </style>
