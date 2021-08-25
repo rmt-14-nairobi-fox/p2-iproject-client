@@ -10,6 +10,7 @@ export default new Vuex.Store({
     teacherClassess: [],
     studentClassess: [],
     classess: [],
+    waitingClassess: [],
     myStudents: [],
     oneStudent: {},
     myScore: {}
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     GET_ALL_CLASS(state, payload) {
       state.classess = payload
+    },
+    GET_ALL_CLASS_WAITING(state, payload) {
+      state.waitingClassess = payload
     }
   },
   actions: {
@@ -263,6 +267,21 @@ export default new Vuex.Store({
       })
         .then(res => {
           context.commit('GET_ALL_CLASS', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getClassWaiting(context) {
+      axios({
+        method: 'get',
+        url: 'http://localhost:3000/students/waiting-class',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          context.commit('GET_ALL_CLASS_WAITING', res.data)
         })
         .catch(err => {
           console.log(err)

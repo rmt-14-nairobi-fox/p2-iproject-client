@@ -80,10 +80,14 @@
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
-                    <tr>
-                      <td class="px-6 py-4 whitespace-nowrap">1</td>
-                      <td class="px-6 py-4 whitespace-nowrap">Class 1</td>
-                      <td class="px-6 py-4 whitespace-nowrap">Teacher 1</td>
+                    <tr v-for="(wc, i) in waitingClassess" :key="'wc' + wc.id">
+                      <td class="px-6 py-4 whitespace-nowrap">{{ i + 1 }}</td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        {{ wc.Class.name }}
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        {{ wc.Class.Teacher.name }}
+                      </td>
                       <td class="px-6 py-4 whitespace-nowrap flex">
                         <div class="p-3">
                           <span
@@ -121,8 +125,15 @@ export default {
   components: {
     SideBarStudent,
   },
-  computed: {},
+  computed: {
+    waitingClassess() {
+      return this.$store.state.waitingClassess;
+    },
+  },
   methods: {},
+  created() {
+    this.$store.dispatch("getClassWaiting");
+  },
 };
 </script>
 
