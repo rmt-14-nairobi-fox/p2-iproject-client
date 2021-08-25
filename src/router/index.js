@@ -67,6 +67,12 @@ router.beforeEach((to, from, next) => {
   if (!localStorage.getItem("access_token") && to.name === "AnimeReview") {
     next({ name: "Login" });
   }
+  if (!localStorage.getItem("access_token") && to.name === "MyAnimeReview") {
+    next({ name: "Login" });
+  }
+  if (!localStorage.getItem("access_token") && to.name === "Discuse") {
+    next({ name: "Login" });
+  }
   if (localStorage.getItem("access_token") && to.name === "Login") {
     next({ name: "Home" });
   }

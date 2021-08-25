@@ -23,7 +23,7 @@
             <router-link to="/login" class="nav-link" aria-current="page" v-if="!this.$store.state.isLogin"> <i class="bx bx-log-in"></i>LOG-IN</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href=""><i class="bx bx-log-out" v-if="this.$store.state.isLogin"></i> LOG-OUT</a>
+            <GoogleLogin :params="params" :logoutButton="true" class="nav-link button-logout" @click.prevent="logoutHandler" v-if="this.$store.state.isLogin">><i class="bx bx-log-out"></i> Logout</GoogleLogin>
           </li>
         </ul>
       </div>
@@ -32,9 +32,27 @@
 </template>
 
 <script>
+import GoogleLogin from "vue-google-login";
+import successHandler from "../helper/successCase";
 export default {
   name: "NavBarPage",
+  components: {
+    GoogleLogin,
+  },
+  logoutHandler: function () {
+    localStorage.clear();
+    this.$store.commit("LOGIN_CHECK");
+    this.$router.push("/");
+    successHandler("See you later");
+  },
 };
 </script>
 
-<style></style>
+<style>
+.button-logout {
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+</style>

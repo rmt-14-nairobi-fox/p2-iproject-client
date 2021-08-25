@@ -148,6 +148,7 @@ export default new Vuex.Store({
         },
       });
     },
+    // loginGoogle(context, payload) {},
   },
   modules: {},
 });

@@ -117,7 +117,6 @@ body {
   height: 900px;
   padding-top: 20%;
   background: url("./assets/1.png") no-repeat center center;
-  text-shadow: 2px 1px #474747;
 }
 .form-register input {
   height: 45px;
