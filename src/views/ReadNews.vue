@@ -8,7 +8,7 @@
       :style="`background-image: url(${$route.query.image});`"
     ></div>
     <h2>{{ $route.query.title }}</h2>
-    <h5>Source: {{ $route.query.source.name }} | {{ published }}</h5>
+    <h5>Source: {{ sourceName }} | {{ published }}</h5>
     <p style="text-align: justify;">
       {{ $route.query.content }}
       <a :href="$route.query.url" target="_blank">Read more</a>
@@ -20,6 +20,15 @@
 export default {
   name: 'ReadNews',
   computed: {
+    sourceName() {
+      let source_name;
+      if (this.$route.query.source) {
+        source_name = this.$route.query.source.name;
+      } else {
+        source_name = this.$route.query.source_name;
+      }
+      return source_name;
+    },
     published() {
       const pubDate = new Date(this.$route.query.publishedAt);
       let date = pubDate.getDate() + '';
@@ -39,9 +48,6 @@ export default {
         ':'
       )}`;
     },
-  },
-  created() {
-    console.log(this.$route.query.source);
   },
 };
 </script>

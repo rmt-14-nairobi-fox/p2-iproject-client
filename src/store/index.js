@@ -12,6 +12,7 @@ export default new Vuex.Store({
     user_name: '',
     newsPrefs: [],
     news: {},
+    savednews: [],
   },
   mutations: {
     SET_ISLOGIN(state, payload) {
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     },
     SET_NEWS(state, payload) {
       state.news = payload;
+    },
+    SET_SAVEDNEWS(state, payload) {
+      state.savednews = payload;
     },
   },
   actions: {
@@ -106,6 +110,53 @@ export default new Vuex.Store({
         });
 
         context.commit('SET_NEWS', response.data);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
+
+    async saveNews(context, payload) {
+      try {
+        const response = await server.post(
+          '/news',
+          { payload },
+          {
+            headers: {
+              access_token: localStorage.access_token,
+            },
+          }
+        );
+
+        console.log(response.data);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
+
+    async fetchSavedNews(context) {
+      try {
+        const response = await server.get('/news/saved', {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        context.commit('SET_SAVEDNEWS', response.data);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
+
+    async deleteNews(context, payload) {
+      try {
+        const response = await server.delete('/news/saved/' + payload, {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        console.log(response.data);
+        context.dispatch('fetchSavedNews');
       } catch (err) {
         console.log(err.response.data);
       }

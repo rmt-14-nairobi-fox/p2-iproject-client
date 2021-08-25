@@ -7,17 +7,17 @@
       <img class="custom-rounded-top" :src="article.image" alt="cover" />
       <h3>{{ article.title }}</h3>
       <h5 class="bg-dark text-light text-center custom-rounded-sm">
-        {{ article.source.name }} | {{ published }}
+        {{ article.source_name }} | {{ published }}
       </h5>
       <p class="p-2" style="text-align: justify;">{{ article.description }}</p>
-      <b-button @click.stop="saveNews">Save</b-button>
+      <b-button @click.stop="deleteNews">Delete</b-button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'NewsCard',
+  name: 'SavedCard',
   props: ['article'],
   computed: {
     published() {
@@ -45,8 +45,8 @@ export default {
       const payload = { ...this.article };
       this.$router.push({ name: 'ReadNews', query: payload });
     },
-    saveNews() {
-      this.$store.dispatch('saveNews', this.article);
+    deleteNews() {
+      this.$store.dispatch('deleteNews', this.article.id);
     },
   },
 };
