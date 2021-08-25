@@ -8,18 +8,26 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     teacherClassess: [],
+    studentClassess: [],
     myStudents: [],
-    oneStudent: {}
+    oneStudent: {},
+    myScore: {}
   },
   mutations: {
     GET_CLASSES_TEACHER(state, payload) {
       state.teacherClassess = payload
+    },
+    GET_CLASSES_STUDENT(state, payload) {
+      state.studentClassess = payload
     },
     GET_MY_STUDENTS(state, payload) {
       state.myStudents = payload
     },
     GET_ONE_STUDENT(state, payload) {
       state.oneStudent = payload
+    },
+    GET_MY_SCORE(state, payload) {
+      state.myScore = payload
     }
   },
   actions: {
@@ -103,6 +111,43 @@ export default new Vuex.Store({
       })
         .then(res => {
           context.commit('GET_CLASSES_TEACHER', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getClassStudent(context) {
+      axios({
+        method: 'get',
+        url: 'http://localhost:3000/students/my-class',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          context.commit('GET_CLASSES_STUDENT', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    myScore(context, payload) {
+      const { id } = payload
+      axios({
+        method: 'get',
+        url: `http://localhost:3000/students/my-score/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          context.commit('GET_MY_SCORE', res.data)
+          router.push({
+            name: 'MyScore',
+            params: {
+              idClass: id
+            }
+          })
         })
         .catch(err => {
           console.log(err)

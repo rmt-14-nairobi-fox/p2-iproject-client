@@ -80,10 +80,17 @@
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
-                    <tr>
-                      <td class="px-6 py-4 whitespace-nowrap">1</td>
-                      <td class="px-6 py-4 whitespace-nowrap">Class 1</td>
-                      <td class="px-6 py-4 whitespace-nowrap">Teacher 1</td>
+                    <tr
+                      v-for="(studentClass, i) in studentClassess"
+                      :key="'studentClass' + studentClass.id"
+                    >
+                      <td class="px-6 py-4 whitespace-nowrap">{{ i + 1 }}</td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        {{ studentClass.Class.name }}
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        {{ studentClass.Class.Teacher.name }}
+                      </td>
                       <td class="px-6 py-4 whitespace-nowrap flex">
                         <div class="p-3">
                           <button
@@ -95,7 +102,7 @@
                               bg-green-500
                               text-white
                             "
-                            @click="myScore(1)"
+                            @click="myScore(studentClass.ClassId)"
                           >
                             My Score
                           </button>
@@ -124,16 +131,19 @@ export default {
   components: {
     SideBarStudent,
   },
-  computed: {},
+  computed: {
+    studentClassess() {
+      return this.$store.state.studentClassess;
+    },
+  },
   methods: {
     myScore(id) {
-      this.$router.push({
-        name: "MyScore",
-        params: {
-          idClass: id,
-        },
-      });
+      const payload = { id };
+      this.$store.dispatch("myScore", payload);
     },
+  },
+  created() {
+    this.$store.dispatch("getClassStudent");
   },
 };
 </script>

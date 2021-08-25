@@ -34,6 +34,7 @@
                           focus:border-blue-500
                         "
                         type="number"
+                        :value="myScore.score1"
                         readonly
                         disabled
                       />
@@ -50,6 +51,7 @@
                           focus:border-blue-500
                         "
                         type="number"
+                        :value="myScore.score2"
                         readonly
                         disabled
                       />
@@ -66,6 +68,7 @@
                           focus:border-blue-500
                         "
                         type="number"
+                        :value="myScore.score3"
                         readonly
                         disabled
                       />
@@ -82,6 +85,7 @@
                           focus:border-blue-500
                         "
                         type="number"
+                        :value="myScore.score4"
                         readonly
                         disabled
                       />
@@ -98,6 +102,7 @@
                           focus:border-blue-500
                         "
                         type="number"
+                        :value="myScore.score5"
                         readonly
                         disabled
                       />
@@ -107,14 +112,16 @@
                 <div class="text-lg ml-10 w-1/2">
                   <div class="flex flex-col">
                     <div class="p-3 mb-3 space-y-3 bg-purple-600 text-white">
-                      <p>Teacher Name : Teacher 1</p>
-                      <p>Teacher Email : Teacher1@mail.com</p>
-                      <p>Teacher Phone : 0182018201</p>
+                      <p>Teacher Name : {{ myScore.Class.Teacher.name }}</p>
+                      <p>Teacher Email : {{ myScore.Class.Teacher.email }}</p>
+                      <p>
+                        Teacher Phone : {{ myScore.Class.Teacher.phoneNumber }}
+                      </p>
                     </div>
                     <div class="p-3 mb-3 space-y-3 bg-purple-600 text-white">
                       <div>Total Score</div>
                       <hr />
-                      <div>100</div>
+                      <div>{{ myScore.totalScore }}</div>
                     </div>
                     <div
                       class="
@@ -128,7 +135,7 @@
                     >
                       <div>Predikat</div>
                       <hr />
-                      <div>A</div>
+                      <div>{{ myScore.predikat }}</div>
                     </div>
                     <div
                       class="
@@ -143,11 +150,7 @@
                       <div>Note</div>
                       <hr />
                       <div>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Voluptatem, culpa doloremque provident pariatur
-                        asperiores sit blanditiis error totam laboriosam dolore
-                        necessitatibus quasi mollitia, natus repudiandae ullam!
-                        Nam velit provident accusamus.
+                        {{ myScore.note }}
                       </div>
                     </div>
                   </div>
@@ -172,7 +175,11 @@ export default {
   components: {
     SideBarStudent,
   },
-  computed: {},
+  computed: {
+    myScore() {
+      return this.$store.state.myScore;
+    },
+  },
   methods: {},
 };
 </script>
