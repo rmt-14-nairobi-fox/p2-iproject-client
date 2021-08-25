@@ -246,6 +246,20 @@ export default new Vuex.Store({
         console.log(err.response.data);
       }
     },
+
+    async fetchAllMyPost(context) {
+      try {
+        const response = await server.get('/posts/myposts', {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        context.commit('SET_MYPOSTS', response.data);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
   },
   modules: {},
 });

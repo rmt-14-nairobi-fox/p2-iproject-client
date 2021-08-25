@@ -4,12 +4,14 @@
       <div class="d-flex align-items-center w-100">
         <!-- Pic and nam -->
         <img
-          :src="post.User.imgUrl"
+          :src="post.User ? post.User.imgUrl : profile"
           class="rounded-circle"
           width="36"
           alt="user pic"
         />
-        <span class="font-weight-bold ml-3">{{ post.User.name }}</span>
+        <span class="font-weight-bold ml-3">{{
+          post.User ? post.User.name : user_name
+        }}</span>
       </div>
       <!-- News pic and title -->
       <div
@@ -29,9 +31,9 @@
         <div>
           <a @click.prevent="toggleComment" href="#" class="h4 text-dark">
             <b-icon-chat />
+            <!-- Comment count -->
+            <span> 35</span>
           </a>
-          <!-- Comment count -->
-          <span> 35</span>
         </div>
         <CommentBox v-if="showComment" />
       </div>
@@ -41,6 +43,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import CommentBox from './CommentBox.vue';
 export default {
   name: 'PostCard',
@@ -50,6 +53,9 @@ export default {
     };
   },
   props: ['post'],
+  computed: {
+    ...mapState(['user_name', 'profile']),
+  },
   components: {
     CommentBox,
   },
