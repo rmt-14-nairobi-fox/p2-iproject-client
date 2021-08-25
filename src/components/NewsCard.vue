@@ -10,7 +10,7 @@
       ></div>
       <h3 class="p-2 border-bottom">{{ article.title }}</h3>
       <h5 class="text-black-50 p-2">
-        {{ article.source_name }} | {{ published }}
+        {{ article.source.name }} | {{ published }}
       </h5>
       <p class="p-2" style="text-align: justify;">{{ article.description }}</p>
       <b-button class="m-3 w-25 align-self-end" @click.stop="saveNews"

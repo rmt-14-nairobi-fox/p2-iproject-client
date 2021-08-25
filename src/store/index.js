@@ -200,6 +200,20 @@ export default new Vuex.Store({
         console.log(err.response.data);
       }
     },
+
+    async searchAction(context, payload) {
+      try {
+        const response = await server.post('/news/search', payload, {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        context.commit('SET_NEWS', response.data);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
   },
   modules: {},
 });
