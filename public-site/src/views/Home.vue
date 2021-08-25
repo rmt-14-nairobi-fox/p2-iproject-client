@@ -1,18 +1,32 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="w-full overflow-x-hidden border-t flex flex-col">
+    <main class="w-full flex-grow p-6">
+      <h1 class="text-3xl text-black pb-6">All Accommodations</h1>
+      <accommodations-card
+        v-for="accommodation in accommodations"
+        :key="accommodation + accommodation.id"
+        :accommodation="accommodation"
+      ></accommodations-card>
+    </main>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 
+import AccommodationsCard from "@/components/AccommodationsCard.vue";
 export default {
   name: "Home",
   components: {
-    HelloWorld,
+    AccommodationsCard,
+  },
+  created() {
+    this.$store.dispatch("getAccommodationsFunction");
+  },
+  computed: {
+    accommodations() {
+      return this.$store.state.accommodations;
+    },
   },
 };
 </script>
