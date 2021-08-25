@@ -4,24 +4,27 @@
   >
     <div
       @click="gotoLogin"
-      class="w-100 text-light p-3 sidebar-item"
+      class="w-100 text-light p-3 sidebar-item d-flex flex-row align-items-center"
       :class="$route.name === 'Login' ? 'sidebar-item-active' : ''"
     >
-      <h5 class="m-0">Login</h5>
+      <b-icon-person-fill />
+      <h5 class="m-0 ml-3">Login</h5>
     </div>
     <div
       @click="gotoRegister"
-      class="w-100 text-light p-3 sidebar-item"
+      class="w-100 text-light p-3 sidebar-item d-flex flex-row align-items-center"
       :class="$route.name === 'Register' ? 'sidebar-item-active' : ''"
     >
-      <h5 class="m-0">Register</h5>
+      <b-icon-person-plus-fill />
+      <h5 class="m-0 ml-3">Register</h5>
     </div>
     <div
       @click="gotoGoogle"
-      class="w-100 text-light p-3 sidebar-item"
+      class="w-100 text-light p-3 sidebar-item d-flex flex-row align-items-center"
       :class="$route.name === 'GoogleSignIn' ? 'sidebar-item-active' : ''"
     >
-      <h5 class="m-0">Google Sign In</h5>
+      <b-icon-google />
+      <h5 class="m-0 ml-3">Google Sign In</h5>
     </div>
   </nav>
 </template>

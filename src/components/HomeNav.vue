@@ -15,17 +15,19 @@
     <div class="flex-grow-1 w-100">
       <div
         @click="gotoLogin"
-        class="w-100 text-light p-3 sidebar-item"
+        class="w-100 text-light p-3 sidebar-item d-flex flex-row align-items-center"
         :class="$route.name === 'Login' ? 'sidebar-item-active' : ''"
       >
-        <h5 class="m-0">News</h5>
+        <b-icon-newspaper />
+        <h5 class="m-0 ml-3">News</h5>
       </div>
       <div
         @click="gotoRegister"
-        class="w-100 text-light p-3 sidebar-item"
+        class="w-100 text-light p-3 sidebar-item d-flex flex-row align-items-center"
         :class="$route.name === 'Register' ? 'sidebar-item-active' : ''"
       >
-        <h5 class="m-0">Saved News</h5>
+        <b-icon-bookmark-fill />
+        <h5 class="m-0 ml-3">Saved News</h5>
       </div>
     </div>
     <div class="flex-grow-1 d-flex flex-column justify-content-end pb-3">
