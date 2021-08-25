@@ -15,6 +15,7 @@
       hover:-translate-y-1 hover:scale-105
       cursor-pointer
     "
+    @click="detailClick(accommodation.id)"
   >
     <div class="flex max-h-72">
       <div class="w-6/12 text-gray-800 bg-home-main p-16 flex items-center">
@@ -69,6 +70,19 @@
 export default {
   name: "AccommodationsCard",
   props: ["accommodation"],
+  methods: {
+    detailClick(payload) {
+      console.log(payload);
+      this.$router
+        .push({
+          name: "AccommodationDetails",
+          params: {
+            id: +payload,
+          },
+        })
+        .catch(() => {});
+    },
+  },
 };
 </script>
 

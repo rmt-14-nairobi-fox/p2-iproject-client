@@ -43,6 +43,19 @@ const routes = [
       }
     },
   },
+  {
+    path: "/accommodation/:id",
+    name: "AccommodationDetails",
+    component: () =>
+      import(/* webpackChunkName: "Login" */ "../views/Accommodation.vue"),
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("access_token")) {
+        next();
+      } else {
+        next({ name: "Login" });
+      }
+    },
+  },
 ];
 
 const router = new VueRouter({

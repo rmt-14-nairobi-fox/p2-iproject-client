@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     isAuth: false,
     accommodations: [],
+    images: [],
   },
   mutations: {
     FETCH_ISAUTH(state, payload) {
