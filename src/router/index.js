@@ -5,6 +5,9 @@ import AllReview from "../views/allReview.vue";
 import AnimeReview from "../views/reviewAnime.vue";
 import Login from "../views/login.vue";
 import Register from "../views/register.vue";
+import MyAnimeReview from "../views/myReview.vue";
+import EditReview from "../views/editreview.vue";
+import Discuse from "../views/discuse.vue";
 
 Vue.use(VueRouter);
 
@@ -25,6 +28,11 @@ const routes = [
     component: AnimeReview,
   },
   {
+    path: "/myreview",
+    name: "MyAnimeReview",
+    component: MyAnimeReview,
+  },
+  {
     path: "/login",
     name: "Login",
     component: Login,
@@ -33,6 +41,16 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
+  },
+  {
+    path: "/myreview/edit",
+    name: "EditReview",
+    component: EditReview,
+  },
+  {
+    path: "/discuse",
+    name: "Discuse",
+    component: Discuse,
   },
 ];
 

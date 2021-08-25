@@ -8,13 +8,16 @@
       <div class="collapse navbar-collapse justify-content-end me-3" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link to="/" class="nav-link active" aria-current="page"> <i class="bx bx-home"></i>Home</router-link>
+            <router-link to="/" class="nav-link active" aria-current="page"> <i class="bx bx-home"></i> Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/allreview" class="nav-link" aria-current="page"> <i class="bx bx-book-open"></i>All Review</router-link>
+            <router-link to="/allreview" class="nav-link" aria-current="page" v-if="this.$store.state.isLogin"> <i class="bx bx-book-open"></i> All Review</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href=""><i class="bx bxl-discourse" v-if="this.$store.state.isLogin"></i> DISQUS</a>
+            <router-link to="/myreview" class="nav-link" aria-current="page" v-if="this.$store.state.isLogin"> <i class="bx bx-game"></i> My Review</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/discuse" class="nav-link" aria-current="page" v-if="this.$store.state.isLogin"> <i class="bx bxl-discourse"></i> DISQUS</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/login" class="nav-link" aria-current="page" v-if="!this.$store.state.isLogin"> <i class="bx bx-log-in"></i>LOG-IN</router-link>
