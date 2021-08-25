@@ -322,6 +322,28 @@ export default new Vuex.Store({
         console.log(err.response.data);
       }
     },
+
+    async editProfileAction(context, payload) {
+      try {
+        const response = await server.patch('/users/edit', payload, {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        console.log(response.data);
+
+        localStorage.user_name = response.data.name;
+
+        if (response.data.imgUrl) localStorage.profile = response.data.imgUrl;
+
+        context.dispatch('checkTokenAction');
+
+        router.push({ name: 'Home' });
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
   },
   modules: {},
 });

@@ -6,9 +6,10 @@
       class="flex-grow-1 d-flex flex-column align-items-center justify-content-start pt-3"
     >
       <img
+        @click="gotoEditProfile"
         width="120"
         height="120"
-        style="border-radius: 100%;"
+        class="rounded-circle cursor-pointer"
         :src="profile"
         referrerpolicy="no-referrer"
         alt=""
@@ -73,6 +74,9 @@ export default {
     ...mapState(['profile', 'user_name']),
   },
   methods: {
+    gotoEditProfile() {
+      this.$router.push('/editprofile').catch(() => {});
+    },
     gotoNews() {
       this.$router.push('/news').catch(() => {});
     },
