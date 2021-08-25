@@ -22,7 +22,10 @@
         ></b-form-file>
 
         <div class="d-flex justify-content-center mt-3">
-          <b-button type="submit" variant="dark">Edit</b-button>
+          <b-button class="mx-2" type="submit" variant="dark">Edit</b-button>
+          <b-button @click="cancel" class="mx-2" type="button" variant="danger"
+            >Cancel</b-button
+          >
         </div>
       </b-form>
     </b-card>
@@ -49,6 +52,9 @@ export default {
     },
     setUsername() {
       this.username = this.user_name;
+    },
+    cancel() {
+      this.$router.go(-1);
     },
   },
   created() {
