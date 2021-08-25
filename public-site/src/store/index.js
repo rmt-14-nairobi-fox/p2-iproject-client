@@ -10,6 +10,8 @@ export default new Vuex.Store({
     isAuth: false,
     accommodations: [],
     images: [],
+    accommodation: {},
+    ownerInfo: {},
   },
   mutations: {
     FETCH_ISAUTH(state, payload) {
@@ -17,6 +19,15 @@ export default new Vuex.Store({
     },
     FETCH_ACCOMMODATIONS(state, payload) {
       state.accommodations = payload;
+    },
+    FETCH_IMAGES(state, payload) {
+      state.images = payload;
+    },
+    FETCH_ACCOMMODATION(state, payload) {
+      state.accommodation = payload;
+    },
+    FETCH_OWNERINFO(state, payload) {
+      state.ownerInfo = payload;
     },
   },
   actions: {
@@ -66,6 +77,23 @@ export default new Vuex.Store({
         .then(({ data }) => {
           console.log(data);
           context.commit("FETCH_ACCOMMODATIONS", data);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    },
+
+    getAccommodationFunction(context, payload) {
+      axios
+        .get(`/public/${+payload}`, {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        })
+        .then(({ data }) => {
+          console.log(data.User);
+          context.commit("FETCH_ACCOMMODATION", data);
+          context.commit("FETCH_OWNERINFO", data.User);
         })
         .catch((err) => {
           console.log(err.response.data);

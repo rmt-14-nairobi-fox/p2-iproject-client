@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- FIRST  ROW -->
     <div class="mt-12 grid grid-cols-2 content-center mx-auto w-10/12">
       <!-- CAROUSEL -->
       <div class="carousel relative rounded relative shadow-xl max-w-6xl">
@@ -273,7 +272,7 @@
         </div>
       </div>
 
-      <!-- MAPBOXS -->
+      <!-- DETAILS -->
       <div class="w-full relative">
         <MglMap
           :accessToken="accessToken"
@@ -286,118 +285,41 @@
         </MglMap>
       </div>
     </div>
-    <div class="mt-12 grid grid-cols-2 content-center mx-auto w-10/12">
-      <!-- DETAILS -->
-      <div>
-        <div class="max-w-2xl w-full h-1/2">
-          <div class="w-full w-auto px-4 mr-auto ml-auto">
-            <h3 class="text-3xl mb-2 font-semibold leading-normal">Details</h3>
-            <h3 class="text-3xl mb-2 font-semibold leading-normal">
-              {{ accommodation.title }}
-            </h3>
-            <p
-              class="text-xl font-light leading-relaxed mt-4 mb-4 text-gray-700"
-            >
-              {{ accommodation.description }}
-            </p>
-            <p
-              class="text-xl font-light leading-relaxed mt-0 mb-4 text-gray-700"
-            >
-              Rp.
-              <span class="font-bold">
-                {{ accommodation.price }}
-              </span>
-              /month
-            </p>
-            <div class="flex">
-              <div class="mr-8">
-                <p class="text-xl capitalize">
-                  <span>Street:&nbsp;</span>
-                  {{ accommodation.address }}
-                </p>
-              </div>
-              <div class="mr-8">
-                <p class="text-xl capitalize">
-                  <span>City:&nbsp;</span>
-                  {{ accommodation.city }}
-                </p>
-              </div>
-              <div class="mr-8">
-                <p class="text-xl capitalize">
-                  <span>Zip code:&nbsp;</span>
-                  {{ accommodation.zipCode }}
-                </p>
-              </div>
+    <div>
+      <div class="max-w-2xl w-full h-1/2">
+        <div class="w-full w-auto px-4 mr-auto ml-auto">
+          <h3 class="text-4xl mb-2 font-semibold leading-normal">
+            {{ accommodation.title }}
+          </h3>
+          <p class="text-xl font-light leading-relaxed mt-4 mb-4 text-gray-700">
+            {{ accommodation.description }}
+          </p>
+          <p class="text-xl font-light leading-relaxed mt-0 mb-4 text-gray-700">
+            Rp.
+            <span class="font-bold">
+              {{ accommodation.price }}
+            </span>
+            /month
+          </p>
+          <div class="flex">
+            <div class="mr-8">
+              <p class="text-xl capitalize">
+                <span>Street:&nbsp;</span>
+                {{ accommodation.address }}
+              </p>
             </div>
-          </div>
-        </div>
-      </div>
-      <!-- PERSONAL INFO -->
-      <div>
-        <div class="max-w-2xl w-full h-1/2">
-          <div class="w-full w-auto px-4 mr-auto ml-auto">
-            <h3 class="text-3xl mb-2 font-semibold leading-normal">
-              Owner Information
-            </h3>
-            <h3 class="text-3xl mb-2 font-semibold leading-normal">
-              {{ ownerInfo.fullname }}
-            </h3>
-            <div class="flex mb-2">
-              <div class="mr-8">
-                <p class="text-xl capitalize">
-                  <span>
-                    <i class="far fa-envelope text-sm"></i>
-                    :&nbsp;
-                  </span>
-                  {{ ownerInfo.email }}
-                </p>
-              </div>
-              <div class="mr-8">
-                <p class="text-xl capitalize">
-                  <span>
-                    <i class="fas fa-phone text-sm"></i>
-                    :&nbsp;
-                  </span>
-                  {{ ownerInfo.phonenumber }}
-                </p>
-              </div>
+            <div class="mr-8">
+              <p class="text-xl capitalize">
+                <span>City:&nbsp;</span>
+                {{ accommodation.city }}
+              </p>
             </div>
-
-            <div class="flex">
-              <div class="mr-8">
-                <p class="text-xl capitalize">
-                  <span>Address:&nbsp;</span>
-                  {{ ownerInfo.address }}
-                </p>
-              </div>
-              <div class="mr-8">
-                <p class="text-xl capitalize">
-                  <span>City:&nbsp;</span>
-                  {{ ownerInfo.city }}
-                </p>
-              </div>
-              <div class="mr-8">
-                <p class="text-xl capitalize">
-                  <span>Zip code:&nbsp;</span>
-                  {{ ownerInfo.zipCode }}
-                </p>
-              </div>
+            <div class="mr-8">
+              <p class="text-xl capitalize">
+                <span>Zip code:&nbsp;</span>
+                {{ accommodation.zipCode }}
+              </p>
             </div>
-          </div>
-          <div class="w-full w-auto px-4 mr-auto ml-auto items-rigth mt-2">
-            <button
-              class="
-                text-2xl text-center
-                bg-btn-in-main
-                py-2
-                px-5
-                rounded-lg
-                text-white
-                mr-2
-              "
-            >
-              Save
-            </button>
           </div>
         </div>
       </div>
@@ -437,9 +359,6 @@ export default {
   computed: {
     accommodation() {
       return this.$store.state.accommodation;
-    },
-    ownerInfo() {
-      return this.$store.state.ownerInfo;
     },
   },
   methods: {

@@ -72,7 +72,6 @@ export default {
   props: ["accommodation"],
   methods: {
     detailClick(payload) {
-      console.log(payload);
       this.$router
         .push({
           name: "AccommodationDetails",
