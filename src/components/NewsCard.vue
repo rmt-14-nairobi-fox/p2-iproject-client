@@ -1,16 +1,21 @@
 <template>
-  <div class="col-4 mb-3">
+  <div class="col-12 my-3">
     <div
       @click="readNews"
       class="d-flex flex-column custom-rounded shadow-sm cursor-pointer"
     >
-      <img class="custom-rounded-top" :src="article.image" alt="cover" />
-      <h3>{{ article.title }}</h3>
-      <h5 class="bg-dark text-light text-center custom-rounded-sm">
-        {{ article.source.name }} | {{ published }}
+      <div
+        class="image-header custom-rounded-top"
+        :style="`background-image: url(${article.image});`"
+      ></div>
+      <h3 class="p-2 border-bottom">{{ article.title }}</h3>
+      <h5 class="text-black-50 p-2">
+        {{ article.source_name }} | {{ published }}
       </h5>
       <p class="p-2" style="text-align: justify;">{{ article.description }}</p>
-      <b-button @click.stop="saveNews">Save</b-button>
+      <b-button class="m-3 w-25 align-self-end" @click.stop="saveNews"
+        >Save</b-button
+      >
     </div>
   </div>
 </template>
