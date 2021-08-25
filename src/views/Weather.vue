@@ -60,7 +60,7 @@ export default {
           },
           {
             Item: 'Wind Speed',
-            Value: newWeather.wind.speed * 3.6 + ' KM/h',
+            Value: (newWeather.wind.speed * 3.6).toFixed(1) + ' KM/h',
           },
           {
             Item: 'Sunrise',
