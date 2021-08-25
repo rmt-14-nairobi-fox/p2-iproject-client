@@ -10,10 +10,16 @@
 <script>
 import ListPost from "./ListPost.vue";
 import HFooter from "vue-hacktiv8-footer";
-// @ is an alias to /src
-
+import { mapActions } from "vuex";
 export default {
   name: "Home",
   components: { ListPost, HFooter },
+  computed: {},
+  methods: {
+    ...mapActions(["fetchIP"]),
+  },
+  created() {
+    this.fetchIP();
+  },
 };
 </script>

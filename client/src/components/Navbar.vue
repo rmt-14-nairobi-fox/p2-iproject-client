@@ -26,6 +26,22 @@
       </li>
 
       <li class="px-2">
+        <a class="no-underline" href="">
+          <span
+            class="
+              cursor-pointer
+              font-semibold
+              hover:text-blue-900
+              text-blue-500
+            "
+            v-show="isLoggedin"
+            @click.prevent="findNearby"
+            >Nearby</span
+          >
+        </a>
+      </li>
+
+      <li class="px-2">
         <router-link class="no-underline" to="/add-post">
           <span
             class="
@@ -75,18 +91,22 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 export default {
   name: "Navbar",
   computed: {
-    ...mapState(["isLoggedin"]),
+    ...mapState(["isLoggedin", "userLocation"]),
   },
   methods: {
     ...mapMutations({ toogleStateLogin: "TOGGLE_STATE_LOGIN" }),
+    ...mapActions(["fetchNearbyposts"]),
     logoutHandler() {
       localStorage.clear();
       this.toogleStateLogin();
       this.$router.push({ name: "Home" }).catch(() => {});
+    },
+    findNearby() {
+      this.fetchNearbyposts(this.userLocation);
     },
   },
 };
