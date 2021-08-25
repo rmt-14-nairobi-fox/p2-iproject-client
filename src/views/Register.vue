@@ -24,12 +24,12 @@
           <div
             class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none"
           >
-            <h3 class="pt-4 text-2xl text-center">Create your Account!</h3>
+            <h3 class="text-2xl pt-4 text-center">Create your Account!</h3>
             <form
               @submit.prevent="registHandler"
               class="px-8 pt-6 pb-8 mb-4 bg-white rounded"
             >
-              <div class="mb-4">
+              <div class="mb-2">
                 <label
                   class="block mb-2 text-sm font-bold text-gray-700"
                   for="email"
@@ -57,7 +57,7 @@
                   placeholder="John Doe"
                 />
               </div>
-              <div class="mb-4">
+              <div class="mb-2">
                 <label
                   class="block mb-2 text-sm font-bold text-gray-700"
                   for="email"
@@ -113,9 +113,6 @@
                     type="text"
                     placeholder="johnDoe07"
                   />
-                  <!-- <p class="text-xs italic text-red-500">
-                    Please choose a password.
-                  </p> -->
                 </div>
                 <div class="md:ml-2">
                   <label
@@ -179,10 +176,10 @@
                     class="block mb-2 text-sm font-bold text-gray-700"
                     for="lastName"
                   >
-                    Address
+                    Postal Code
                   </label>
                   <input
-                    v-model="address"
+                    v-model="zipCode"
                     class="
                       w-full
                       px-3
@@ -198,7 +195,63 @@
                     "
                     id="lastName"
                     type="text"
-                    placeholder="Lampung, Indonesia"
+                    placeholder="35372"
+                  />
+                </div>
+              </div>
+              <div class="mb-4 md:flex md:justify-between">
+                <div class="mb-4 md:mr-2 md:mb-0">
+                  <label
+                    class="block mb-2 text-sm font-bold text-gray-700"
+                    for="firstName"
+                  >
+                    Address
+                  </label>
+                  <input
+                    v-model="street"
+                    class="
+                      w-full
+                      px-3
+                      py-2
+                      text-sm
+                      leading-tight
+                      text-gray-700
+                      border
+                      rounded
+                      shadow
+                      appearance-none
+                      focus:outline-none focus:shadow-outline
+                    "
+                    id="firstName"
+                    type="text"
+                    placeholder="Jl. Setapak, Depan Gang"
+                  />
+                </div>
+                <div class="md:ml-2">
+                  <label
+                    class="block mb-2 text-sm font-bold text-gray-700"
+                    for="lastName"
+                  >
+                    City
+                  </label>
+                  <input
+                    v-model="city"
+                    class="
+                      w-full
+                      px-3
+                      py-2
+                      text-sm
+                      leading-tight
+                      text-gray-700
+                      border
+                      rounded
+                      shadow
+                      appearance-none
+                      focus:outline-none focus:shadow-outline
+                    "
+                    id="lastName"
+                    type="text"
+                    placeholder="Lampung"
                   />
                 </div>
               </div>
@@ -266,7 +319,9 @@ export default {
       username: "",
       password: "",
       phoneNumber: "",
-      address: "",
+      zipCode: "",
+      street: "",
+      city: "",
     };
   },
   methods: {
@@ -277,8 +332,9 @@ export default {
         username: this.username,
         password: this.password,
         phoneNumber: this.phoneNumber,
-        address: this.address,
+        address: `${this.street}, ${this.city}, Indonesia. ${this.zipCode}`,
       };
+      console.log(payload);
       this.$store.dispatch("userRegist", payload);
     },
   },

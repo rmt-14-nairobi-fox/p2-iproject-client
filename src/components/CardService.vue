@@ -1,55 +1,38 @@
 <template>
   <div
     class="
-      max-w-xs
-      mx-auto
-      overflow-hidden
-      bg-red-500
-      rounded-lg
-      shadow-lg
-      dark:bg-gray-800
+      col-span-4
+      sm:col-span-4
+      md:col-span-2
+      lg:col-span-1
+      xl:col-span-1
+      flex flex-col
+      items-center
     "
   >
-    <div class="px-4 py-2">
-      <h1 class="text-3xl font-bold text-white uppercase dark:text-white">
-        {{ service.name }}
-      </h1>
-      <p class="mt-1 text-sm text-white dark:text-white-400">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quos
-        quidem sequi illum facere recusandae voluptatibus
-      </p>
+    <div class="bg-white rounded-lg mt-5">
+      <img :src="service.imgUrl" class="h-40 rounded-md" alt="" />
     </div>
-
-    <img
-      class="object-cover w-full h-48 mt-2"
-      src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=320&q=80"
-      alt="NIKE AIR"
-    />
-
-    <div class="flex items-center px-4 py-2 bg-gray-900">
-      <button
-        @click.prevent="seeProvider(service.id)"
-        class="
-          px-2
-          py-1
-          text-xs
-          font-semibold
-          text-gray-900
-          uppercase
-          transition-colors
-          duration-200
-          transform
-          bg-white
-          rounded
-          hover:bg-gray-200
-          focus:bg-gray-400 focus:outline-none
-        "
-        type="button"
-      >
-        See Providers
-      </button>
+    <div class="bg-white shadow-lg rounded-lg -mt-4 w-64">
+      <div class="py-5 px-5">
+        <span class="font-bold text-gray-800 text-lg">
+          <a
+            @click.prevent="seeProvider(service.id)"
+            href="#"
+            class="flex md:inline-flex p-4 items-center hover:text-red-500"
+          >
+            <span>{{ service.name }}</span>
+          </a></span
+        >
+        <div class="flex items-center justify-between">
+          <div class="text-sm text-gray-600 font-light">
+            {{ service.description }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <!-- end cols -->
 </template>
 
 <script>
