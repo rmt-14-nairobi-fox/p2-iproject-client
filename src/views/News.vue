@@ -83,10 +83,11 @@ export default {
 }
 
 .image-header {
-  height: 200px;
+  height: 260px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  padding-bottom: 40%;
 }
 
 .post-header {
