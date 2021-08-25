@@ -53,6 +53,16 @@ export default new Vuex.Store({
       }
     },
 
+    async registerAction(context, payload) {
+      try {
+        const response = await server.post('/users/register', payload);
+        console.log(response.data);
+        router.push('/auth/login');
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
+
     async googleSignIn(context, payload) {
       try {
         const response = await server.post('/users/google', payload);
