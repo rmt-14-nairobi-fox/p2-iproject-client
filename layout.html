@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/fb9d24a49a.js" crossorigin="anonymous"></script>
+    <title>Layouting</title>
+
+    <style>
+        :root {
+            --red: #f9032f;
+            --black: #000;
+            --white: #fff;
+        }
+
+        .hero {
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('https://wallpaperaccess.com/full/697849.jpg');
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            padding: 0.5rem calc((100vw - 1200px)/2);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .hero__content {
+            color: var(--white);
+            padding: 3rem 1rem;
+            line-height: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Page Login -->
+    <section id="section__login">
+        <div class="
+            min-h-screen
+            bg-gray-100
+            flex
+            items-center
+            justify-center
+            sm:py-12
+          ">
+            <div class="bg-white p-16 border border-indigo-400 rounded-xl shadow-2xl w-1/2">
+                <h2 class="text-3xl font-bold mb-10 text-center">Login as Teacher</h2>
+                <form class="space-y-8">
+                    <div>
+                        <label class="block mb-2" for="email">Email</label>
+                        <input class="
+                    border-2 border-gray-200
+                    p-3
+                    w-full
+                    rounded
+                    outline-none
+                    focus:border-blue-500
+                  " type="text" id="email" placeholder="your@mail.com" />
+                    </div>
+                    <div>
+                        <label class="block mb-2" for="password">Password</label>
+                        <input class="
+                    border-2 border-gray-200
+                    p-3
+                    w-full
+                    rounded
+                    outline-none
+                    focus:border-blue-500
+                  " type="password" id="password" />
+                    </div>
+                    <button
+                        class="block w-full bg-blue-300 p-4 rounded text-white font-bold hover:bg-blue-600 hover:shadow-2xl transition delay-75 duration-300 ease-in-out"
+                        type="submit">
+                        Login
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Page Register -->
+    <section id="">
+        <div class="
+            min-h-screen
+            bg-gray-100
+            flex
+            items-center
+            justify-center
+            sm:py-12
+          ">
+            <div class="bg-white p-16 rounded-xl border border-indigo-400 shadow-2xl w-1/2">
+                <h2 class="text-3xl font-bold mb-10 text-center">Register as Teacher</h2>
+                <form class="space-y-8">
+                    <div>
+                        <label class="block mb-2" for="email">Email</label>
+                        <input class="
+                    border-2 border-gray-200
+                    p-3
+                    w-full
+                    rounded
+                    outline-none
+                    focus:border-blue-500
+                  " type="text" id="email" placeholder="your@mail.com" />
+                    </div>
+                    <div>
+                        <label class="block mb-2" for="password">Password</label>
+                        <input class="
+                    border-2 border-gray-200
+                    p-3
+                    w-full
+                    rounded
+                    outline-none
+                    focus:border-blue-500
+                  " type="password" id="password" />
+                    </div>
+                    <div>
+                        <label class="block mb-2" for="email">Name</label>
+                        <input class="
+                    border-2 border-gray-200
+                    p-3
+                    w-full
+                    rounded
+                    outline-none
+                    focus:border-blue-500
+                  " type="text" />
+                    </div>
+                    <div>
+                        <label class="block mb-2" for="email">Phone Number</label>
+                        <input class="
+                    border-2 border-gray-200
+                    p-3
+                    w-full
+                    rounded
+                    outline-none
+                    focus:border-blue-500
+                  " type="text" />
+                    </div>
+                    <button
+                        class="block w-full bg-blue-300 p-4 rounded text-white font-bold hover:bg-blue-600 hover:shadow-2xl transition delay-75 duration-300 ease-in-out"
+                        type="submit">
+                        Register
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Dashboard  -->
+    <section id="section__dashboard">
+        <div class="min-h-screen grid grid-cols-5">
+            <!-- Sidebar -->
+            <div class="col-auto bg-white shadow-xl">
+                <div class="p-7">
+                    <h2 class="font-bold text-2xl">RAPOOT</h2>
+                    <hr class="my-6" />
+                    <div class="flex flex-col my-12 space-y-8">
+                        <div class="uppercase space-y-4">
+                            <!-- Teacher -->
+                            <div>
+                                <div class="mx-5">
+                                    <button>MY CLASS</button>
+                                </div>
+                                <div class="mx-5">
+                                    <button>CREATE CLASS</button>
+                                </div>
+                            </div>
+                            <!-- Student -->
+                            <div>
+                                <div class="mx-5">
+                                    <button>MY CLASS</button>
+                                </div>
+                                <div class="mx-5">
+                                    <button>JOIN CLASS</button>
+                                </div>
+                                <div class="mx-5">
+                                    <button>WAITING CLASS</button>
+                                </div>
+                            </div>
+                            <div class="mx-5">
+                                <button>LOGOUT</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-4 flex flex-col">
+                <!-- Navbar -->
+                <div class="h-32 bg-indigo-500">
+                    <div class="flex justify-between p-7">
+                        <h2 class="text-white font-bold text-3xl tracking-wide">Dashboard Teacher</h2>
+                    </div>
+                </div>
+                <div class="h-auto flex-grow bg-gray-50">
+                    <div class="p-7 -my-16">
+                        <!-- My Class -->
+                        <div class="bg-white h-auto mt-2">
+                            <div class="p-4 shadow-xl rounded-lg">
+                                <div class="p-4 grid grid-cols-3 gap-4">
+                                    <button
+                                        class="border border-indigo-500 shadow-md mb-5 h-32 flex justify-center items-center">
+                                        My Class
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Class -->
+                        <div class="bg-white h-auto mt-2">
+                            <div class="p-4 shadow-xl rounded-lg flex flex-col">
+                                <div class="flex justify-center">
+                                    <h1 class="font-bold text-xl my-3">My Class Name</h1>
+                                </div>
+                                <button class=" shadow-xl p-5 bg-blue-500 text-white w-56">See Student Register</button>
+                                <div>
+                                    <table class="min-w-full my-7">
+                                        <thead class="bg-indigo-50">
+                                            <tr>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    No
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Student Name
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Predikat
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Action
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            <tr v-for="(history, i) in histories" :key="history">
+                                                <td class="px-6 py-4 whitespace-nowrap">1</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">Student 1</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    B
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap flex">
+                                                    <div class="p-3">
+                                                        <button
+                                                            class="shadow-xl font-bold p-4 w-40 bg-green-500 text-white">
+                                                            Score
+                                                        </button>
+                                                    </div>
+                                                    <div class="p-3">
+                                                        <button
+                                                            class="shadow-xl font-bold p-4 w-40 bg-red-500 text-white">
+                                                            Delete Student
+                                                        </button>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Waiting Class -->
+                        <div class="bg-white h-auto mt-2">
+                            <div class="p-4 shadow-xl rounded-lg flex flex-col">
+                                <div class="flex justify-center">
+                                    <h1 class="font-bold text-xl my-3">My Class Name</h1>
+                                </div>
+                                <div>
+                                    <table class="min-w-full my-7">
+                                        <thead class="bg-indigo-50">
+                                            <tr>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    No
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Student Name
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Email
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Action
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            <tr v-for="(history, i) in histories" :key="history">
+                                                <td class="px-6 py-4 whitespace-nowrap">1</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">Student 1</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    student1@mail.com
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap flex">
+                                                    <div class="p-3">
+                                                        <button
+                                                            class="shadow-xl font-bold p-4 w-40 bg-green-500 text-white">
+                                                            Accept
+                                                        </button>
+                                                    </div>
+                                                    <div class="p-3">
+                                                        <button
+                                                            class="shadow-xl font-bold p-4 w-40 bg-red-500 text-white">
+                                                            Reject
+                                                        </button>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Score Student -->
+                        <div class="bg-white h-auto mt-2">
+                            <div class="p-4 shadow-xl rounded-lg flex flex-col">
+                                <div class="flex justify-center">
+                                    <h1 class="font-bold text-xl my-3">My Class Name</h1>
+                                </div>
+                                <div class="flex mt-10">
+                                    <div class="w-1/2 mx-auto">
+                                        <form class="space-y-4">
+                                            <div>
+                                                <label class="block mb-2" for="email">Score 1</label>
+                                                <input class="
+                                            border-2 border-gray-200
+                                            p-2
+                                            w-full
+                                            rounded
+                                            outline-none
+                                            focus:border-blue-500
+                                          " type="number" />
+                                            </div>
+                                            <div>
+                                                <label class="block mb-2" for="email">Score 2</label>
+                                                <input class="
+                                            border-2 border-gray-200
+                                            p-2
+                                            w-full
+                                            rounded
+                                            outline-none
+                                            focus:border-blue-500
+                                          " type="number" />
+                                            </div>
+                                            <div>
+                                                <label class="block mb-2" for="email">Score 3</label>
+                                                <input class="
+                                            border-2 border-gray-200
+                                            p-2
+                                            w-full
+                                            rounded
+                                            outline-none
+                                            focus:border-blue-500
+                                          " type="number" />
+                                            </div>
+                                            <div>
+                                                <label class="block mb-2" for="email">Score 4</label>
+                                                <input class="
+                                            border-2 border-gray-200
+                                            p-2
+                                            w-full
+                                            rounded
+                                            outline-none
+                                            focus:border-blue-500
+                                          " type="number" />
+                                            </div>
+                                            <div>
+                                                <label class="block mb-2" for="email">Score 5</label>
+                                                <input class="
+                                            border-2 border-gray-200
+                                            p-2
+                                            w-full
+                                            rounded
+                                            outline-none
+                                            focus:border-blue-500
+                                          " type="number" />
+                                            </div>
+                                            <div>
+                                                <label class="block mb-2" for="email">Note</label>
+                                                <input class="
+                                            border-2 border-gray-200
+                                            p-3
+                                            w-full
+                                            rounded
+                                            outline-none
+                                            focus:border-blue-500
+                                          " type="text" />
+                                            </div>
+                                            <button
+                                                class="block w-full bg-blue-300 p-4 rounded text-white font-bold hover:bg-blue-600 hover:shadow-2xl transition delay-75 duration-300 ease-in-out"
+                                                type="submit">
+                                                Confirm
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="text-lg ml-10 w-1/2">
+                                        <div class="flex flex-col">
+                                            <div class="p-3 mb-3 space-y-3 bg-purple-600 text-white">
+                                                <p>Student Name : Student 1</p>
+                                                <p>Student Email : student1@mail.com</p>
+                                                <p>Student Phone : 0182018201</p>
+                                            </div>
+                                            <div class="p-3 mb-3 space-y-3 bg-purple-600 text-white">
+                                                Total Score : 100
+                                            </div>
+                                            <div class="p-3 mb-3 space-y-3 bg-purple-600 text-white flex flex-col">
+                                                Predikat : A
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- My Class Student -->
+                        <div class="bg-white h-auto mt-2">
+                            <div class="p-4 shadow-xl rounded-lg flex flex-col">
+                                <div class="flex justify-center">
+                                </div>
+                                <div>
+                                    <table class="min-w-full my-7">
+                                        <thead class="bg-indigo-50">
+                                            <tr>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    No
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Class Name
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Teacher Name
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Action
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            <tr v-for="(history, i) in histories" :key="history">
+                                                <td class="px-6 py-4 whitespace-nowrap">1</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">Class 1</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    Teacher 1
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap flex">
+                                                    <div class="p-3">
+                                                        <button
+                                                            class="shadow-xl font-bold p-4 w-40 bg-green-500 text-white">
+                                                            My Score
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Join Class -->
+                        <div class="bg-white h-auto mt-2">
+                            <div class="p-4 shadow-xl rounded-lg flex flex-col">
+                                <div class="flex justify-center">
+                                </div>
+                                <div>
+                                    <table class="min-w-full my-7">
+                                        <thead class="bg-indigo-50">
+                                            <tr>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    No
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Class Name
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Teacher Name
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Action
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            <tr v-for="(history, i) in histories" :key="history">
+                                                <td class="px-6 py-4 whitespace-nowrap">1</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">Class 1</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    Teacher 1
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap flex">
+                                                    <div class="p-3">
+                                                        <button
+                                                            class="shadow-xl font-bold p-4 w-40 bg-blue-500 text-white">
+                                                            Join Class
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Waiting Class -->
+                        <div class="bg-white h-auto mt-2">
+                            <div class="p-4 shadow-xl rounded-lg flex flex-col">
+                                <div class="flex justify-center">
+                                </div>
+                                <div>
+                                    <table class="min-w-full my-7">
+                                        <thead class="bg-indigo-50">
+                                            <tr>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    No
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Class Name
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Teacher Name
+                                                </th>
+                                                <th scope="col" class="
+                                                px-6
+                                                py-3
+                                                text-left text-xs
+                                                font-medium
+                                                text-gray-500
+                                                uppercase
+                                                tracking-wider
+                                              ">
+                                                    Status
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            <tr v-for="(history, i) in histories" :key="history">
+                                                <td class="px-6 py-4 whitespace-nowrap">1</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">Class 1</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    Teacher 1
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap flex">
+                                                    <div class="p-3">
+                                                        <span class="
+                                                          p-3
+                                                          inline-flex
+                                                          leading-5
+                                                          font-semibold
+                                                          rounded-full
+                                                          bg-yellow-400
+                                                          text-green-800
+                                                        " v-if="!isAdmin">
+                                                            Waiting
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- My Score -->
+                        <div class="bg-white h-auto mt-2">
+                            <div class="p-4 shadow-xl rounded-lg flex flex-col">
+                                <div class="flex justify-center">
+                                    <h1 class="font-bold text-xl my-3">My Class Name</h1>
+                                </div>
+                                <div class="flex mt-10">
+                                    <div class="w-1/2 mx-auto">
+                                        <form class="space-y-4">
+                                            <div>
+                                                <label class="block mb-2" for="email">Score 1</label>
+                                                <input class="
+                                            border-2 border-gray-200
+                                            p-2
+                                            w-full
+                                            rounded
+                                            outline-none
+                                            focus:border-blue-500
+                                          " type="number" readonly disabled />
+                                            </div>
+                                            <div>
+                                                <label class="block mb-2" for="email">Score 2</label>
+                                                <input class="
+                                            border-2 border-gray-200
+                                            p-2
+                                            w-full
+                                            rounded
+                                            outline-none
+                                            focus:border-blue-500
+                                          " type="number" readonly disabled />
+                                            </div>
+                                            <div>
+                                                <label class="block mb-2" for="email">Score 3</label>
+                                                <input class="
+                                            border-2 border-gray-200
+                                            p-2
+                                            w-full
+                                            rounded
+                                            outline-none
+                                            focus:border-blue-500
+                                          " type="number" readonly disabled />
+                                            </div>
+                                            <div>
+                                                <label class="block mb-2" for="email">Score 4</label>
+                                                <input class="
+                                            border-2 border-gray-200
+                                            p-2
+                                            w-full
+                                            rounded
+                                            outline-none
+                                            focus:border-blue-500
+                                          " type="number" readonly disabled />
+                                            </div>
+                                            <div>
+                                                <label class="block mb-2" for="email">Score 5</label>
+                                                <input class="
+                                            border-2 border-gray-200
+                                            p-2
+                                            w-full
+                                            rounded
+                                            outline-none
+                                            focus:border-blue-500
+                                          " type="number" readonly disabled />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="text-lg ml-10 w-1/2">
+                                        <div class="flex flex-col">
+                                            <div class="p-3 mb-3 space-y-3 bg-purple-600 text-white">
+                                                <p>Teacher Name : Teacher 1</p>
+                                                <p>Teacher Email : Teacher1@mail.com</p>
+                                                <p>Teacher Phone : 0182018201</p>
+                                            </div>
+                                            <div class="p-3 mb-3 space-y-3 bg-purple-600 text-white">
+                                                <div>Total Score</div>
+                                                <hr>
+                                                <div>100</div>
+                                            </div>
+                                            <div class="p-3 mb-3 space-y-3 bg-purple-600 text-white flex flex-col">
+                                                <div>Predikat</div>
+                                                <hr>
+                                                <div>A</div>
+                                            </div>
+                                            <div class="p-3 mb-3 space-y-3 bg-purple-600 text-white flex flex-col">
+                                                <div>Note</div>
+                                                <hr>
+                                                <div>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                    Voluptatem,
+                                                    culpa doloremque provident pariatur asperiores sit blanditiis error
+                                                    totam laboriosam dolore necessitatibus quasi mollitia, natus
+                                                    repudiandae
+                                                    ullam! Nam velit provident accusamus.
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Home -->
+    <div class="min-h-screen flex flex-col">
+        <div class="flex-grow flex flex-col">
+            <div class="min-h-screen">
+                <div class="hero">
+                    <div class="hero__content">
+                        <h1 class="text-9xl mb-5">RAPOOT</h1>
+                        <p class="text-3xl mb-5">
+                            A website to help teachers assign score to their students and make easier for students
+                            to see their score</p>
+                        <div class="flex">
+                            <button class="p-7 text-2xl bg-indigo-700 rounded-xl mr-3">Login as Teacher</button>
+                            <button class="p-7 text-2xl bg-indigo-800 rounded-xl ml-3">Login as Student</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
