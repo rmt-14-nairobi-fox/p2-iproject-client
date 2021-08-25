@@ -12,7 +12,7 @@
             <button @click="addClass">CREATE CLASS</button>
           </div>
           <div class="mx-5">
-            <button>LOGOUT</button>
+            <button @click="logout">LOGOUT</button>
           </div>
         </div>
       </div>
@@ -33,6 +33,10 @@ export default {
       this.$router.push({
         name: "MyClassTeacher",
       });
+    },
+    logout() {
+      localStorage.clear();
+      this.$router.push({ name: "Home" });
     },
   },
 };

@@ -16,9 +16,9 @@
           <!-- My Class -->
           <div class="bg-white h-auto mt-2">
             <div class="p-4 shadow-xl rounded-lg">
-              <form class="space-y-8">
+              <form class="space-y-8" @submit.prevent="addClass">
                 <div>
-                  <label class="block mb-2" for="email">Class Name</label>
+                  <label class="block mb-2">Class Name</label>
                   <input
                     class="
                       border-2 border-gray-200
@@ -29,6 +29,7 @@
                       focus:border-blue-500
                     "
                     type="text"
+                    v-model="className"
                   />
                 </div>
                 <button
@@ -71,8 +72,20 @@ export default {
   components: {
     SideBarTeacher,
   },
+  data() {
+    return {
+      className: "",
+    };
+  },
   computed: {},
-  methods: {},
+  methods: {
+    addClass() {
+      const payload = {
+        name: this.className,
+      };
+      this.$store.dispatch("addClass", payload);
+    },
+  },
 };
 </script>
 

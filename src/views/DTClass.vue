@@ -69,7 +69,7 @@
                           tracking-wider
                         "
                       >
-                        Predikat
+                        Email
                       </th>
                       <th
                         scope="col"
@@ -88,10 +88,17 @@
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
-                    <tr>
-                      <td class="px-6 py-4 whitespace-nowrap">1</td>
-                      <td class="px-6 py-4 whitespace-nowrap">Student 1</td>
-                      <td class="px-6 py-4 whitespace-nowrap">B</td>
+                    <tr
+                      v-for="(myStudent, i) in myStudents"
+                      :key="'myStudents' + myStudent.id"
+                    >
+                      <td class="px-6 py-4 whitespace-nowrap">{{ i + 1 }}</td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        {{ myStudent.Student.name }}
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        {{ myStudent.Student.email }}
+                      </td>
                       <td class="px-6 py-4 whitespace-nowrap flex">
                         <div class="p-3">
                           <button
@@ -103,7 +110,9 @@
                               bg-green-500
                               text-white
                             "
-                            @click="score(1, 2)"
+                            @click="
+                              score(myStudent.ClassId, myStudent.StudentId)
+                            "
                           >
                             Score
                           </button>
@@ -117,6 +126,12 @@
                               w-40
                               bg-red-500
                               text-white
+                            "
+                            @click="
+                              deleteStudent(
+                                myStudent.ClassId,
+                                myStudent.StudentId
+                              )
                             "
                           >
                             Delete Student
@@ -145,7 +160,11 @@ export default {
   components: {
     SideBarTeacher,
   },
-  computed: {},
+  computed: {
+    myStudents() {
+      return this.$store.state.myStudents;
+    },
+  },
   methods: {
     studentRegister(id) {
       this.$router.push({
@@ -156,13 +175,11 @@ export default {
       });
     },
     score(idClass, idStudent) {
-      this.$router.push({
-        name: "Score",
-        params: {
-          idClass,
-          idStudent,
-        },
-      });
+      const payload = {
+        idClass,
+        idStudent,
+      };
+      this.$store.dispatch("getOneStudent", payload);
     },
   },
 };

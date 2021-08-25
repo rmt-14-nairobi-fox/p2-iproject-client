@@ -40,7 +40,9 @@ export default {
     loginTeacher() {
       this.$router.push({ name: "LoginTeacher" });
     },
-    loginStudent() {},
+    loginStudent() {
+      this.$router.push({ name: "LoginStudent" });
+    },
   },
 };
 </script>

@@ -18,6 +18,8 @@
             <div class="p-4 shadow-xl rounded-lg">
               <div class="p-4 grid grid-cols-3 gap-4">
                 <button
+                  v-for="teacherClass in teacherClassess"
+                  :key="'teacherClass' + teacherClass.id"
                   class="
                     border border-indigo-500
                     shadow-md
@@ -27,9 +29,9 @@
                     justify-center
                     items-center
                   "
-                  @click="myClass(1)"
+                  @click="myClass(teacherClass.id)"
                 >
-                  My Class
+                  {{ teacherClass.name }}
                 </button>
               </div>
             </div>
@@ -51,16 +53,19 @@ export default {
   components: {
     SideBarTeacher,
   },
-  computed: {},
+  computed: {
+    teacherClassess() {
+      return this.$store.state.teacherClassess;
+    },
+  },
   methods: {
     myClass(id) {
-      this.$router.push({
-        name: "TeacherClass",
-        params: {
-          idClass: id,
-        },
-      });
+      const payload = { id };
+      this.$store.dispatch("getStudentClass", payload);
     },
+  },
+  created() {
+    this.$store.dispatch("getClassTeacher");
   },
 };
 </script>

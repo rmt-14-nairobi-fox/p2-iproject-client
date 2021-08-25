@@ -21,7 +21,7 @@
               </div>
               <div class="flex mt-10">
                 <div class="w-1/2 mx-auto">
-                  <form class="space-y-4">
+                  <form class="space-y-4" @submit.prevent="addScore">
                     <div>
                       <label class="block mb-2" for="email">Score 1</label>
                       <input
@@ -34,6 +34,7 @@
                           focus:border-blue-500
                         "
                         type="number"
+                        v-model="score1"
                       />
                     </div>
                     <div>
@@ -48,6 +49,7 @@
                           focus:border-blue-500
                         "
                         type="number"
+                        v-model="score2"
                       />
                     </div>
                     <div>
@@ -62,6 +64,7 @@
                           focus:border-blue-500
                         "
                         type="number"
+                        v-model="score3"
                       />
                     </div>
                     <div>
@@ -76,6 +79,7 @@
                           focus:border-blue-500
                         "
                         type="number"
+                        v-model="score4"
                       />
                     </div>
                     <div>
@@ -90,6 +94,7 @@
                           focus:border-blue-500
                         "
                         type="number"
+                        v-model="score5"
                       />
                     </div>
                     <div>
@@ -104,6 +109,7 @@
                           focus:border-blue-500
                         "
                         type="text"
+                        v-model="note"
                       />
                     </div>
                     <button
@@ -131,12 +137,14 @@
                 <div class="text-lg ml-10 w-1/2">
                   <div class="flex flex-col">
                     <div class="p-3 mb-3 space-y-3 bg-purple-600 text-white">
-                      <p>Student Name : Student 1</p>
-                      <p>Student Email : student1@mail.com</p>
-                      <p>Student Phone : 0182018201</p>
+                      <p>Student Name : {{ oneStudent.Student.name }}</p>
+                      <p>Student Email : {{ oneStudent.Student.email }}</p>
+                      <p>
+                        Student Phone : {{ oneStudent.Student.phoneNumber }}
+                      </p>
                     </div>
                     <div class="p-3 mb-3 space-y-3 bg-purple-600 text-white">
-                      Total Score : 100
+                      Total Score : {{ oneStudent.totalScore }}
                     </div>
                     <div
                       class="
@@ -148,7 +156,7 @@
                         flex flex-col
                       "
                     >
-                      Predikat : A
+                      Predikat : {{ oneStudent.predikat }}
                     </div>
                   </div>
                 </div>
@@ -166,11 +174,41 @@
 import SideBarTeacher from "../components/SideBarTeacher.vue";
 export default {
   name: "DTScore",
+  data() {
+    return {
+      idClass: this.$store.state.oneStudent.ClassId,
+      idStudent: this.$store.state.oneStudent.StudentId,
+      score1: this.$store.state.oneStudent.score1,
+      score2: this.$store.state.oneStudent.score2,
+      score3: this.$store.state.oneStudent.score3,
+      score4: this.$store.state.oneStudent.score4,
+      score5: this.$store.state.oneStudent.score5,
+      note: this.$store.state.oneStudent.note,
+    };
+  },
   components: {
     SideBarTeacher,
   },
-  computed: {},
-  methods: {},
+  computed: {
+    oneStudent() {
+      return this.$store.state.oneStudent;
+    },
+  },
+  methods: {
+    addScore() {
+      const payload = {
+        idClass: this.idClass,
+        idStudent: this.idStudent,
+        score1: this.score1,
+        score2: this.score2,
+        score3: this.score3,
+        score4: this.score4,
+        score5: this.score5,
+        note: this.note,
+      };
+      this.$store.dispatch("updateScore", payload);
+    },
+  },
 };
 </script>
 
