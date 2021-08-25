@@ -7,6 +7,8 @@ import Register from '../views/Register.vue';
 import GoogleSignIn from '../views/GoogleSignIn.vue';
 import News from '../views/News.vue';
 import MySpace from '../views/MySpace.vue';
+import Weather from '../views/Weather.vue';
+import Corona from '../views/Corona.vue';
 
 Vue.use(VueRouter);
 
@@ -26,6 +28,16 @@ const routes = [
         path: 'myspace',
         name: 'MySpace',
         component: MySpace,
+      },
+      {
+        path: 'weather',
+        name: 'Weather',
+        component: Weather,
+      },
+      {
+        path: 'corona',
+        name: 'Corona',
+        component: Corona,
       },
     ],
   },
