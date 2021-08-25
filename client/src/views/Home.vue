@@ -4,22 +4,17 @@
     <!-- <page-chat></page-chat> -->
     <!-- <login></login> -->
     <HFooter class="mt-10"></HFooter>
-    <pre>
-      {{ userLocation }}
-    </pre>
   </div>
 </template>
 
 <script>
 import ListPost from "./ListPost.vue";
 import HFooter from "vue-hacktiv8-footer";
-import { mapActions, mapState } from "vuex";
+import { mapActions } from "vuex";
 export default {
   name: "Home",
   components: { ListPost, HFooter },
-  computed: {
-    ...mapState(["userLocation"]),
-  },
+  computed: {},
   methods: {
     ...mapActions(["fetchIP"]),
   },

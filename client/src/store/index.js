@@ -48,18 +48,6 @@ export default new Vuex.Store({
       }
     },
 
-    async fetchPosts(context) {
-      try {
-        const result = await publicURI.get("/animal");
-        context.commit("MUTATE_GET_POSTS", result.data);
-      } catch (err) {
-        Vue.$toast.open({
-          message: err.response.data.message,
-          type: "error",
-        });
-      }
-    },
-
     async addPost(context, payload) {
       try {
         const { name, type, imageUrl } = payload;
@@ -82,10 +70,21 @@ export default new Vuex.Store({
       }
     },
 
+    async fetchPosts(context) {
+      try {
+        const result = await publicURI.get("/animal");
+        context.commit("MUTATE_GET_POSTS", result.data);
+      } catch (err) {
+        Vue.$toast.open({
+          message: err.response.data.message,
+          type: "error",
+        });
+      }
+    },
+
     async fetchIP(context) {
       try {
         const ip = await axios.get("https://api.ipify.org");
-        console.log(ip.data);
         const data = await axios.get(
           `https://ipgeolocation.abstractapi.com/v1/?api_key=0e07a9ff5dbc44019a9f926aa9432a1a&ip_address=${ip.data}`
         );
@@ -98,6 +97,23 @@ export default new Vuex.Store({
       } catch (err) {
         Vue.$toast.open({
           message: err.response.data,
+          type: "error",
+        });
+      }
+    },
+
+    async fetchNearbyposts(context, payload) {
+      try {
+        const { latitude, longitude } = payload;
+        const result = await publicURI({
+          method: "POST",
+          url: `/nearbyPost`,
+          data: { latitude, longitude },
+        });
+        context.commit("MUTATE_GET_POSTS", result.data);
+      } catch (err) {
+        Vue.$toast.open({
+          message: err.response.data.message,
           type: "error",
         });
       }
