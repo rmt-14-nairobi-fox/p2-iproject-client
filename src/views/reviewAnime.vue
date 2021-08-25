@@ -110,7 +110,6 @@ export default {
       this.$store
         .dispatch("reviewAnime", { url: this.url, image_url: this.image_url, title: this.title, episodes: this.episodes, rated: this.rated, userpoin: this.userpoin, review: this.review, recomendation: this.recomendation })
         .then(() => {
-          console.log("masuk");
           this.$store.commit("ANIME_WILL_REVIEW", {});
           this.$router.push("/");
           successHandler("Thanks for your Review");

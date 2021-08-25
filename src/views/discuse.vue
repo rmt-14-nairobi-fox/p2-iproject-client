@@ -33,7 +33,6 @@ export default {
   },
   sockets: {
     broadcastMessage(data) {
-      console.log(data);
       this.$store.commit("PUSH_MASSAGE", data);
     },
   },

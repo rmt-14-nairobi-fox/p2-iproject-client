@@ -57,7 +57,6 @@ export default {
   },
   methods: {
     logoutHandler() {
-      console.log("masuk");
       localStorage.clear();
       this.$store.commit("LOGIN_CHECK");
       this.$router.push("/");

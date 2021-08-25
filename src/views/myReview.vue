@@ -60,7 +60,6 @@ export default {
         .then(() => {
           successHandler("Review has been Delete Successfully");
           this.$store.dispatch("myReview").then((res) => {
-            console.log(res.data);
             this.$store.commit("ALL_MY_REVIEW", res.data);
           });
         })
@@ -70,7 +69,6 @@ export default {
         });
     },
     editReview(review) {
-      console.log(review);
       this.$store.commit("DATA_EDIT", review);
       this.$router.push("/myreview/edit");
     },
@@ -79,7 +77,6 @@ export default {
     this.$store
       .dispatch("myReview")
       .then((res) => {
-        console.log(res.data);
         this.$store.commit("ALL_MY_REVIEW", res.data);
       })
       .catch((err) => {

@@ -52,7 +52,6 @@ export default {
     this.$store
       .dispatch("allReview")
       .then((res) => {
-        console.log(res.data);
         this.$store.commit("ALL_REVIEW", res.data);
       })
       .catch((err) => {

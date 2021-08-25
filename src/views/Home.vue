@@ -78,7 +78,6 @@ export default {
       return this.$store.state.dataAnime;
     },
     fetchAnimeQuote() {
-      console.log(this.$store.state.animeQuote);
       return this.$store.state.animeQuote;
     },
   },
@@ -87,7 +86,6 @@ export default {
       this.$store.dispatch("findAnime", this.search);
     },
     animeReview(payload) {
-      console.log(payload);
       this.$store.commit("ANIME_WILL_REVIEW", payload);
       this.$router.push("/animereview");
     },
