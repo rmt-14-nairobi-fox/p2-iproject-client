@@ -29,61 +29,79 @@ export default {
   components: {
     VueWeather,
   },
+  data() {
+    return {
+      items: [],
+    };
+  },
   computed: {
     ...mapState(['weather']),
-    sunrise() {
-      let unix_timestamp = this.weather.sys.sunrise;
-      // Create a new JavaScript Date object based on the timestamp
-      // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-      var date = new Date(unix_timestamp * 1000);
-      // Hours part from the timestamp
-      var hours = date.getHours();
-      // Minutes part from the timestamp
-      var minutes = '0' + date.getMinutes();
-      // Seconds part from the timestamp
-      var seconds = '0' + date.getSeconds();
-
-      // Will display time in 10:30:23 format
-      return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-    },
-    sunset() {
-      let unix_timestamp = this.weather.sys.sunset;
-      // Create a new JavaScript Date object based on the timestamp
-      // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-      var date = new Date(unix_timestamp * 1000);
-      // Hours part from the timestamp
-      var hours = date.getHours();
-      // Minutes part from the timestamp
-      var minutes = '0' + date.getMinutes();
-      // Seconds part from the timestamp
-      var seconds = '0' + date.getSeconds();
-
-      // Will display time in 10:30:23 format
-      return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-    },
-    items() {
-      return [
-        { Item: 'Weather', Value: this.weather.weather[0].main },
-        { Item: 'Description', Value: this.weather.weather[0].description },
-        {
-          Item: 'Temperature',
-          Value: (this.weather.main.temp - 273.15).toFixed(1) + '°C',
-        },
-        {
-          Item: 'Max Temp',
-          Value: (this.weather.main.temp_max - 273.15).toFixed(1) + '°C',
-        },
-        {
-          Item: 'Min Temp',
-          Value: (this.weather.main.temp_min - 273.15).toFixed(1) + '°C',
-        },
-        { Item: 'Wind Speed', Value: this.weather.wind.speed * 3.6 + ' KM/h' },
-        { Item: 'Sunrise', Value: this.sunrise },
-        { Item: 'Sunset', Value: this.sunset },
-      ];
+  },
+  watch: {
+    weather(newWeather) {
+      if (newWeather.weather) {
+        this.items = [
+          { Item: 'Weather', Value: newWeather.weather[0].main },
+          {
+            Item: 'Description',
+            Value: newWeather.weather[0].description,
+          },
+          {
+            Item: 'Temperature',
+            Value: (newWeather.main.temp - 273.15).toFixed(1) + '°C',
+          },
+          {
+            Item: 'Max Temp',
+            Value: (newWeather.main.temp_max - 273.15).toFixed(1) + '°C',
+          },
+          {
+            Item: 'Min Temp',
+            Value: (newWeather.main.temp_min - 273.15).toFixed(1) + '°C',
+          },
+          {
+            Item: 'Wind Speed',
+            Value: newWeather.wind.speed * 3.6 + ' KM/h',
+          },
+          {
+            Item: 'Sunrise',
+            Value: this.sunrise(newWeather.sys.sunrise),
+          },
+          { Item: 'Sunset', Value: this.sunset(newWeather.sys.sunset) },
+        ];
+      }
     },
   },
   methods: {
+    sunrise(time) {
+      let unix_timestamp = time;
+      // Create a new JavaScript Date object based on the timestamp
+      // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+      var date = new Date(unix_timestamp * 1000);
+      // Hours part from the timestamp
+      var hours = date.getHours();
+      // Minutes part from the timestamp
+      var minutes = '0' + date.getMinutes();
+      // Seconds part from the timestamp
+      var seconds = '0' + date.getSeconds();
+
+      // Will display time in 10:30:23 format
+      return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    },
+    sunset(time) {
+      let unix_timestamp = time;
+      // Create a new JavaScript Date object based on the timestamp
+      // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+      var date = new Date(unix_timestamp * 1000);
+      // Hours part from the timestamp
+      var hours = date.getHours();
+      // Minutes part from the timestamp
+      var minutes = '0' + date.getMinutes();
+      // Seconds part from the timestamp
+      var seconds = '0' + date.getSeconds();
+
+      // Will display time in 10:30:23 format
+      return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    },
     fetchWeather() {
       this.$store.dispatch('fetchWeather');
     },
