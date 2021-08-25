@@ -95,7 +95,7 @@ import { mapActions, mapMutations, mapState } from "vuex";
 export default {
   name: "Navbar",
   computed: {
-    ...mapState(["isLoggedin", "userLocation"]),
+    ...mapState(["isLoggedin", "ip"]),
   },
   methods: {
     ...mapMutations({ toogleStateLogin: "TOGGLE_STATE_LOGIN" }),
@@ -106,7 +106,7 @@ export default {
       this.$router.push({ name: "Home" }).catch(() => {});
     },
     findNearby() {
-      this.fetchNearbyposts(this.userLocation);
+      this.fetchNearbyposts(this.ip);
     },
   },
 };

@@ -10,6 +10,7 @@ export default new Vuex.Store({
     isLoggedin: false,
     userProfiles: {},
     userLocation: {},
+    ip: "",
   },
   mutations: {
     TOGGLE_STATE_LOGIN(state) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     ADD_STATE_USERLOCATION(state, payload) {
       state.userLocation = payload;
+    },
+    ADD_IP(state, payload) {
+      state.ip = payload;
     },
     MUTATE_GET_POSTS(state, payload) {
       state.posts = payload;
@@ -85,15 +89,7 @@ export default new Vuex.Store({
     async fetchIP(context) {
       try {
         const ip = await axios.get("https://api.ipify.org");
-        const data = await axios.get(
-          `https://ipgeolocation.abstractapi.com/v1/?api_key=0e07a9ff5dbc44019a9f926aa9432a1a&ip_address=${ip.data}`
-        );
-        const dataLocation = {
-          city: data.data.city,
-          latitude: data.data.latitude,
-          longitude: data.data.longitude,
-        };
-        context.commit("ADD_STATE_USERLOCATION", dataLocation);
+        context.commit("ADD_IP", ip.data);
       } catch (err) {
         Vue.$toast.open({
           message: err.response.data,
@@ -104,11 +100,11 @@ export default new Vuex.Store({
 
     async fetchNearbyposts(context, payload) {
       try {
-        const { latitude, longitude } = payload;
+        const ip = payload;
         const result = await publicURI({
           method: "POST",
           url: `/nearbyPost`,
-          data: { latitude, longitude },
+          data: { ip },
         });
         context.commit("MUTATE_GET_POSTS", result.data);
       } catch (err) {
