@@ -80,10 +80,12 @@
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
-                    <tr>
-                      <td class="px-6 py-4 whitespace-nowrap">1</td>
-                      <td class="px-6 py-4 whitespace-nowrap">Class 1</td>
-                      <td class="px-6 py-4 whitespace-nowrap">Teacher 1</td>
+                    <tr v-for="(c, i) in classess" :key="'c' + c.id">
+                      <td class="px-6 py-4 whitespace-nowrap">{{ i + 1 }}</td>
+                      <td class="px-6 py-4 whitespace-nowrap">{{ c.name }}</td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        {{ c.Teacher.name }}
+                      </td>
                       <td class="px-6 py-4 whitespace-nowrap flex">
                         <div class="p-3">
                           <button
@@ -120,8 +122,15 @@ export default {
   components: {
     SideBarStudent,
   },
-  computed: {},
+  computed: {
+    classess() {
+      return this.$store.state.classess;
+    },
+  },
   methods: {},
+  created() {
+    this.$store.dispatch("getAllClass");
+  },
 };
 </script>
 

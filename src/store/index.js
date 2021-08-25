@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     teacherClassess: [],
     studentClassess: [],
+    classess: [],
     myStudents: [],
     oneStudent: {},
     myScore: {}
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     },
     GET_MY_SCORE(state, payload) {
       state.myScore = payload
+    },
+    GET_ALL_CLASS(state, payload) {
+      state.classess = payload
     }
   },
   actions: {
@@ -244,6 +248,21 @@ export default new Vuex.Store({
               idClass
             }
           })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getAllClass(context) {
+      axios({
+        method: 'get',
+        url: 'http://localhost:3000/students/all-class',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          context.commit('GET_ALL_CLASS', res.data)
         })
         .catch(err => {
           console.log(err)
