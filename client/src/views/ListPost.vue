@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full lg:w-3/4 flex flex-row flex-wrap">
+  <section class="w-full flex">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 w-full mt-10">
       <!-- Card component -->
       <post-card v-for="post in posts" :key="post.id" :post="post"></post-card>

@@ -32,7 +32,7 @@ export default new Vuex.Store({
   actions: {
     async loginUser(context, payload) {
       try {
-        const result = await publicURI.post("/login", payload);
+        const result = await publicURI.post("/user/login", payload);
         context.commit("TOGGLE_STATE_LOGIN");
         context.commit("ADD_STATE_USERPROFILES", result.data.userProfile);
         localStorage.setItem(

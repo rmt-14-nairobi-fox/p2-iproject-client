@@ -11,21 +11,6 @@
 
     <ul class="inline-flex items-center">
       <li class="px-2">
-        <router-link class="no-underline" to="/login">
-          <span
-            class="
-              cursor-pointer
-              font-semibold
-              hover:text-blue-900
-              text-blue-500
-            "
-            v-show="!isLoggedin"
-            >Sign In</span
-          >
-        </router-link>
-      </li>
-
-      <li class="px-2">
         <a class="no-underline" href="">
           <span
             class="
@@ -83,6 +68,20 @@
             v-show="isLoggedin"
             @click.prevent="logoutHandler"
             >Sign out</span
+          >
+        </router-link>
+      </li>
+      <li class="px-2">
+        <router-link class="no-underline" to="/login">
+          <span
+            class="
+              cursor-pointer
+              font-semibold
+              hover:text-blue-900
+              text-blue-500
+            "
+            v-show="!isLoggedin"
+            >Sign In</span
           >
         </router-link>
       </li>
