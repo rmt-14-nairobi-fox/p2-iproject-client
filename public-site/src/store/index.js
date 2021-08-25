@@ -13,6 +13,7 @@ export default new Vuex.Store({
     accommodation: {},
     ownerInfo: {},
     bookmarks: [],
+    image: {},
   },
   mutations: {
     FETCH_ISAUTH(state, payload) {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     FETCH_BOOKMARKS(state, payload) {
       state.bookmarks = payload;
+    },
+    FETCH_IMAGE(state, payload) {
+      state.image = payload;
     },
   },
   actions: {
