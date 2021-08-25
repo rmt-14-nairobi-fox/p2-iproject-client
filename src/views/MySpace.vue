@@ -1,15 +1,21 @@
 <template>
-  <div class="col">
+  <div class="col mh-100">
     <div class="row">
-      <div class="col">Saved</div>
-      <div class="col-3">test</div>
+      <SavedList />
+      <PostList />
     </div>
   </div>
 </template>
 
 <script>
+import SavedList from '../components/SavedList.vue';
+import PostList from '../components/PostList.vue';
 export default {
   name: 'MySpace',
+  components: {
+    SavedList,
+    PostList,
+  },
 };
 </script>
 

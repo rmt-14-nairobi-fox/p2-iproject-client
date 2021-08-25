@@ -20,6 +20,10 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@0;1&display=swap');
+@font-face {
+  font-family: chomsky;
+  src: url('./assets/fonts/Chomsky.otf');
+}
 
 * {
   font-family: 'Noto Serif', serif;
@@ -46,5 +50,9 @@ body {
 .content-height {
   height: calc(100% - 85px);
   max-height: calc(100% - 85px);
+}
+
+.font-chomsky {
+  font-family: 'chomsky';
 }
 </style>
