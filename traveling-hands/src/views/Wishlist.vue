@@ -1,91 +1,98 @@
 <template>
-  <div class="home">
-    <div id="container">
-      <!-- Products -->
-      <div class="mx-auto pt-4" style="width: 70%">
-        <div class="grid grid-cols-3 gap-4">
-          <div
-            class="bg-yellow-100 pt-4 pb-4 rounded-xl shadow-md"
-            v-for="product in products"
-            :key="product.id"
-          >
-            <!-- <router-link to=/pub/products/:id></router-link> -->
-            <div class="flex flex-col">
-              <div class="flex-1 mx-auto">
-                <img :src="product.imgUrl" class="w-48 h-48" />
-              </div>
-              <br>
-              <div class="flex-1 mx-auto">
-                <span>Name : </span>
-                <span class="font-bold">{{ product.name }}</span>
-              </div>
-              <br>
-              <div class="flex-1 mx-auto">
-                <span>Description : </span>
-                <span class="font-bold">{{ product.description }}</span>
-              </div>
-              <br>
-              <div class="flex-1 mx-auto">
-                <span>Category : </span>
-                <span class="font-bold">{{ product.Category.name }}</span>
-              </div>
-              <br>
-              <div class="flex-1 mx-auto font-bold">
-                Rp. {{ product.price }} / Pcs
-              </div>
-              <br v-if="isLoggedIn">
-              <br v-if="isLoggedIn">
-              <button
-                @click="addUserBookmark(product.id)"
-                v-if="isLoggedIn"
-                class="
-                  bg-green-500
-                  hover:bg-green-700
-                  text-white
-                  font-bold
-                  py-2
-                  rounded-full
-                "
-              >
-                Add to Bookmark
-              </button>
-            </div>
-          </div>
-        </div>
+  <div class="flex items-center justify-center min-h-screen bg-gray-900">
+    <div class="col-span-12">
+      <div class="overflow-auto lg:overflow-visible">
+        <table class="table text-gray-400 border-separate space-y-6 text-sm">
+          <thead class="bg-gray-800 text-gray-500">
+            <tr>
+              <th class="p-3">Image</th>
+              <th class="p-3 text-left">Name</th>
+              <th class="p-3 text-left">Country</th>
+              <th class="p-3 text-left">City</th>
+              <th class="p-3 text-left">Price</th>
+              <th class="p-3 text-left">Category</th>
+              <th class="p-3 text-left">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="bg-gray-800"
+              v-for="(wishlist, index) in wishlists"
+              :key="index"
+            >
+              <td class="p-3">
+                <img :src="wishlist.Destination.image" class="w-80 h-60" />
+              </td>
+              <td class="p-3">{{ wishlist.Destination.name }}</td>
+              <td class="p-3 font-bold">{{ wishlist.Destination.country }}</td>
+              <td class="p-3">{{ wishlist.Destination.city }}</td>
+              <td class="p-3">Rp.{{ wishlist.Destination.price }}</td>
+              <td class="p-3">
+                {{ wishlist.Destination.Category.name }}
+              </td>
+              <td class="p-3">
+                <button
+                  @click.prevent="buyTravelPackage(index+1)"
+                  class="
+                    p-3
+                    bg-green-500
+                    hover:bg-green-700
+                    text-white
+                    font-bold
+                    py-2
+                    px-4
+                    rounded-full
+                  "
+                >
+                  Check Out Package
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-#container {
-  display: flex;
-  flex-direction: row;
+<style>
+.table {
+  border-spacing: 0 15px;
 }
-.sidebar {
-  width: 25%;
+
+i {
+  font-size: 1rem !important;
+}
+
+.table tr {
+  border-radius: 20px;
+}
+
+tr td:nth-child(n + 7),
+tr th:nth-child(n + 7) {
+  border-radius: 0 0.625rem 0.625rem 0;
+}
+
+tr td:nth-child(1),
+tr th:nth-child(1) {
+  border-radius: 0.625rem 0 0 0.625rem;
 }
 </style>
 
 <script>
-import { mapState } from "vuex";
 export default {
-  computed: {
-    ...mapState(["isLoggedIn"]),
-  //   products() {
-  //     return this.$store.state.products;
-  //   },
+  created() {
+    this.fetchAllWishlists();
   },
-  // methods: {
-  //   async fetchProduct() {
-  //     this.$store.dispatch("findAllProductWithorWithoutQuery");
-  //   },
-  //   async addUserBookmark(productId) {
-  //     this.$store.dispatch("addUserBookmark", productId);
-  //   },
-  // },
-  // created() {
-  //   this.fetchProduct();
-  // },
+  computed: {
+    wishlists() {
+      return this.$store.state.wishlists;
+    },
+  },
+  methods: {
+    fetchAllWishlists() {
+      this.$store.dispatch("fetchAllWishlists");
+    },
+  },
 };
 </script>

@@ -130,7 +130,7 @@ export default {
       this.$store.dispatch("handleLogin", payload);
     },
     clickSignUp() {
-      this.$router.push("/login");
+      this.$router.push("/register");
     },
     onSuccess(googleUser) {
       const payload = {

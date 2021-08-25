@@ -34,19 +34,20 @@
           <li class="ml-5 px-2 py-1" v-if="!isLoggedIn">
             <router-link to="/register">Sign Up</router-link>
           </li>
-          <li class="ml-5 px-2 py-1" v-if="isLoggedIn">
-            <router-link to="/wishList" >My WishList</router-link> 
+          <li
+            class="ml-5 px-2 py-1"
+            v-if="isLoggedIn && user.role === 'customer'"
+          >
+            <router-link to="/wishlists">My WishList</router-link>
           </li>
           <li class="ml-5 px-2 py-1" v-if="isLoggedIn">
-            <button @click="signOut">
-              Sign Out
-            </button>
+            <button @click="signOut">Sign Out</button>
           </li>
         </ul>
       </div>
     </div>
     <!-- NAVBAR https://devscorp.medium.com/build-a-navbar-using-tailwind-css-48c4856ed31a -->
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -74,24 +75,28 @@
 </style>
 
 <script>
-import { mapState } from "vuex"
+import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState([ "isLoggedIn" ]),
+    ...mapState(["isLoggedIn"]),
+    user() {
+      return this.$store.state.user;
+    },
   },
   methods: {
-    async signOut() {
-      this.$store.dispatch("signOut")
+    signOut() {
+      this.$store.dispatch("signOut");
     },
-    async checkAccessToken() {
-      if(localStorage.getItem("access_token")) {
-        this.$store.commit("CHANGE_IS_LOGGED_IN", true)
+    checkAccessToken() {
+      if (localStorage.getItem("access_token")) {
+        this.$store.commit("CHANGE_IS_LOGGED_IN", true);
       }
-    }
+    },
   },
   created() {
-    this.checkAccessToken()
+    this.checkAccessToken();
+    this.$store.dispatch("findUserLoginned");
   },
 };
 </script>
