@@ -16,8 +16,13 @@ export default new Vuex.Store({
     allMyDataReview: [],
     myReviewEdit: {},
     animeQuote: [],
+    messages: [],
   },
   mutations: {
+    PUSH_MASSAGE(state, payload) {
+      state.messages.push(payload);
+    },
+
     ACTIVE_PAGE(state, payload) {
       state.activePage = payload;
     },

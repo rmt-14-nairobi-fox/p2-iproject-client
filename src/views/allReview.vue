@@ -63,6 +63,9 @@ export default {
 </script>
 
 <style>
+.box-content button {
+  border: none !important;
+}
 .allreview {
   padding-top: 50px;
 }

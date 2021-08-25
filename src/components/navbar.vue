@@ -8,7 +8,7 @@
       <div class="collapse navbar-collapse justify-content-end me-3" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link to="/" class="nav-link active" aria-current="page"> <i class="bx bx-home"></i> Home</router-link>
+            <router-link to="/" class="nav-link" aria-current="page"> <i class="bx bx-home"></i> Home</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/allreview" class="nav-link" aria-current="page" v-if="this.$store.state.isLogin"> <i class="bx bx-book-open"></i> All Review</router-link>
@@ -21,6 +21,9 @@
           </li>
           <li class="nav-item">
             <router-link to="/login" class="nav-link" aria-current="page" v-if="!this.$store.state.isLogin"> <i class="bx bx-log-in"></i> LOG-IN</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/register" class="nav-link" aria-current="page" v-if="!this.$store.state.isLogin"> <i class="bx bx-registered"></i> REGISTER</router-link>
           </li>
           <li class="nav-item" @click.prevent="logoutHandler" v-if="this.$store.state.isLogin">
             <GoogleLogin :params="params" :logoutButton="true" class="nav-link button-logout"><i class="bx bx-log-out"></i> Logout</GoogleLogin>
@@ -57,7 +60,7 @@ export default {
       console.log("masuk");
       localStorage.clear();
       this.$store.commit("LOGIN_CHECK");
-
+      this.$router.push("/");
       successHandler("See you later");
     },
   },

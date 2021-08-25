@@ -91,6 +91,7 @@ export default {
 
 <style>
 .allreview {
+  min-height: 100vh;
   padding-top: 50px;
 }
 .allreview h1 {

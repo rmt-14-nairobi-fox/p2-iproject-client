@@ -64,7 +64,7 @@
                   <div class="col-4">
                     <label class="form-check-label" for="inlineRadio1">This anime Recomended? </label><br />
                     <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked value="recomended" v-model="recomendation" />
-                    <label class="btn btn-outline-success" for="success-outlined">Recomended</label>
+                    <label class="btn btn-outline-light" for="success-outlined">Recomended</label>
 
                     <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off" value="notrecomended" v-model="recomendation" />
                     <label class="btn btn-outline-danger" for="danger-outlined">Not Recomended</label>

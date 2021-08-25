@@ -66,6 +66,7 @@ export default {
       this.$store
         .dispatch("login", { email: this.email, password: this.password })
         .then((res) => {
+          localStorage.setItem("email", this.email);
           localStorage.setItem("access_token", res.data.access_token);
           this.$store.commit("LOGIN_SUCCESS");
           this.$router.push("/");

@@ -7,13 +7,16 @@
       <router-link to="/about">About</router-link>
     </div> -->
     <router-view />
+    <HFooter></HFooter>
   </div>
 </template>
 <script>
+import HFooter from "vue-hacktiv8-footer";
 import NavBarPage from "./components/navbar.vue";
 export default {
   components: {
     NavBarPage,
+    HFooter,
   },
   created() {
     this.$store.commit("LOGIN_CHECK");
@@ -58,14 +61,14 @@ body {
   padding-top: 10%;
   padding-bottom: 20%;
   color: #fff;
-  height: 500px;
+  height: 600px;
 }
 .anime {
   font-size: 120px;
   text-shadow: 2px 3px #474747;
 }
 .jumbotron-tag p {
-  font-size: 16px;
+  font-size: 32px;
   text-shadow: 2px 1px #474747;
 }
 .form-login {

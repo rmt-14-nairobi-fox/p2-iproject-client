@@ -2,25 +2,30 @@
   <div class="home">
     <!-- Banner Home -->
     <div class="container-fluid banner shadow-sm">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 anime text-center">アニメ</div>
+      <div class="">
+        <div class="row" v-if="!this.$store.state.isLogin">
+          <div class="col-lg-4 anime">アニメ</div>
           <div class="col-lg-8 jumbotron-tag">
-            <p>Ayo beri niali "Anime" yang kamu tonton dan sampaikan disini bersama sama kita bantu orang orang menemukan anime yang cocok untuk mereka c⌒っ╹v╹ )っ</p>
-
-            <div class="row text-center justify-content-center">
-              <div class="col-md-12">
-                <p>Daftar Sekarang dan jadilah Seorang Weebo</p>
-              </div>
-
-              <div class="form-banner">
-                <router-link to="/register" class="button" aria-current="page" v-if="!this.$store.state.isLogin"> Register</router-link>
-              </div>
-            </div>
+            <p>Ayo beri nilai "Anime" yang kamu tonton dan sampaikan disini bersama sama kita bantu orang orang menemukan anime yang cocok untuk mereka c⌒っ╹v╹ )っ</p>
+          </div>
+        </div>
+        <div class="row" v-if="this.$store.state.isLogin">
+          <div class="col-lg-12 jumbotron-tag">
+            <carousel v-if="this.$store.state.isLogin">
+              <slide v-for="(quote, i) in fetchAnimeQuote" :key="i">
+                <div class="quote">
+                  <blockquote>
+                    <h5>"{{ quote.quote }}"</h5>
+                    <cite>'{{ quote.character }}' from {{ quote.anime }}</cite>
+                  </blockquote>
+                </div>
+              </slide>
+            </carousel>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Anni Search -->
     <div>
       <div class="head-search">
@@ -39,25 +44,13 @@
           </div>
         </div>
       </main>
-      <div class="anime_quote head-search" v-if="this.$store.state.dataAnime.length === 0">
-        <h1>Anime Save The Word</h1>
-        <div class="row justify-content-center">
-          <div v-for="quote in fetchAnimeQuote" :key="quote">
-            <div class="quote">
-              <blockquote>
-                <p>"{{ quote.quote }}"</p>
-                <cite>'{{ quote.character }}' from {{ quote.anime }}</cite>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import { Carousel, Slide } from "vue-carousel";
 
 export default {
   name: "Home",
@@ -65,6 +58,15 @@ export default {
     return {
       search: "",
     };
+  },
+  sockets: {
+    sendUser(users) {
+      this.$store.commit("LIST_USER", users);
+    },
+  },
+  components: {
+    Carousel,
+    Slide,
   },
   created() {
     this.$store.dispatch("findQuote").then((res) => {
@@ -93,10 +95,14 @@ export default {
 };
 </script>
 <style>
-.anime_quote p {
+.home {
+  min-height: 100vh;
+}
+.anime_quote h5 {
   color: #8a8a8a;
 }
 .quote {
+  text-shadow: 2px 2px #5c5c5c;
   display: inline-block;
   width: 600px;
   margin: 1em;
