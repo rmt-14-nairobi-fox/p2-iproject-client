@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -29,7 +30,33 @@ const routes = [
     path: '/students/register',
     name: 'RegisterStudent',
     component: () => import('../views/RegisterStudent.vue')
+  },
+  {
+    path: '/teachers/class',
+    name: 'MyClassTeacher',
+    component: () => import('../views/DTMyClass')
+  },
+  {
+    path: '/teachers/class/:idClass',
+    name: 'TeacherClass',
+    component: () => import('../views/DTClass')
+  },
+  {
+    path: '/teachers/class/waiting/:idClass',
+    name: 'WaitingClass',
+    component: () => import('../views/DTWaiting')
+  },
+  {
+    path: '/teachers/score/:idClass/:idStudent',
+    name: 'Score',
+    component: () => import('../views/DTScore')
+  },
+  {
+    path: '/teachers/add-class',
+    name: 'AddClass',
+    component: () => import('../views/DTAdd')
   }
+
 ]
 
 const router = new VueRouter({
