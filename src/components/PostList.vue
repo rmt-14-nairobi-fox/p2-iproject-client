@@ -4,7 +4,12 @@
       class="bg-light position-relative custom-rounded post-height p-3 overflow-auto"
     >
       <div class="row">
-        <PostCard v-for="post in posts" :key="post.id" :post="post" />
+        <PostCard
+          v-for="post in posts"
+          :key="post.id"
+          :post="post"
+          @editPost="fillForm"
+        />
       </div>
       <button
         v-b-modal.modal-center
@@ -16,8 +21,7 @@
         id="modal-center"
         centered
         hide-footer
-        title="Create new post"
-        @show="resetModal"
+        title="Post"
         @hidden="resetModal"
       >
         <form @submit.stop.prevent="createPostForm">
@@ -65,6 +69,8 @@ export default {
         savedNews_id: null,
       },
       savedNewsOptions: [],
+      post_id: null,
+      isEdit: false,
     };
   },
   props: ['posts'],
@@ -97,11 +103,27 @@ export default {
       this.$store.dispatch('fetchSavedNews');
     },
     createPostForm() {
-      this.$store.dispatch('createPostForm', this.form);
+      if (this.isEdit) {
+        this.$store.dispatch('editPostForm', {
+          form: this.form,
+          post_id: this.post_id,
+        });
+      } else {
+        this.$store.dispatch('createPostForm', this.form);
+      }
       this.$bvModal.hide('modal-center');
+    },
+    fillForm(payload) {
+      this.form.title = payload.title;
+      this.form.message = payload.message;
+      this.form.savedNews_id = payload.savedNews_id;
+      this.post_id = payload.id;
+      this.isEdit = true;
     },
     resetModal() {
       Object.keys(this.form).forEach((key) => {
+        this.isEdit = false;
+        this.post_id = null;
         if (key === 'savedNews_id') {
           this.form[key] = null;
         } else {

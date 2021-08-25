@@ -12,6 +12,14 @@
         <span class="font-weight-bold ml-3">{{
           post.User ? post.User.name : user_name
         }}</span>
+        <div
+          v-if="$route.name === 'MySpace'"
+          class="flex-grow-1 d-flex justify-content-end"
+        >
+          <button @click="editPost" v-b-modal.modal-center class="btn">
+            <b-icon-three-dots-vertical />
+          </button>
+        </div>
       </div>
       <!-- News pic and title -->
       <div
@@ -62,6 +70,14 @@ export default {
   methods: {
     toggleComment() {
       this.showComment = !this.showComment;
+    },
+    editPost() {
+      const payload = { ...this.post };
+      delete payload.user_id;
+      delete payload.createdAt;
+      delete payload.updatedAt;
+      delete payload.SavedNew;
+      this.$emit('editPost', payload);
     },
   },
 };

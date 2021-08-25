@@ -276,6 +276,26 @@ export default new Vuex.Store({
         console.log(err.response.data);
       }
     },
+
+    async editPostForm(context, payload) {
+      try {
+        const response = await server.put(
+          '/posts/' + payload.post_id,
+          payload.form,
+          {
+            headers: {
+              access_token: localStorage.access_token,
+            },
+          }
+        );
+
+        console.log(response.data);
+        context.dispatch('fetchAllPost');
+        context.dispatch('fetchAllMyPost');
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
   },
   modules: {},
 });
