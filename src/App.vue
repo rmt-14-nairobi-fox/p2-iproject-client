@@ -1,29 +1,58 @@
 <template>
-  <div id="app">
-    <div id="nav"><router-link to="/">Home</router-link> |</div>
+  <div id="app" class="vh-100 container-fluid">
     <router-view />
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+  methods: {
+    checkToken() {
+      this.$store.dispatch('checkTokenAction');
+    },
+  },
+  created() {
+    this.checkToken();
+  },
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@0;1&display=swap');
+@font-face {
+  font-family: chomsky;
+  src: url('./assets/fonts/Chomsky.otf');
 }
 
-#nav {
-  padding: 30px;
+* {
+  font-family: 'Noto Serif', serif;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+body {
+  background-color: #dbdbdb;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.sidebar-width {
+  width: 300px;
+}
+
+.sidebar-item-active {
+  border-left: 4px solid white;
+  background-color: #1f1f1f;
+}
+
+.sidebar-item:hover {
+  cursor: pointer;
+  background-color: #7e7e7e;
+}
+
+.content-height {
+  height: calc(100% - 85px);
+  max-height: calc(100% - 85px);
+}
+
+.font-chomsky {
+  font-family: 'chomsky';
 }
 </style>
