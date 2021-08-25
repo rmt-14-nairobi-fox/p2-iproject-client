@@ -1,5 +1,5 @@
 <template>
-  <header class="w-full items-center bg-navbar py-2 px-6 hidden sm:flex">
+  <header class="w-full items-center bg-navbar py-5 px-6 hidden sm:flex">
     <div class="w-1/2"></div>
     <div class="relative w-1/2 flex justify-end">
       <ul class="flex">
@@ -8,12 +8,10 @@
             class="
               text-center
               block
-              border border-blue-500
               rounded
               py-2
               px-4
-              bg-blue-500
-              hover:bg-blue-700
+              bg-btn-in-main
               text-white
             "
             @click.prevent="registerClick"
@@ -26,12 +24,10 @@
             class="
               text-center
               block
-              border border-blue-500
               rounded
               py-2
               px-4
-              bg-blue-500
-              hover:bg-blue-700
+              bg-btn-in-main
               text-white
             "
             @click.prevent="loginClick"

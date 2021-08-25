@@ -4,18 +4,7 @@
       <h1 class="text-3xl text-black pb-6">Accommodation</h1>
       <div class="bg-sidebar p-8 rounded">
         <div class="flex">
-          <div
-            class="
-              w-7/12
-              text-gray-800
-              bg-home-main
-              p-8
-              sm:rounded-tr-lg
-              rounded-tr-none rounded-bl-lg rounded-tl-lg
-              flex
-              items-center
-            "
-          >
+          <div class="w-7/12 text-gray-800 bg-home-main p-16 flex items-center">
             <div>
               <p class="text-xl mb-5">
                 <span>Title:&nbsp;</span>
@@ -99,10 +88,24 @@
             px-4
             rounded-lg
             text-white
+            mr-auto
           "
           @click="deleteHandler(accommodation.id)"
         >
           Delete
+        </button>
+        <button
+          class="
+            text-l text-center
+            bg-btn-in-main
+            py-2
+            px-4
+            rounded-lg
+            text-white
+          "
+          @click="showImagesClick(accommodation.id)"
+        >
+          Show Images
         </button>
       </div>
     </main>
@@ -132,9 +135,11 @@ export default {
     MglNavigationControl,
     MglGeolocateControl,
   },
+  mountend() {
+    this.mapbox = Mapbox;
+  },
   created() {
     this.$store.dispatch("getAccommodationFunction", this.$route.params.id);
-    this.mapbox = Mapbox;
   },
   computed: {
     accommodation() {
@@ -152,9 +157,11 @@ export default {
         })
         .catch(() => {});
     },
+
     deleteHandler(payload) {
       this.$store.dispatch("deleteAccommodationFunction", payload);
     },
+
     async onMapLoaded(event, lat, long) {
       // Here we cathing 'load' map event
       const asyncActions = event.component.actions;
@@ -165,6 +172,17 @@ export default {
         center: [long, lat],
         zoom: 17,
       });
+    },
+
+    showImagesClick(payload) {
+      this.$router
+        .push({
+          name: "ShowImages",
+          params: {
+            idAccom: +payload,
+          },
+        })
+        .catch(() => {});
     },
   },
 };

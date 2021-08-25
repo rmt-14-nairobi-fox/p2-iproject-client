@@ -84,6 +84,19 @@ const routes = [
       }
     },
   },
+  {
+    path: "/accommodation/:idAccom/images",
+    name: "ShowImages",
+    component: () =>
+      import(/* webpackChunkName: "Login" */ "../views/ShowImages.vue"),
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("access_token")) {
+        next();
+      } else {
+        next({ name: "Login" });
+      }
+    },
+  },
 ];
 
 const router = new VueRouter({

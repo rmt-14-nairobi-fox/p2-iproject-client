@@ -10,6 +10,7 @@ export default new Vuex.Store({
     isAuth: false,
     accommodations: [],
     accommodation: {},
+    images: [],
   },
   mutations: {
     FETCH_ISAUTH(state, payload) {
@@ -20,6 +21,17 @@ export default new Vuex.Store({
     },
     FETCH_ACCOMMODATION(state, payload) {
       state.accommodation = payload;
+    },
+    FETCH_IMAGES(state, payload) {
+      state.images = payload;
+    },
+    DELETE_IMAGES(state, payload) {
+      let images = state.images.filter((el) => +el.id !== +payload);
+      state.images = images;
+    },
+    // state.image.push -> teknik hemat nembak api
+    ADD_NEW_IMAGE(state, payload) {
+      state.images.push(payload);
     },
   },
   actions: {
@@ -117,6 +129,56 @@ export default new Vuex.Store({
         })
         .then(() => {
           router.push({ path: "/" }).catch(() => {});
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    },
+
+    getAllImages(context, payload) {
+      axios
+        .get(`/accommodations/${+payload}/images`, {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        })
+        .then(({ data }) => {
+          context.commit("FETCH_IMAGES", data);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    },
+
+    addImageFunction(context, payload) {
+      axios
+        .post(`/accommodations/${+payload.id}/images`, payload.data, {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        })
+        .then(() => {
+          // ! cara ini gk hemat
+          context.dispatch("getAllImages", +payload.id);
+          // context.dispatch("DELETE_IMAGES", data);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    },
+
+    deleteImageFunction(context, payload) {
+      axios
+        .delete(
+          `/accommodations/${+payload.accomId}/images/${+payload.imageId}`,
+          {
+            headers: {
+              access_token: localStorage.getItem("access_token"),
+            },
+          }
+        )
+        .then(() => {
+          context.commit("ADD_NEW_IMAGE", +payload.imageId);
         })
         .catch((err) => {
           console.log(err.response.data);
