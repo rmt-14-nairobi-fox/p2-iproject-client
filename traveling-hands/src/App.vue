@@ -1,10 +1,52 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <!-- NAVBAR -->
+    <div
+      class="
+        items-center
+        justify-between
+        flex
+        bg-gray-800 bg-opacity-90
+        px-12
+        py-4
+        my-4
+        mx-auto
+        shadow-2xl
+        w-11/12
+      "
+      style="width: 100%"
+    >
+      <div class="text-2xl text-white font-semibold inline-flex items-center">
+        <img
+          src="https://cdn0.iconfinder.com/data/icons/holidays-icons-rounded/110/Travel-Bag-512.png"
+          class="w-16 mr-4"
+        />
+        <span>Travel Agent</span>
+      </div>
+      <div>
+        <ul class="flex text-white">
+          <li class="ml-5 px-2 py-1">
+            <router-link to="/">Home</router-link>
+          </li>
+          <li class="ml-5 px-2 py-1" v-if="!isLoggedIn">
+            <router-link to="/login">Sign In</router-link>
+          </li>
+          <li class="ml-5 px-2 py-1" v-if="!isLoggedIn">
+            <router-link to="/register">Sign Up</router-link>
+          </li>
+          <li class="ml-5 px-2 py-1" v-if="isLoggedIn">
+            <router-link to="/wishList" >My WishList</router-link> 
+          </li>
+          <li class="ml-5 px-2 py-1" v-if="isLoggedIn">
+            <button @click="signOut">
+              Sign Out
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
-    <router-view />
+    <!-- NAVBAR https://devscorp.medium.com/build-a-navbar-using-tailwind-css-48c4856ed31a -->
+    <router-view/>
   </div>
 </template>
 
@@ -30,3 +72,26 @@
   color: #42b983;
 }
 </style>
+
+<script>
+import { mapState } from "vuex"
+
+export default {
+  computed: {
+    ...mapState([ "isLoggedIn" ]),
+  },
+  methods: {
+    async signOut() {
+      this.$store.dispatch("signOut")
+    },
+    async checkAccessToken() {
+      if(localStorage.getItem("access_token")) {
+        this.$store.commit("CHANGE_IS_LOGGED_IN", true)
+      }
+    }
+  },
+  created() {
+    this.checkAccessToken()
+  },
+};
+</script>
