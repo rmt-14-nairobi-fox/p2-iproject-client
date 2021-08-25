@@ -55,7 +55,17 @@ export default {
   methods: {
     onSuccess(googleUser) {
       const data = googleUser;
-      this.$store.dispatch("loginGoogle", data);
+      this.$store
+        .dispatch("loginGoogle", data)
+        .then((res) => {
+          localStorage.setItem("access_token", res.data.access_token);
+          this.$store.commit("LOGIN_SUCCESS");
+          this.$router.push("/");
+          successHandler("Success to Login");
+        })
+        .catch((err) => {
+          errorHandler(err);
+        });
     },
     handleRegister() {
       this.$store

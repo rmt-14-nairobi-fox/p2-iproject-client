@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import jikanUrl from "../apis/jikan";
 import baseUrl from "../apis/baseUrl";
+import animeChan from "../apis/animeChan";
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     allDataReview: [],
     allMyDataReview: [],
     myReviewEdit: {},
+    animeQuote: [],
   },
   mutations: {
     ACTIVE_PAGE(state, payload) {
@@ -24,6 +26,9 @@ export default new Vuex.Store({
     },
     LOGIN_SUCCESS(state) {
       state.isLogin = true;
+    },
+    ANIME_QUOTE(state, payload) {
+      state.animeQuote = payload;
     },
     LOGIN_CHECK(state) {
       if (localStorage.getItem("access_token")) {
@@ -148,7 +153,21 @@ export default new Vuex.Store({
         },
       });
     },
-    // loginGoogle(context, payload) {},
+    loginGoogle(context, payload) {
+      var id_token = payload.getAuthResponse().id_token;
+      return baseUrl({
+        method: "post",
+        url: "/user/auth",
+        data: {
+          idToken: id_token,
+        },
+      });
+    },
+    findQuote() {
+      return animeChan({
+        method: "get",
+      });
+    },
   },
   modules: {},
 });

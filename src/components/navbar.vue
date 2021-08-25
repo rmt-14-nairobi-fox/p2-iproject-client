@@ -20,10 +20,10 @@
             <router-link to="/discuse" class="nav-link" aria-current="page" v-if="this.$store.state.isLogin"> <i class="bx bxl-discourse"></i> DISQUS</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/login" class="nav-link" aria-current="page" v-if="!this.$store.state.isLogin"> <i class="bx bx-log-in"></i>LOG-IN</router-link>
+            <router-link to="/login" class="nav-link" aria-current="page" v-if="!this.$store.state.isLogin"> <i class="bx bx-log-in"></i> LOG-IN</router-link>
           </li>
-          <li class="nav-item">
-            <GoogleLogin :params="params" :logoutButton="true" class="nav-link button-logout" @click.prevent="logoutHandler" v-if="this.$store.state.isLogin">><i class="bx bx-log-out"></i> Logout</GoogleLogin>
+          <li class="nav-item" @click.prevent="logoutHandler" v-if="this.$store.state.isLogin">
+            <GoogleLogin :params="params" :logoutButton="true" class="nav-link button-logout"><i class="bx bx-log-out"></i> Logout</GoogleLogin>
           </li>
         </ul>
       </div>
@@ -36,14 +36,30 @@ import GoogleLogin from "vue-google-login";
 import successHandler from "../helper/successCase";
 export default {
   name: "NavBarPage",
+  data() {
+    return {
+      params: {
+        client_id: "889000753785-7ocipgkjnqu0ok7ujv7sgmqv98spqe31.apps.googleusercontent.com",
+      },
+      // only needed if you want to render the button with the google ui
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true,
+      },
+    };
+  },
   components: {
     GoogleLogin,
   },
-  logoutHandler: function () {
-    localStorage.clear();
-    this.$store.commit("LOGIN_CHECK");
-    this.$router.push("/");
-    successHandler("See you later");
+  methods: {
+    logoutHandler() {
+      console.log("masuk");
+      localStorage.clear();
+      this.$store.commit("LOGIN_CHECK");
+
+      successHandler("See you later");
+    },
   },
 };
 </script>
