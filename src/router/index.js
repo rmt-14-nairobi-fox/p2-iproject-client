@@ -10,6 +10,7 @@ import MySpace from '../views/MySpace.vue';
 import Weather from '../views/Weather.vue';
 import Corona from '../views/Corona.vue';
 import ReadNews from '../views/ReadNews.vue';
+import EditProfile from '../views/EditProfile.vue';
 
 Vue.use(VueRouter);
 
@@ -44,6 +45,11 @@ const routes = [
         path: 'readnews',
         name: 'ReadNews',
         component: ReadNews,
+      },
+      {
+        path: 'editprofile',
+        name: 'EditProfile',
+        component: EditProfile,
       },
     ],
   },
