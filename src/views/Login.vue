@@ -1,0 +1,36 @@
+<template>
+  <div class="col d-flex align-items-center justify-content-center">
+    <b-card header="Login">
+      <b-form>
+        <label for="inline-form-input-name">Name</label>
+        <b-form-input
+          id="inline-form-input-name"
+          class="mb-2 mr-sm-2 mb-sm-0"
+          placeholder="Jane Doe"
+        ></b-form-input>
+
+        <label for="inline-form-input-username">Username</label>
+        <b-input-group prepend="@" class="mb-2 mr-sm-2 mb-sm-0">
+          <b-form-input
+            id="inline-form-input-username"
+            placeholder="Username"
+          ></b-form-input>
+        </b-input-group>
+
+        <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0"
+          >Remember me</b-form-checkbox
+        >
+
+        <b-button variant="primary">Save</b-button>
+      </b-form>
+    </b-card>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Login',
+};
+</script>
+
+<style></style>
