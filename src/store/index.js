@@ -14,6 +14,7 @@ export default new Vuex.Store({
     news: {},
     savednews: [],
     graph: {},
+    weather: {},
   },
   mutations: {
     SET_ISLOGIN(state, payload) {
@@ -36,6 +37,9 @@ export default new Vuex.Store({
     },
     SET_GRAPH(state, payload) {
       state.graph = payload;
+    },
+    SET_WEATHER(state, payload) {
+      state.weather = payload;
     },
   },
   actions: {
@@ -171,6 +175,27 @@ export default new Vuex.Store({
         const response = await server.get('/corona');
 
         context.commit('SET_GRAPH', response.data);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
+
+    getPosition() {
+      return new Promise((resolve, reject) =>
+        navigator.geolocation.getCurrentPosition(resolve, reject)
+      );
+    },
+
+    async fetchWeather(context) {
+      try {
+        const position = await context.dispatch('getPosition');
+        const coords = {
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+        };
+
+        const response = await server.post('/weather', coords);
+        context.commit('SET_WEATHER', response.data);
       } catch (err) {
         console.log(err.response.data);
       }
