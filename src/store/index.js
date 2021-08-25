@@ -12,6 +12,7 @@ export default new Vuex.Store({
     dataCheckout: [],
     tokenTransaction: "",
     cartData: [],
+    dataOrderDetail: [],
   },
   mutations: {
     LOGIN_STATUS(state, payload) {
@@ -32,19 +33,35 @@ export default new Vuex.Store({
     COMMIT_TOKEN_TRANSACTION(state, payload) {
       state.tokenTransaction = payload;
     },
+    COMMIT_ORDER_DETAIL(state, payload) {
+      state.dataOrderDetail = payload;
+    },
   },
   actions: {
+    async fetchOrderDetails(context, payload) {
+      try {
+        const response = await localhost({
+          method: "get",
+          url: `/orders`,
+          headers: { access_token: localStorage.getItem("access_token") },
+          data: payload,
+        });
+        context.commit("COMMIT_ORDER_DETAIL", response.data);
+        console.log(response, "response");
+      } catch (error) {
+        console.log(error, "error fetch order");
+      }
+    },
     async goCheckout(context, payload) {
       try {
-        console.log(payload, "<<<<payloadd");
         const response = await localhost({
           method: "post",
           url: `/orders/checkout`,
           headers: { access_token: localStorage.getItem("access_token") },
           data: payload,
         });
-        console.log(response, "response");
         context.commit("COMMIT_TOKEN_TRANSACTION", response.data);
+        router.push("/payment");
       } catch (error) {
         console.log(error, "error checkout");
       }

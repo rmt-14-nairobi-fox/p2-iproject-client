@@ -25,14 +25,69 @@
               </th>
               <th class="hidden text-right md:table-cell">Unit price</th>
               <th class="text-right">Total price</th>
+              <th class="text-right">Action</th>
             </tr>
           </thead>
           <tbody>
-            <TableCart
-              v-for="(item, index) in this.$store.state.cartData"
+            <tr
+              v-for="(item, index) in this.$store.state.dataOrderDetail"
               :key="index"
-              :item="item"
-            ></TableCart>
+            >
+              <td class="hidden pb-4 md:table-cell">
+                <a href="#">
+                  <!-- <img
+                    :src="item.User.imgUser"
+                    class="w-20 rounded"
+                    alt="Thumbnail"
+                  /> -->
+                </a>
+              </td>
+              <td>
+                <a href="#">
+                  <p class="mb-2 md:ml-4">{{ item.name }}</p>
+                  <form action="" method="POST">
+                    <button type="submit" class="text-gray-700 md:ml-4">
+                      <small>(Remove item)</small>
+                    </button>
+                  </form>
+                </a>
+              </td>
+              <td class="justify-center md:justify-end md:flex mt-6">
+                <div class="w-20 h-10">
+                  <div class="relative flex flex-row w-full h-8">1x</div>
+                </div>
+              </td>
+              <td class="hidden text-right md:table-cell">
+                <span class="text-sm lg:text-base font-medium">
+                  {{ item.price }}
+                </span>
+              </td>
+              <td class="text-right">
+                <span class="text-sm lg:text-base font-medium">
+                  Rp. {{ item.totalPrice }}
+                </span>
+              </td>
+              <td class="text-right">
+                <span class="text-sm lg:text-base font-medium">
+                  <a
+                    href="#"
+                    class="
+                      px-5
+                      py-2
+                      font-semibold
+                      text-gray-100
+                      transition-colors
+                      duration-200
+                      transform
+                      bg-green-500
+                      rounded-md
+                      hover:bg-green-800
+                    "
+                    >Pay</a
+                  >
+                </span>
+              </td>
+            </tr>
           </tbody>
         </table>
         <hr class="pb-6 mt-6" />
@@ -55,60 +110,25 @@
                     <label class="block text-sm text-gray-600" for="cus_email"
                       >Email</label
                     >
-                    <input
-                      v-model="email"
-                      class="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded"
-                      id="cus_email"
-                      name="cus_email"
-                      type="text"
-                      required=""
-                      placeholder="Your Email"
-                      aria-label="Email"
-                    />
+                    <p>email</p>
                   </div>
                   <div class="mt-2">
                     <label class="block text-sm text-gray-600" for="cus_email"
                       >Date Service</label
                     >
-                    <input
-                      v-model="dateService"
-                      class="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded"
-                      id="cus_email"
-                      name="dateService"
-                      type="date"
-                      required=""
-                      placeholder="Your Email"
-                      aria-label="Email"
-                    />
+                    <p>tanggal</p>
                   </div>
                   <div class="mt-2">
                     <label class="block text-sm text-gray-600" for="cus_email"
                       >Phone Number</label
                     >
-                    <input
-                      v-model="phoneNumber"
-                      class="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded"
-                      id="phoneNumber"
-                      name="phoneNumber"
-                      type="text"
-                      required=""
-                      placeholder="Your Phone"
-                      aria-label="Email"
-                    />
+                    <p>nomor hp</p>
                   </div>
                   <div class="mt-2">
                     <label class="block text-sm text-gray-600" for="cus_email"
                       >Address</label
                     >
-                    <input
-                      class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                      id="address"
-                      name="address"
-                      type="text"
-                      required=""
-                      placeholder="Street"
-                      v-model="street"
-                    />
+                    <p>alamat</p>
                   </div>
                   <div class="mt-2">
                     <label
@@ -116,16 +136,7 @@
                       for="cus_email"
                       >City</label
                     >
-                    <input
-                      class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                      id="cus_email"
-                      name="cus_email"
-                      type="text"
-                      required=""
-                      placeholder="City"
-                      aria-label="Email"
-                      v-model="city"
-                    />
+                    <p>kota</p>
                   </div>
                   <div class="inline-block mt-2 w-1/2 pr-1">
                     <label
@@ -133,16 +144,7 @@
                       for="cus_email"
                       >Country</label
                     >
-                    <input
-                      class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                      id="cus_email"
-                      name="cus_email"
-                      type="text"
-                      required=""
-                      placeholder="Country"
-                      aria-label="Email"
-                      v-model="country"
-                    />
+                    <p>negara</p>
                   </div>
                   <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
                     <label
@@ -150,16 +152,7 @@
                       for="cus_email"
                       >Zip</label
                     >
-                    <input
-                      class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                      id="cus_email"
-                      name="cus_email"
-                      type="text"
-                      required=""
-                      placeholder="Zip"
-                      aria-label="Email"
-                      v-model="zipCode"
-                    />
+                    <p>kode pos</p>
                   </div>
                 </form>
               </div>
@@ -190,7 +183,7 @@
               </div>
               <a href="#">
                 <button
-                  @click.prevent="checkoutHandler"
+                  @click.prevent="paymentHandler"
                   class="
                     flex
                     justify-center
@@ -222,7 +215,7 @@
                       d="M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z"
                     />
                   </svg>
-                  <span class="ml-2 mt-5px">Procceed to checkout</span>
+                  <span class="ml-2 mt-5px">Create Payment</span>
                 </button>
               </a>
             </div>
@@ -236,6 +229,23 @@
 // tokenTransaction
 export default {
   name: "Checkout",
+  methods: {
+      paymentHandler(){
+          
+      }
+  },
+  created() {
+    this.$store.dispatch("fetchOrderDetails");
+  },
+  computed: {
+    sumTotalPrice() {
+      let totalPrice = 0;
+      this.$store.state.dataOrderDetail.map((el) => {
+        totalPrice += el.totalPrice;
+      });
+      return totalPrice;
+    },
+  },
   data() {
     return {
       fullName: "",
@@ -247,22 +257,6 @@ export default {
       notes: "",
       price: 0,
     };
-  },
-  methods: {
-    checkoutHandler() {
-      let payload = {
-        full_name: this.fullName,
-        email: this.email,
-        phone: this.phoneNumber,
-        address: this.address,
-        city: this.city,
-        dateService: this.dateService,
-        notes: this.notes,
-        price: this.$store.state.dataCheckout.price,
-      };
-      this.$router.push("/orders");
-      this.$store.dispatch("goCheckout", payload);
-    },
   },
 };
 </script>

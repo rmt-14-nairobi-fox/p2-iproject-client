@@ -7,7 +7,6 @@
 <script>
 export default {
   name: "Payment",
-
   created() {
     window.snap.pay(this.$store.state.tokenTransaction);
   },

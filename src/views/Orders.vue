@@ -285,8 +285,9 @@ export default {
           dateService: this.dateService,
         },
       };
-      this.$router.push("/checkout");
+      // this.$router.push("/payment");
       this.$store.dispatch("goCheckout", dataOrder);
+      this.$store.commit("COMMIT_ORDER_DETAIL", dataOrder);
     },
   },
 };
