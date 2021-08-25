@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'SavedNews',
+  name: 'MySpace',
 };
 </script>
 

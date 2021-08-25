@@ -27,11 +27,13 @@
         :class="$route.name === 'SavedNews' ? 'sidebar-item-active' : ''"
       >
         <b-icon-bookmark-fill />
-        <h5 class="m-0 ml-3">Saved News</h5>
+        <h5 class="m-0 ml-3">My Space</h5>
       </div>
     </div>
     <div class="flex-grow-1 d-flex flex-column justify-content-end pb-3">
-      <b-button @click="logout" variant="danger">Logout</b-button>
+      <b-button @click="logout" variant="danger"
+        >Logout <b-icon-box-arrow-right class="ml-3"
+      /></b-button>
     </div>
   </nav>
 </template>
@@ -48,7 +50,7 @@ export default {
       this.$router.push('/news');
     },
     gotoSavedNews() {
-      this.$router.push('/savednews');
+      this.$router.push('/myspace');
     },
     logout() {
       localStorage.clear();

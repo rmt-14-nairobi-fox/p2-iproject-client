@@ -6,7 +6,7 @@ import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import GoogleSignIn from '../views/GoogleSignIn.vue';
 import News from '../views/News.vue';
-import SavedNews from '../views/SavedNews.vue';
+import MySpace from '../views/MySpace.vue';
 
 Vue.use(VueRouter);
 
@@ -15,6 +15,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    redirect: '/news',
     children: [
       {
         path: 'news',
@@ -22,9 +23,9 @@ const routes = [
         component: News,
       },
       {
-        path: 'savednews',
-        name: 'SavedNews',
-        component: SavedNews,
+        path: 'myspace',
+        name: 'MySpace',
+        component: MySpace,
       },
     ],
   },
@@ -32,6 +33,7 @@ const routes = [
     path: '/auth',
     name: 'Auth',
     component: Auth,
+    redirect: '/auth/login',
     children: [
       {
         path: 'login',
