@@ -11,7 +11,7 @@
             >Email Address</label
           >
           <input
-            type="email"
+            type="name"
             id="emailLogin"
             placeholder="you@company.com"
             class="
@@ -24,6 +24,7 @@
               outline-none
               focus:border-blue-500
             "
+            v-model="loginForm.email"
           />
         </div>
         <div>
@@ -45,6 +46,7 @@
               outline-none
               focus:border-blue-500
             "
+            v-model="loginForm.password"
           />
         </div>
         <button
@@ -58,8 +60,29 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 export default {
   name: "Login",
+  data() {
+    return {
+      loginForm: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  computed: {
+    ...mapState(["isLoggedin"]),
+  },
+  methods: {
+    ...mapActions(["loginUser"]),
+    async sendLoginData() {
+      await this.loginUser(this.loginForm);
+      if (this.isLoggedin && localStorage.getItem("access_token")) {
+        this.$router.push({ name: "Home" });
+      }
+    },
+  },
 };
 </script>
 

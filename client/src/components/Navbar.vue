@@ -19,7 +19,23 @@
               hover:text-blue-900
               text-blue-500
             "
+            v-show="!isLoggedin"
             >Sign In</span
+          >
+        </router-link>
+      </li>
+
+      <li class="px-2">
+        <router-link class="no-underline" to="/add-post">
+          <span
+            class="
+              cursor-pointer
+              font-semibold
+              hover:text-blue-900
+              text-blue-500
+            "
+            v-show="isLoggedin"
+            >Add Post</span
           >
         </router-link>
       </li>
@@ -33,6 +49,7 @@
               hover:text-blue-900
               text-blue-500
             "
+            v-show="isLoggedin"
             >Chats</span
           >
         </router-link>
@@ -47,6 +64,8 @@
               hover:text-blue-900
               text-blue-500
             "
+            v-show="isLoggedin"
+            @click.prevent="logoutHandler"
             >Sign out</span
           >
         </router-link>
@@ -56,8 +75,20 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex";
 export default {
   name: "Navbar",
+  computed: {
+    ...mapState(["isLoggedin"]),
+  },
+  methods: {
+    ...mapMutations({ toogleStateLogin: "TOGGLE_STATE_LOGIN" }),
+    logoutHandler() {
+      localStorage.clear();
+      this.toogleStateLogin();
+      this.$router.push({ name: "Home" }).catch(() => {});
+    },
+  },
 };
 </script>
 

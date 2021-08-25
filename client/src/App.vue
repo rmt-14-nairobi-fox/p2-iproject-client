@@ -9,9 +9,21 @@
 
 <script>
 import Navbar from "./components/Navbar.vue";
+import { mapMutations, mapState } from "vuex";
 export default {
   components: { Navbar },
   name: "App",
+  computed: {
+    ...mapState(["isLoggedin"]),
+  },
+  methods: {
+    ...mapMutations({ toggleStateLogin: "TOGGLE_STATE_LOGIN" }),
+  },
+  created() {
+    if (localStorage.getItem("access_token")) {
+      this.toggleStateLogin();
+    }
+  },
 };
 </script>
 
