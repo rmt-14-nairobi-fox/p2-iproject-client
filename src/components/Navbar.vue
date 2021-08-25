@@ -1,7 +1,13 @@
 <template>
   <div class="sticky top-0 bg-red-500">
     <nav class="flex px-4 border-b md:shadow-lg items-center relative">
-      <div class="text-lg font-bold md:py-0 py-4">Logo</div>
+      <img
+        src="https://www.freepnglogos.com/uploads/logos-pinterest-icon-black-png-29.png"
+        alt=""
+        srcset=""
+        style="height: 50px"
+      />
+      <div class="text-lg font-bold md:py-0 py-4">PENGANGGURANS</div>
       <ul
         class="
           md:px-2
@@ -19,7 +25,7 @@
             href="#"
             class="flex md:inline-flex p-4 items-center hover:bg-gray-50"
           >
-            <span>Home</span>
+            <span><router-link to="/">Home</router-link></span>
           </a>
         </li>
         <li>
@@ -27,7 +33,7 @@
             href="#"
             class="flex md:inline-flex p-4 items-center hover:bg-gray-50"
           >
-            <span>Products</span>
+            <span><router-link to="/orders">Your Orders</router-link></span>
           </a>
         </li>
         <li class="relative parent">
@@ -89,7 +95,22 @@
             href="#"
             class="flex md:inline-flex p-4 items-center hover:bg-gray-50"
           >
-            <span>About us</span>
+            <span
+              ><router-link to="/cart"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                  /></svg></router-link
+            ></span>
           </a>
         </li>
       </ul>
@@ -105,25 +126,6 @@
         </svg>
       </div>
     </nav>
-    <div class="rounded-lg shadow bg-base-200 drawer h-52">
-      <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-      <div class="flex flex-col items-center justify-center drawer-content">
-        <label for="my-drawer" class="btn btn-primary drawer-button"
-          >open menu</label
-        >
-      </div>
-      <div class="drawer-side">
-        <label for="my-drawer" class="drawer-overlay"></label>
-        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
-          <li>
-            <a>Menu Item</a>
-          </li>
-          <li>
-            <a>Menu Item</a>
-          </li>
-        </ul>
-      </div>
-    </div>
   </div>
 </template>
 

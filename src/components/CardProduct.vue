@@ -115,7 +115,11 @@ export default {
   methods: {
     checkoutHandler(product) {
       this.$store.commit("COMMIT_ADD_CART", product);
-      this.$router.push("/orders");
+      this.$toast.open({
+        message: "Succes add service to cart!",
+        type: "success",
+        position: "top",
+      });
     },
   },
 };
