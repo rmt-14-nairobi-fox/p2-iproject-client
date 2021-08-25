@@ -60,6 +60,17 @@ export default new Vuex.Store({
       router.push({ path: "/login" }).catch(() => {});
     },
 
+    registerFunction(context, payload) {
+      axios
+        .post("/public/register", payload)
+        .then(() => {
+          router.push({ path: "/login" }).catch(() => {});
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    },
+
     getAccommodationsFunction(context) {
       axios
         .get("/accommodations", {
