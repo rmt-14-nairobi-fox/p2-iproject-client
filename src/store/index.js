@@ -260,6 +260,22 @@ export default new Vuex.Store({
         console.log(err.response.data);
       }
     },
+
+    async createPostForm(context, payload) {
+      try {
+        const response = await server.post('/posts', payload, {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        console.log(response.data);
+        context.dispatch('fetchAllPost');
+        context.dispatch('fetchAllMyPost');
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
   },
   modules: {},
 });
