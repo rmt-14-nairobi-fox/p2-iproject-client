@@ -48,7 +48,7 @@
             ></b-form-select>
           </b-form-group>
           <div class="d-flex justify-content-end">
-            <b-button type="submit" variant="dark">Create</b-button>
+            <b-button type="submit" variant="dark">Post</b-button>
           </div>
         </form>
       </b-modal>

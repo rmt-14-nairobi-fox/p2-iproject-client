@@ -294,6 +294,21 @@ export default new Vuex.Store({
         console.log(err.response.data);
       }
     },
+
+    async deletePost(context, payload) {
+      try {
+        const response = await server.delete('/posts/' + payload, {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        console.log(response.data);
+        context.dispatch('fetchAllMyPost');
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
   },
   modules: {},
 });

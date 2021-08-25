@@ -16,9 +16,23 @@
           v-if="$route.name === 'MySpace'"
           class="flex-grow-1 d-flex justify-content-end"
         >
-          <button @click="editPost" v-b-modal.modal-center class="btn">
+          <!-- <button @click="editPost" v-b-modal.modal-center class="btn">
             <b-icon-three-dots-vertical />
-          </button>
+          </button> -->
+          <b-dropdown variant="transparent" no-caret>
+            <template #button-content>
+              <b-icon-three-dots-vertical />
+            </template>
+            <b-dropdown-item
+              @click.prevent="editPost"
+              v-b-modal.modal-center
+              href="#"
+              >Edit</b-dropdown-item
+            >
+            <b-dropdown-item @click.prevent="deletePost" href="#"
+              >Delete</b-dropdown-item
+            >
+          </b-dropdown>
         </div>
       </div>
       <!-- News pic and title -->
@@ -78,6 +92,9 @@ export default {
       delete payload.updatedAt;
       delete payload.SavedNew;
       this.$emit('editPost', payload);
+    },
+    deletePost() {
+      this.$store.dispatch('deletePost', this.post.id);
     },
   },
 };
