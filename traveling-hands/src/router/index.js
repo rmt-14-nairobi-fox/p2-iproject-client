@@ -4,6 +4,8 @@ import Home from "../views/Home.vue";
 import Wishlist from "../views/Wishlist.vue"
 import SignIn from "../views/SignIn.vue";
 import SignUp from "../views/SignUp.vue";
+import FormCreate from "../views/FormCreate"
+import FormEdit from "../views/FormEdit"
 
 Vue.use(VueRouter);
 
@@ -27,6 +29,16 @@ const routes = [
     path: "/wishlists",
     name: "Wishlist",
     component: Wishlist,
+  },
+  {
+    path: "/formCreate",
+    name: "FormCreate",
+    component: FormCreate,
+  },
+  {
+    path: "/formEdit",
+    name: "FormEdit",
+    component: FormEdit,
   },
   {
     path: "/destinations/:id",

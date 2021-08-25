@@ -40,6 +40,9 @@
           >
             <router-link to="/wishlists">My WishList</router-link>
           </li>
+          <li class="ml-5 px-2 py-1" v-if="isLoggedIn && user.role === 'admin'">
+            <router-link to="/formCreate">Create Destination</router-link>
+          </li>
           <li class="ml-5 px-2 py-1" v-if="isLoggedIn">
             <button @click="signOut">Sign Out</button>
           </li>

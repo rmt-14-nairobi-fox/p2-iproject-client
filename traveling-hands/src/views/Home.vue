@@ -62,7 +62,7 @@
                 <br v-if="user.role === 'admin'" />
                 <button
                   v-if="user.role === 'admin'"
-                  @click.prevent="deleteTravel(travel.id)"
+                  @click="deleteTravel(travel.id)"
                   class="
                     p-3
                     bg-red-600
@@ -110,7 +110,7 @@ tr th:nth-child(1) {
 </style>
 
 <script>
-import router from '../router/index'
+import router from "../router/index";
 export default {
   computed: {
     travels() {
@@ -128,9 +128,14 @@ export default {
       this.$store.dispatch("fetchTravel", travelId);
     },
     deleteTravel(travelId) {
-      this.$store.dispatch("deleteTravel", travelId)
-      router.push('/')
-    }
+      console.log(travelId);
+      this.$store.dispatch("deleteTravel", travelId);
+      router.push("/");
+    },
+    editTravel() { //travelId
+      router.push("/formEdit");
+      // this.$store.dispatch("fetchTravel", travelId);
+    },
   },
   created() {
     this.fetchTravels();
