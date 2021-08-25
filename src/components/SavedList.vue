@@ -7,13 +7,13 @@
         <h1 class="font-chomsky">The New Roman Times</h1>
       </div>
       <div class="bg-light mw-100 item-height px-3 overflow-auto">
-        <div class="d-flex mt-3 justify-content-center">
+        <div class="d-flex mt-3 justify-content-end">
           <button
             @click="sendEmail"
             v-show="savednews.length"
-            class="btn btn-dark"
+            class="btn btn-dark w-25"
           >
-            Send To Email
+            Send News to Email
           </button>
         </div>
         <div class="row">
