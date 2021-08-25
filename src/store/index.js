@@ -13,6 +13,7 @@ export default new Vuex.Store({
     newsPrefs: [],
     news: {},
     savednews: [],
+    graph: {},
   },
   mutations: {
     SET_ISLOGIN(state, payload) {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     SET_SAVEDNEWS(state, payload) {
       state.savednews = payload;
+    },
+    SET_GRAPH(state, payload) {
+      state.graph = payload;
     },
   },
   actions: {
@@ -157,6 +161,16 @@ export default new Vuex.Store({
 
         console.log(response.data);
         context.dispatch('fetchSavedNews');
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    },
+
+    async getGraph(context) {
+      try {
+        const response = await server.get('/corona');
+
+        context.commit('SET_GRAPH', response.data);
       } catch (err) {
         console.log(err.response.data);
       }
