@@ -97,6 +97,7 @@
                               bg-blue-500
                               text-white
                             "
+                            @click="joinClass(c.id)"
                           >
                             Join Class
                           </button>
@@ -127,7 +128,12 @@ export default {
       return this.$store.state.classess;
     },
   },
-  methods: {},
+  methods: {
+    joinClass(id) {
+      const payload = { id };
+      this.$store.dispatch("joinClass", payload);
+    },
+  },
   created() {
     this.$store.dispatch("getAllClass");
   },

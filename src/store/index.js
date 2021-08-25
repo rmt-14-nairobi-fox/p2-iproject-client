@@ -286,6 +286,22 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    joinClass(context, payload) {
+      const { id } = payload
+      axios({
+        method: 'post',
+        url: `http://localhost:3000/students/join-class/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          console.log(res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
 
   },
