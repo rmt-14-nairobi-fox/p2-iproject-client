@@ -109,20 +109,6 @@
                   Sign In
                 </button>
               </div>
-              <hr class="mb-6 border-t" />
-              <div class="text-center">
-                <a
-                  class="
-                    inline-block
-                    text-sm text-red-500
-                    align-baseline
-                    hover:text-black
-                  "
-                  href=""
-                >
-                  <router-link to="/register">Create an Account!</router-link>
-                </a>
-              </div>
               <div class="text-center">
                 <a
                   class="
@@ -136,6 +122,28 @@
                   Forgot Password?
                 </a>
               </div>
+              <hr class="mb-6 border-t" />
+              <div class="text-center">
+                <a
+                  class="
+                    inline-block
+                    text-sm text-red-500
+                    align-baseline
+                    hover:text-black
+                  "
+                  href=""
+                >
+                  <router-link to="/register">Create an Account!</router-link>
+                </a>
+                <br />
+                OR
+                <GoogleLogin
+                  :params="params"
+                  :renderParams="renderParams"
+                  :onSuccess="onSuccess"
+                  :onFailure="onFailure"
+                ></GoogleLogin>
+              </div>
             </form>
           </div>
         </div>
@@ -145,12 +153,25 @@
 </template>
 
 <script>
+import GoogleLogin from "vue-google-login";
 export default {
   name: "Login",
+  components: {
+    GoogleLogin,
+  },
   data() {
     return {
       email: "",
       password: "",
+      params: {
+        client_id:
+          "483465974444-51nimbi8e3oj1hk5o326uh2ambcr9lpr.apps.googleusercontent.com",
+      },
+      renderParams: {
+        width: 410,
+        height: 40,
+        longtitle: true,
+      },
     };
   },
   methods: {
@@ -160,6 +181,19 @@ export default {
         password: this.password,
       };
       this.$store.dispatch("userLogin", payload);
+    },
+    onSuccess(googleUser) {
+      this.$store.dispatch("loginGoogle", googleUser);
+    },
+    onFailure() {
+      setTimeout(() => {
+        this.$toast.open({
+          message: "Internal Server Error",
+          type: "error",
+          position: "top",
+        });
+        this.$router.push({ name: "Login" });
+      }, 3000);
     },
   },
 };

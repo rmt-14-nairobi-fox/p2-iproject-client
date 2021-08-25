@@ -61,6 +61,35 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    async loginGoogle(context, payload) {
+      try {
+        var profile = payload.getBasicProfile();
+        console.log(profile);
+        var access_token = payload.getAuthResponse().id_token;
+        const response = await localhost({
+          method: "post",
+          url: "/users/auth/google",
+          data: { access_token },
+        });
+        Vue.$toast.open({
+          message: "Login Succes!",
+          type: "success",
+          position: "top",
+        });
+        localStorage.setItem("access_token", response.data.access_token);
+        context.commit("LOGIN_STATUS", true);
+        router.push({ name: "Home" });
+      } catch (error) {
+        setTimeout(() => {
+          Vue.$toast.open({
+            message: `${error.response.data}`,
+            type: "error",
+            position: "top",
+          });
+          router.push({ name: "Login" });
+        }, 3000);
+      }
+    },
     async currencyAPI(context, payload) {
       try {
         const response = await axios({

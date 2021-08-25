@@ -5,13 +5,13 @@
     <router-view />
 
     <div class="bottom-0">
-      <!-- <HFooter></HFooter> -->
+      <HFooter></HFooter>
     </div>
   </div>
 </template>
 <script>
 import Navbar from "./components/Navbar.vue";
-// import HFooter from "vue-hacktiv8-footer";
+import HFooter from "vue-hacktiv8-footer";
 export default {
   name: "App",
   created() {
@@ -26,7 +26,7 @@ export default {
   },
   components: {
     Navbar,
-    // HFooter,
+    HFooter,
   },
 };
 </script>

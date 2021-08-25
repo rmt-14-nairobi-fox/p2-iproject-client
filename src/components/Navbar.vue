@@ -154,7 +154,9 @@
                 href="#"
                 class="flex px-4 py-3 hover:bg-red-100"
               >
-                Logout
+                <GoogleLogin :params="params" :logoutButton="true"
+                  >Logout</GoogleLogin
+                >
               </a>
             </li>
           </ul>
@@ -185,17 +187,60 @@
 </template>
 
 <script>
+import GoogleLogin from "vue-google-login";
+
 export default {
   name: "Navbar",
+  components: {
+    GoogleLogin,
+  },
+  data() {
+    return {
+      params: {
+        client_id:
+          "483465974444-51nimbi8e3oj1hk5o326uh2ambcr9lpr.apps.googleusercontent.com",
+      },
+      renderParams: {
+        width: 300,
+        height: 50,
+        longtitle: true,
+      },
+    };
+  },
   methods: {
     seeProvider(service) {
       this.$store.dispatch("fetchProvider", service);
       this.$router.push(`/products/${service}`);
     },
     logoutHandler() {
-      localStorage.clear();
-      this.$store.commit("LOGIN_STATUS", false);
-      this.$router.push("/login");
+      try {
+        this.show = true;
+        setTimeout(() => {
+          this.show = false;
+        }, this.timeOut);
+
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {});
+        this.$store.commit("LOGIN_STATUS", false);
+        localStorage.clear();
+        this.$router.push({ name: "Login" });
+        setTimeout(() => {
+          this.$toast.open({
+            message: "Logout succes",
+            type: "success",
+            position: "top",
+          });
+        }, this.timeOut + 1000);
+      } catch (error) {
+        setTimeout(() => {
+          this.$toast.open({
+            message: "Invernal Server Error",
+            type: "error",
+            position: "top",
+          });
+          this.$router.push({ name: "Home" });
+        }, this.timeOut);
+      }
     },
   },
 };
