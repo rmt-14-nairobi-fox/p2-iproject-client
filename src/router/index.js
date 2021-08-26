@@ -8,6 +8,9 @@ import AddImage from "../components/AddImage.vue"
 import Login from "../views/Login"
 import ShowListByTag from "../views/ShowListByTag.vue"
 import Registration from "../views/Registration.vue"
+import CreatedStories from "../views/CreatedStories.vue"
+import EditStory from "../views/EditStory.vue"
+
 
 Vue.use(VueRouter);
 
@@ -63,6 +66,16 @@ const routes = [
     path: "/result",
     name: "Result",
     component: ShowListByTag
+  },
+  {
+    path: "/created",
+    name: "CreatedStories",
+    component: CreatedStories,
+  },
+  {
+    path: "/editstory",
+    name: "EditStory",
+    component: EditStory
   }
 ];
 
@@ -71,14 +84,5 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
-
-/*router.beforeEach((to, _, next) => {
-  if (to.name === 'Login' && localStorage.getItem("access_token")) {
-    next({ name: '/' })
-  }
-  else {
-    next({name : 'Home'})
-  }
-})*/
 
 export default router;

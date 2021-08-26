@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="max-w-screen-lg mx-auto">
+    <div class="min-h-screen max-w-screen-lg mx-auto">
       <div class="p-6">
         <Carousel />
       </div>

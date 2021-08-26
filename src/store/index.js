@@ -15,7 +15,10 @@ export default new Vuex.Store({
     currentPage: 0,
     cover_image_url: '',
     readStory: '',
-    pageFilterShowStory: []
+    pageFilterShowStory: [],
+    loginData: null,
+    userCreations:[],
+    editStory:null
   },
   mutations: {
     SET_USER_INPUT_VALUE: (state, payload) => {
@@ -46,6 +49,15 @@ export default new Vuex.Store({
     },
     SET_SHOW_FILTER_RESULT: (state, datas) => {
       state.pageFilterShowStory = datas
+    },
+    SET_LOGIN_DATA: (state, data) => {
+      state.loginData = data
+    },
+    SET_USER_CREATION: (state, data) => {
+      state.userCreations = data
+    },
+    SET_DATA_EDIT: (state, data) => {
+      state.editStory = data
     }
   },
   actions: {
@@ -95,7 +107,7 @@ export default new Vuex.Store({
     AddCommentPost: async function (context, payload) {
       try{
         const {reaction , id} = payload
-        const result = await axios.post(`${baseUrl}/stories/comment`, {
+        await axios.post(`${baseUrl}/stories/comment`, {
           reaction,
           StoryId: id
         },{
@@ -103,7 +115,6 @@ export default new Vuex.Store({
             access_token : localStorage.getItem("access_token")
           }
         })
-        console.log(result);
 
         const {data} = await axios.get(`${baseUrl}/stories/read/${id}`, {
           headers : {
@@ -125,12 +136,28 @@ export default new Vuex.Store({
           password
         })
         localStorage.setItem("access_token", data.access_token)
+        context.commit("SET_LOGIN_DATA", data)
         context.commit("SET_LOGIN_STATUS_TRUE")
         router.push('/')
+        let timerInterval
         Swal.fire({
-          title : "Login success",
-          text : "Redirecting to home...",
-          timer : 5000,
+          html: 'Redirect to home.....',
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+          }
         })
       }
       catch(err){
@@ -177,7 +204,7 @@ export default new Vuex.Store({
       catch(err){
         Swal.fire({
           title : "Oops",
-          text : err.response.data.messages,
+          text : "You need to login first",
           icon : 'warning'
         })
 
@@ -240,6 +267,76 @@ export default new Vuex.Store({
         console.log(data);
         context.commit("SET_SHOW_FILTER_RESULT", data)
         router.push('/result')
+      }
+      catch(err){
+        console.log(err);
+      }
+    },
+
+    seeCreated : async function(context){
+      try{
+        const { data } = await axios.get(`${baseUrl}/stories/created`, {
+          headers : {
+            access_token : localStorage.getItem("access_token")
+          }
+        })
+        context.commit("SET_USER_CREATION", data)
+        console.log(data);
+      }
+      catch(err){
+        console.log();
+      }
+    },
+
+    deleteStory : async function(context, id){
+      console.log(id);
+      try{
+        await axios.delete(`${baseUrl}/stories/delete/${id}`, {
+          headers : {
+            access_token : localStorage.getItem("access_token")
+          }
+        })
+
+        const { data } = await axios.get(`${baseUrl}/stories/created`, {
+          headers : {
+            access_token : localStorage.getItem("access_token")
+          }
+        })
+        context.commit("SET_USER_CREATION", data)
+      }
+      catch(err){
+        console.log(err.response);
+      }
+    },
+
+    editStory : async function(context, id){
+      console.log(id);
+      try{
+        const {data} = await axios.get(`${baseUrl}/stories/read/${id}`, {
+            headers : {
+              access_token : localStorage.getItem("access_token")
+            }
+          })
+        context.commit("SET_DATA_EDIT", data)
+        router.push({path:'/editstory'})
+      }
+
+      catch(err){
+        console.log(err);
+      }
+    },
+
+    putEdit : async function(context, payload){
+      try{
+        const {text, id} = payload
+        await axios.patch(`${baseUrl}/stories/edit/${id}`, {
+          story_text : text
+        },{
+          headers: {
+            access_token : localStorage.getItem("access_token")
+          }
+        })
+        context.dispatch("readStory", {id:id})
       }
       catch(err){
         console.log(err);

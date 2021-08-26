@@ -24,7 +24,10 @@
       <div class="">
         <div class="p-3 bg-white rounded-xl w-full">
           <p class="text-2xl font-bold">{{findRecomendation.title}}</p>
-          <button class="button px-2 bg-yellow-200 rounded">{{findRecomendation.tag}}</button>
+          <div class="grid grid-cols-2 gap-1 w-2/3 text-sm">
+            <button class="button px-2 bg-yellow-200 rounded">{{findRecomendation.tag}}</button>
+            <button class="button px-2 bg-red-200 rounded">Editor`s Choice</button>
+          </div>
         </div>
         <div class="text-sm p-3 bg-blue-100">
           <div>

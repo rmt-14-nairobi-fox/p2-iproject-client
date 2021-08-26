@@ -26,9 +26,68 @@
         </button>
       </div>
   </div>
-  <div class="grid grid-cols-2 gap-2">
+  <div class="flex flex-col">
+    <div class="grid grid-cols-2 gap-2">
+      <div v-if="this.$store.state.isLogin">
+        <p
+          class="
+          inline-block
+          text-sm
+          px-4
+          py-2
+          leading-none
+          border border-indigo-200
+          rounded
+          text-indigo-300
+          border-white
+          hover:border-purple-700 hover:text-teal-500
+          "
+          >
+          <router-link to="addstory">Share Story</router-link>
+        </p>
+    </div>
     <div v-if="this.$store.state.isLogin">
-      <p
+      <button
+        @click="signOut"
+        class="
+        inline-block
+        text-sm
+        px-4
+        py-2
+        leading-none
+        border border-indigo-200
+        rounded
+        text-indigo-300
+        border-white
+        hover:border-purple-700 hover:text-teal-500
+        ">
+        Sign Out
+      </button>          
+    </div>
+  <div>
+    <router-link to="/login">
+      <button
+        v-if="!this.$store.state.isLogin"
+        class="
+        inline-block
+        text-sm
+        px-4
+        py-2
+        leading-none
+        border border-indigo-200
+        rounded
+        text-indigo-300
+        border-white
+        hover:border-purple-700 hover:text-teal-500
+        "
+        >Sign In
+      </button>   
+    </router-link>       
+  </div>
+  <div>
+    <router-link to="/registration">
+      <button
+      v-if="!this.$store.state.isLogin"
       class="
       inline-block
       text-sm
@@ -41,70 +100,20 @@
       border-white
       hover:border-purple-700 hover:text-teal-500
       "
-      >
-      <router-link to="addstory">Share Story</router-link>
-    </p>
+      >Sign Up
+    </button>   
+  </router-link>       
   </div>
-  <div v-if="this.$store.state.isLogin">
+  </div>
+  <div>
+    <router-link to="/created">
     <button
-
-    @click="signOut"
-    class="
-    inline-block
-    text-sm
-    px-4
-    py-2
-    leading-none
-    border border-indigo-200
-    rounded
-    text-indigo-300
-    border-white
-    hover:border-purple-700 hover:text-teal-500
-    ">
-    Sign Out
-  </button>          
-</div>
-<div>
-  <router-link to="/login">
-    <button
-    v-if="!this.$store.state.isLogin"
-    class="
-    inline-block
-    text-sm
-    px-4
-    py-2
-    leading-none
-    border border-indigo-200
-    rounded
-    text-indigo-300
-    border-white
-    hover:border-purple-700 hover:text-teal-500
-    "
-    >Sign In
-  </button>   
-</router-link>       
-</div>
-<div>
-  <router-link to="/registration">
-    <button
-    v-if="!this.$store.state.isLogin"
-    class="
-    inline-block
-    text-sm
-    px-4
-    py-2
-    leading-none
-    border border-indigo-200
-    rounded
-    text-indigo-300
-    border-white
-    hover:border-purple-700 hover:text-teal-500
-    "
-    >Sign Up
-  </button>   
-</router-link>       
-</div>
-</div>
+     v-if="this.$store.state.isLogin" 
+     @click="seeCreated"
+     class="text-sm text-white text-right bg-indigo-200 rounded px-2">See your colletion</button>
+    </router-link>
+  </div>
+  </div>
 </div>
 </nav>
 </template>
@@ -127,10 +136,15 @@
         })
         localStorage.clear()
         this.$store.commit("SET_USER_LOGOUT")
+        this.$store.commit("SET_LOGIN_DATA", null)
       },
 
       filter(){
         this.$store.dispatch("searcByTitle", this.search)
+      },
+
+      seeCreated(){
+        this.$store.dispatch("seeCreated")
       }
     }
   };
