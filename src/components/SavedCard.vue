@@ -24,6 +24,13 @@
 </template>
 
 <script>
+import Vue from 'vue';
+
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+Vue.use(VueSweetalert2);
+
 export default {
   name: 'SavedCard',
   props: ['article'],
@@ -54,7 +61,21 @@ export default {
       this.$router.push({ name: 'ReadNews', query: payload });
     },
     deleteNews() {
-      this.$store.dispatch('deleteNews', this.article.id);
+      Vue.swal
+        .fire({
+          title: 'Delete saved news?',
+          text: "You won't be able to revert this",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#1b1b1b',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!',
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.$store.dispatch('deleteNews', this.article.id);
+          }
+        });
     },
   },
 };

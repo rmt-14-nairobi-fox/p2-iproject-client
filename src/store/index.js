@@ -66,9 +66,6 @@ export default new Vuex.Store({
         context.commit('SET_ISLOGIN', true);
         context.commit('SET_PROFILE', localStorage.profile);
         context.commit('SET_USER_NAME', localStorage.user_name);
-        Vue.$toast.success('Logged in!', {
-          position: 'top-right',
-        });
       } else {
         context.commit('SET_ISLOGIN', false);
         context.commit('SET_PROFILE', '');
@@ -85,6 +82,9 @@ export default new Vuex.Store({
 
         context.dispatch('checkTokenAction');
         router.push({ name: 'Home' });
+        Vue.$toast.success('Logged in!', {
+          position: 'top-right',
+        });
       } catch (err) {
         console.log(err.response.data);
         Vue.$toast.error(err.response.data.message, {
@@ -121,6 +121,9 @@ export default new Vuex.Store({
 
         context.dispatch('checkTokenAction');
         router.push({ name: 'Home' });
+        Vue.$toast.success('Logged in!', {
+          position: 'top-right',
+        });
       } catch (err) {
         console.log(err.response.data);
         Vue.$toast.error(err.response.data.message, {
@@ -425,7 +428,7 @@ export default new Vuex.Store({
 
         context.dispatch('checkTokenAction');
 
-        router.push({ name: 'Home' });
+        router.go(-1);
 
         Vue.$toast.success(response.data.message, {
           position: 'top-right',
