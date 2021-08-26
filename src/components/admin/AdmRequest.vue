@@ -21,7 +21,9 @@
                             <tr>
                                 <th scope="col" class="
                                     px-6
-                                    py-3 text-xs
+                                    py-3 
+                                    text-left
+                                    text-xs
                                     uppercase
                                     tracking-wider
                                 ">
