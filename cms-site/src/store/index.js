@@ -93,8 +93,10 @@ export default new Vuex.Store({
             access_token: localStorage.getItem("access_token"),
           },
         })
-        .then(() => {
-          router.push({ path: "/" }).catch(() => {});
+        .then(({ data }) => {
+          router
+            .push({ path: `/accommodation/${data.id}/images` })
+            .catch(() => {});
         })
         .catch((err) => {
           console.log(err.response.data);
@@ -190,6 +192,29 @@ export default new Vuex.Store({
         )
         .then(() => {
           context.commit("ADD_NEW_IMAGE", +payload.imageId);
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    },
+
+    changeStatusFunction(context, payload) {
+      console.log(payload);
+      axios
+        .patch(
+          `/accommodations/${+payload.id}`,
+          { status: payload.status },
+          {
+            headers: {
+              access_token: localStorage.getItem("access_token"),
+            },
+          }
+        )
+        .then(() => {
+          console.log("done");
+          // ! cara ini gk hemat
+          // context.dispatch("getAllImages", +payload.id);
+          // context.dispatch("DELETE_IMAGES", data);
         })
         .catch((err) => {
           console.log(err.response.data);

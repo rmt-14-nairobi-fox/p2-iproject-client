@@ -2,6 +2,9 @@
 node_modules
 /dist
 ignore.html
+/www
+.firebaserc
+.firebase
 
 
 # local env files

@@ -83,6 +83,7 @@ export default new Vuex.Store({
           },
         })
         .then(({ data }) => {
+          console.log(data);
           context.commit("FETCH_ACCOMMODATIONS", data);
         })
         .catch((err) => {
