@@ -32,7 +32,9 @@
               </td>
               <td class="p-3">
                 <button
-                  @click.prevent="buyTravelPackage(index+1)"
+                  @click.prevent="
+                    checkOutPackage(user.email, wishlist.Destination.name, wishlist.Destination.city)
+                  "
                   class="
                     p-3
                     bg-green-500
@@ -83,16 +85,24 @@ tr th:nth-child(1) {
 export default {
   created() {
     this.fetchAllWishlists();
+    this.$store.dispatch("findUserLoginned");
   },
   computed: {
     wishlists() {
       return this.$store.state.wishlists;
+    },
+    user() {
+      return this.$store.state.user;
     },
   },
   methods: {
     fetchAllWishlists() {
       this.$store.dispatch("fetchAllWishlists");
     },
+    checkOutPackage(name, city) {
+      console.log("masuk checkout");
+      this.$store.dispatch("checkOutPackage", { name, city })
+    }
   },
 };
 </script>

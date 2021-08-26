@@ -172,6 +172,10 @@ export default new Vuex.Store({
                         access_token: localStorage.getItem("access_token")
                     }
                 })
+                Vue.$toast.open({
+                    message: `Loading Data... please wait`,
+                    type: "info",
+                })
                 context.commit("FETCHING_ALL_WISHLISTS", result.data)
             } catch (err) {
                 Vue.$toast.open({
@@ -321,6 +325,29 @@ export default new Vuex.Store({
                     message: `Loading Form... please wait`,
                     type: "info",
                 })
+            } catch (err) {
+                Vue.$toast.open({
+                    message: 'Something went wrong!',
+                    type: 'error',
+                });
+            }
+        },
+        async checkOutPackage(context, payload) {
+            try {
+                Vue.$toast.open({
+                    message: `Sending Email... please wait`,
+                    type: "info",
+                })
+                await travelAxios({
+                    method: "POST",
+                    url: '/wishlists/nodemailer',
+                    headers: {
+                        access_token: localStorage.getItem("access_token")
+                    },
+                    data: payload
+                })
+                context.dispatch("fetchAllWishlists")
+                Vue.$toast.success("Email Sent!, Please check your email inbox");
             } catch (err) {
                 Vue.$toast.open({
                     message: 'Something went wrong!',
