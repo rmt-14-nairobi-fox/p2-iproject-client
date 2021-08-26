@@ -262,32 +262,23 @@ export default new Vuex.Store({
                 });
             }
         },
-        async clickEditButton(context, data) {
+        async clickEditButton(context, payload) {
+            Vue.$toast.open({
+                message: `Editing data... please wait`,
+                type: "info",
+            });
             try {
-                const id = data.id
-                // const { id, name, country, city, price, image, categoryId } = data;
-                // const form = new FormData();
-                // form.append("name", name);
-                // form.append("country", country);
-                // form.append("city", city);
-                // form.append("price", price);
-                // form.append("images", image); // according file multer.js in middleware
-                // form.append("categoryId", categoryId);
-                // console.log(form);
                 await travelAxios({
                     method: "PUT",
-                    url: `/destination/${id}`,
+                    url: `/destinations/${payload.id}`,
                     headers: {
                         access_token: localStorage.getItem("access_token")
                     },
-                    data: data
+                    data: payload.form
                 })
-                Vue.$toast.open({
-                    message: `Editing data... please wait`,
-                    type: "info",
-                });
                 context.dispatch("findAllDestinations")
                 router.push('/')
+                Vue.$toast.success(`Destination has been updated!`);
             } catch (err) {
                 Vue.$toast.open({
                     message: `${err.message}`,
@@ -295,24 +286,15 @@ export default new Vuex.Store({
                 });
             }
         },
-        async clickCreateButton(context, data) {
+        async clickCreateButton(context, payload) {
             try {
-                // const { name, country, city, price, image, categoryId } = data;
-                // const form = new FormData();
-                // form.append("name", name);
-                // form.append("country", country);
-                // form.append("city", city);
-                // form.append("price", price);
-                // form.append("images", image); // according file multer.js in middleware
-                // form.append("categoryId", categoryId);
-                // console.log(form);
                 await travelAxios({
                     method: "POST",
-                    url: '/destination',
+                    url: '/destinations',
                     headers: {
                         access_token: localStorage.getItem("access_token")
                     },
-                    data: data
+                    data: payload
                 })
                 Vue.$toast.open({
                     message: `Creating data... please wait`,
@@ -336,7 +318,7 @@ export default new Vuex.Store({
                 })
                 context.commit("FETCHING_ALL_CATEGORIES", result.data)
                 Vue.$toast.open({
-                    message: `Loading Data... please wait`,
+                    message: `Loading Form... please wait`,
                     type: "info",
                 })
             } catch (err) {

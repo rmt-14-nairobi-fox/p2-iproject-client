@@ -104,7 +104,13 @@
             />
           </div>
           <div class="w-full md:w-full px-3 mb-6">
-            <img width="150" height="50" :src="showImage" alt="" />
+            <img
+              v-if="showImage"
+              width="150"
+              height="50"
+              :src="showImage"
+              alt=""
+            />
             <label
               class="block tracking-wide text-gray-700 text-xs font-bold mb-2"
               >Image</label
@@ -219,15 +225,14 @@ export default {
       if (this.image) this.showImage = URL.createObjectURL(this.image);
     },
     clickCreateButton() {
-      const data = {
-        name: this.name,
-        country: this.country,
-        city: this.city,
-        price: this.price,
-        image: this.image,
-        categoryId: this.categoryId,
-      };
-      this.$store.dispatch("clickCreateButton", data);
+      const form = new FormData();
+      form.append("name", this.name);
+      form.append("country", this.country);
+      form.append("city", this.city);
+      form.append("price", this.price);
+      form.append("images", this.image); // according file multer.js in middleware
+      form.append("categoryId", this.categoryId);
+      this.$store.dispatch("clickCreateButton", form);
     },
   },
 };

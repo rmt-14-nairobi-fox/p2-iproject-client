@@ -227,21 +227,21 @@ export default {
   },
   methods: {
     imagesUrl(imageUrl) {
-      // console.log(imageUrl);
       this.image = imageUrl.target.files[0]; //from inspect console web
-      if (this.image) this.showImage = URL.createObjectURL(this.image);
+      // if (this.image) this.showImage = URL.createObjectURL(this.image);
     },
     clickEditButton() {
-      const data = {
-        id: this.id,
-        name: this.name,
-        country: this.country,
-        city: this.city,
-        price: this.price,
-        image: this.image,
-        categoryId: this.categoryId,
-      };
-      this.$store.dispatch("clickEditButton", data);
+      const id = this.id //ini ambil dr state;
+      // console.log(id);
+      const form = new FormData();
+      form.append("name", this.name);
+      form.append("country", this.country);
+      form.append("city", this.city);
+      form.append("price", this.price);
+      form.append("images", this.image); // according file multer.js in middleware
+      form.append("categoryId", this.categoryId);
+
+      this.$store.dispatch("clickEditButton", { form, id });
     },
   },
 };
