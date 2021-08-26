@@ -1,6 +1,7 @@
 <template>
   <div class="write-review text-start">
     <h1>WRITE YOUR OPINION ABOUT THIS ANIME HERE</h1>
+    <p>{{ review }}</p>
     <div class="content">
       <div class="row box-content">
         <div class="col-md-8">
@@ -75,7 +76,7 @@
                   <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" v-model="review"></textarea>
                 </div>
               </form>
-              <button class="btn btn-primary" type="submit" @click.prevent="postReview">Post Review</button>
+              <button class="btn btn-primary" type="submit" @click.prevent="postReviewEdit(theAnimeData.id)">Post Review</button>
             </div>
           </div>
         </div>
@@ -95,24 +96,18 @@ export default {
   name: "reviewAnime",
   data() {
     return {
-      url: this.$store.state.animeWillreview.url,
-      title: this.$store.state.animeWillreview.title,
-      image_url: this.$store.state.animeWillreview.image_url,
-      episodes: this.$store.state.animeWillreview.episodes,
-      rated: this.$store.state.animeWillreview.rated,
-      userpoin: "",
-      review: "",
-      recomendation: "",
+      userpoin: this.$store.state.myReviewEdit.userpoin,
+      review: this.$store.state.myReviewEdit.review,
+      recomendation: this.$store.state.myReviewEdit.recomendation,
     };
   },
   methods: {
-    postReview() {
+    postReviewEdit(id) {
       this.$store
-        .dispatch("reviewAnime", { url: this.url, image_url: this.image_url, title: this.title, episodes: this.episodes, rated: this.rated, userpoin: this.userpoin, review: this.review, recomendation: this.recomendation })
+        .dispatch("editReviewAnime", { id: id, userpoin: this.userpoin, review: this.review, recomendation: this.recomendation })
         .then(() => {
-          this.$store.commit("ANIME_WILL_REVIEW", {});
-          this.$router.push("/");
-          successHandler("Thanks for your Review");
+          this.$router.push("/myreview");
+          successHandler("Your Review success to Edit");
         })
         .catch((err) => {
           errorHandler(err);
@@ -121,12 +116,12 @@ export default {
   },
   computed: {
     theAnimeData() {
-      return this.$store.state.animeWillreview;
+      return this.$store.state.myReviewEdit;
     },
   },
   created() {
-    if (this.$store.state.animeWillreview.title === undefined) {
-      this.$router.push("/");
+    if (this.$store.state.myReviewEdit.userpoin === undefined) {
+      this.$router.push("/myreview");
     }
   },
 };
@@ -134,7 +129,7 @@ export default {
 
 <style>
 .write-review {
-  min-height: 100vh;
+  margin-top: 150px;
 }
 .write-review a {
   color: aqua;

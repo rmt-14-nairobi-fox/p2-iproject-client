@@ -1,7 +1,7 @@
 <template>
   <!-- POST CARD -->
   <div class="container text-start mt-5 allreview">
-    <h1>ALL REVIEW FROM EVERYYONE</h1>
+    <h1>My Review</h1>
     <div class="content" v-for="review in dataAnimes" :key="review.id">
       <div class="row box-content">
         <button v-if="review.recomendation === 'notrecomended'" class="btn btn-danger">Not Recomended <i class="bx bx-dislike"></i></button>
@@ -33,6 +33,11 @@
         <div class="col-4 text-end">
           <img :src="review.image_url" alt="" class="image-fluid" />
         </div>
+
+        <div class="absolute">
+          <button class="btn btn-dark" @click.prevent="deleteReview(review.id)"><i class="bx bx-trash-alt"></i> Delete Review</button>
+          <button class="btn btn-success ms-2" @click.prevent="editReview(review)"><i class="bx bx-edit-alt"></i> Edit Review</button>
+        </div>
       </div>
     </div>
   </div>
@@ -40,19 +45,39 @@
 
 <script>
 import errorHandler from "../helper/errorHandler";
-// import successHandler from "../helper/successCase";
+import successHandler from "../helper/successCase";
 export default {
-  name: "allreview",
+  name: "myReview",
   computed: {
     dataAnimes() {
-      return this.$store.state.allDataReview;
+      return this.$store.state.allMyDataReview;
+    },
+  },
+  methods: {
+    deleteReview(id) {
+      this.$store
+        .dispatch("deleteReview", id)
+        .then(() => {
+          successHandler("Review has been Delete Successfully");
+          this.$store.dispatch("myReview").then((res) => {
+            this.$store.commit("ALL_MY_REVIEW", res.data);
+          });
+        })
+
+        .catch((err) => {
+          errorHandler(err);
+        });
+    },
+    editReview(review) {
+      this.$store.commit("DATA_EDIT", review);
+      this.$router.push("/myreview/edit");
     },
   },
   created() {
     this.$store
-      .dispatch("allReview")
+      .dispatch("myReview")
       .then((res) => {
-        this.$store.commit("ALL_REVIEW", res.data);
+        this.$store.commit("ALL_MY_REVIEW", res.data);
       })
       .catch((err) => {
         errorHandler(err);
@@ -62,10 +87,8 @@ export default {
 </script>
 
 <style>
-.box-content button {
-  border: none !important;
-}
 .allreview {
+  min-height: 100vh;
   padding-top: 50px;
 }
 .allreview h1 {

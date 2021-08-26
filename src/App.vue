@@ -7,15 +7,21 @@
       <router-link to="/about">About</router-link>
     </div> -->
     <router-view />
+    <HFooter></HFooter>
   </div>
 </template>
 <script>
-import NavBarPage from "./components/navbar.vue"
+import HFooter from "vue-hacktiv8-footer";
+import NavBarPage from "./components/navbar.vue";
 export default {
-  components:{
-    NavBarPage
-  }
-}
+  components: {
+    NavBarPage,
+    HFooter,
+  },
+  created() {
+    this.$store.commit("LOGIN_CHECK");
+  },
+};
 </script>
 
 <style>
@@ -55,14 +61,14 @@ body {
   padding-top: 10%;
   padding-bottom: 20%;
   color: #fff;
-  height: 500px;
+  height: 600px;
 }
 .anime {
   font-size: 120px;
   text-shadow: 2px 3px #474747;
 }
 .jumbotron-tag p {
-  font-size: 16px;
+  font-size: 32px;
   text-shadow: 2px 1px #474747;
 }
 .form-login {
@@ -114,7 +120,6 @@ body {
   height: 900px;
   padding-top: 20%;
   background: url("./assets/1.png") no-repeat center center;
-  text-shadow: 2px 1px #474747;
 }
 .form-register input {
   height: 45px;
@@ -185,7 +190,7 @@ body {
   font-size: 20px;
   letter-spacing: 2px;
   height: 50px;
-  
+
   padding-right: 20px;
   padding-left: 20px;
 }
@@ -199,7 +204,8 @@ body {
   list-style: none;
 }
 .absolute {
-  bottom: -10px;
+  bottom: 0px;
+  padding-left: 0px !important;
   position: relative;
 }
 .head-search {
@@ -283,5 +289,4 @@ main .cards {
   color: #888;
   color: #313131;
 }
-
 </style>
