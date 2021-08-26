@@ -82,11 +82,13 @@
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
-                    <tr>
-                      <td class="px-6 py-4 whitespace-nowrap">1</td>
-                      <td class="px-6 py-4 whitespace-nowrap">Student 1</td>
+                    <tr v-for="(ws, i) in waitingStudents" :key="'ws' + ws.id">
+                      <td class="px-6 py-4 whitespace-nowrap">{{ i + 1 }}</td>
                       <td class="px-6 py-4 whitespace-nowrap">
-                        student1@mail.com
+                        {{ ws.Student.name }}
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        {{ ws.Student.email }}
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap flex">
                         <div class="p-3">
@@ -99,6 +101,7 @@
                               bg-green-500
                               text-white
                             "
+                            @click="accept(ws.ClassId, ws.StudentId)"
                           >
                             Accept
                           </button>
@@ -113,6 +116,7 @@
                               bg-red-500
                               text-white
                             "
+                            @click="reject(ws.ClassId, ws.StudentId)"
                           >
                             Reject
                           </button>
@@ -126,6 +130,7 @@
           </div>
           <!-- Score Student -->
           <router-view />
+          <HFooter />
         </div>
       </div>
     </div>
@@ -134,13 +139,65 @@
 
 <script>
 import SideBarTeacher from "../components/SideBarTeacher.vue";
+import Swal from "sweetalert2";
+import HFooter from "vue-hacktiv8-footer";
 export default {
   name: "DTWaiting",
   components: {
     SideBarTeacher,
+    HFooter,
   },
-  computed: {},
-  methods: {},
+  computed: {
+    waitingStudents() {
+      return this.$store.state.waitingStudents;
+    },
+  },
+  methods: {
+    accept(idClass, idStudent) {
+      const payload = {
+        idClass,
+        idStudent,
+      };
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Want to Accept this student ?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Accept it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Accepted!", "This Student join your class", "success");
+          this.$store.dispatch("accept", payload);
+        }
+      });
+    },
+    reject(idClass, idStudent) {
+      const payload = {
+        idClass,
+        idStudent,
+      };
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Want to reject this student ?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, rejectit!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            "Reject!",
+            "This student rejected from your class",
+            "success"
+          );
+          this.$store.dispatch("reject", payload);
+        }
+      });
+    },
+  },
 };
 </script>
 

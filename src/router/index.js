@@ -132,6 +132,22 @@ const routes = [
     })
   },
   {
+    path: '/teachers/add-agenda',
+    name: 'AddAgenda',
+    component: () => import('../views/DTAgenda'),
+    beforeEnter: ((to, from, next) => {
+      if (localStorage.getItem('access_token')) {
+        if (localStorage.getItem('role') === 'teacher') {
+          next()
+        } else {
+          next({ name: 'MyClassStudent' })
+        }
+      } else {
+        next({ name: 'LoginTeacher' })
+      }
+    })
+  },
+  {
     path: '/students/my-class',
     name: 'MyClassStudent',
     component: () => import('../views/DSMyClass'),

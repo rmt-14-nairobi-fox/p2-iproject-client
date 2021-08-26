@@ -110,6 +110,7 @@
             </div>
           </div>
           <router-view />
+          <HFooter />
         </div>
       </div>
     </div>
@@ -118,10 +119,12 @@
 
 <script>
 import SideBarStudent from "../components/SideBarStudent.vue";
+import HFooter from "vue-hacktiv8-footer";
 export default {
   name: "DSJoin",
   components: {
     SideBarStudent,
+    HFooter,
   },
   computed: {
     classess() {

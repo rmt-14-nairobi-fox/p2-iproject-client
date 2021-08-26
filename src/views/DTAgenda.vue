@@ -16,9 +16,9 @@
           <!-- My Class -->
           <div class="bg-white h-auto mt-2">
             <div class="p-4 shadow-xl rounded-lg">
-              <form class="space-y-8" @submit.prevent="addClass">
+              <form class="space-y-8" @submit.prevent="addAgenda">
                 <div>
-                  <label class="block mb-2">Class Name</label>
+                  <label class="block mb-2">Agenda Name</label>
                   <input
                     class="
                       border-2 border-gray-200
@@ -29,7 +29,52 @@
                       focus:border-blue-500
                     "
                     type="text"
-                    v-model="className"
+                    v-model="summary"
+                  />
+                </div>
+                <div>
+                  <label class="block mb-2">Description</label>
+                  <input
+                    class="
+                      border-2 border-gray-200
+                      p-3
+                      w-full
+                      rounded
+                      outline-none
+                      focus:border-blue-500
+                    "
+                    type="text"
+                    v-model="description"
+                  />
+                </div>
+                <div>
+                  <label class="block mb-2">Start Agenda</label>
+                  <input
+                    class="
+                      border-2 border-gray-200
+                      p-3
+                      w-full
+                      rounded
+                      outline-none
+                      focus:border-blue-500
+                    "
+                    type="date"
+                    v-model="startEvent"
+                  />
+                </div>
+                <div>
+                  <label class="block mb-2">End Agenda</label>
+                  <input
+                    class="
+                      border-2 border-gray-200
+                      p-3
+                      w-full
+                      rounded
+                      outline-none
+                      focus:border-blue-500
+                    "
+                    type="date"
+                    v-model="endEvent"
                   />
                 </div>
                 <button
@@ -70,23 +115,29 @@
 import SideBarTeacher from "../components/SideBarTeacher.vue";
 import HFooter from "vue-hacktiv8-footer";
 export default {
-  name: "DTAdd",
+  name: "DTAgenda",
   components: {
     SideBarTeacher,
     HFooter,
   },
   data() {
     return {
-      className: "",
+      summary: "",
+      description: "",
+      startEvent: "",
+      endEvent: "",
     };
   },
   computed: {},
   methods: {
-    addClass() {
+    addAgenda() {
       const payload = {
-        name: this.className,
+        summary: this.summary,
+        description: this.description,
+        startEvent: this.startEvent,
+        endEvent: this.endEvent,
       };
-      this.$store.dispatch("addClass", payload);
+      this.$store.dispatch("addAgenda", payload);
     },
   },
 };

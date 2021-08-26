@@ -41,6 +41,7 @@
           <!-- Score Student -->
           <router-view />
         </div>
+        <HFooter />
       </div>
     </div>
   </div>
@@ -48,10 +49,12 @@
 
 <script>
 import SideBarTeacher from "../components/SideBarTeacher.vue";
+import HFooter from "vue-hacktiv8-footer";
 export default {
   name: "DTMyClass",
   components: {
     SideBarTeacher,
+    HFooter,
   },
   computed: {
     teacherClassess() {
@@ -61,6 +64,7 @@ export default {
   methods: {
     myClass(id) {
       const payload = { id };
+      this.$store.commit("GET_ID_CLASS", id);
       this.$store.dispatch("getStudentClass", payload);
     },
   },

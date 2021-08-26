@@ -118,6 +118,7 @@
           <!-- Waiting Class -->
           <!-- Score Student -->
           <router-view />
+          <HFooter />
         </div>
       </div>
     </div>
@@ -126,10 +127,12 @@
 
 <script>
 import SideBarStudent from "../components/SideBarStudent.vue";
+import HFooter from "vue-hacktiv8-footer";
 export default {
   name: "DSMyClass",
   components: {
     SideBarStudent,
+    HFooter,
   },
   computed: {
     studentClassess() {

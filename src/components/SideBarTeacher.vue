@@ -12,6 +12,9 @@
             <button @click="addClass">CREATE CLASS</button>
           </div>
           <div class="mx-5">
+            <button @click="addAgenda">CREATE AGENDA</button>
+          </div>
+          <div class="mx-5">
             <button @click="logout">LOGOUT</button>
           </div>
         </div>
@@ -32,6 +35,11 @@ export default {
     myClass() {
       this.$router.push({
         name: "MyClassTeacher",
+      });
+    },
+    addAgenda() {
+      this.$router.push({
+        name: "AddAgenda",
       });
     },
     logout() {

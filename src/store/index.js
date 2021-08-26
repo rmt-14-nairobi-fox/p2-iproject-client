@@ -2,6 +2,7 @@ import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router'
+import Swal from 'sweetalert2'
 
 Vue.use(Vuex)
 
@@ -11,9 +12,11 @@ export default new Vuex.Store({
     studentClassess: [],
     classess: [],
     waitingClassess: [],
+    waitingStudents: [],
     myStudents: [],
     oneStudent: {},
-    myScore: {}
+    myScore: {},
+    idClass: ''
   },
   mutations: {
     GET_CLASSES_TEACHER(state, payload) {
@@ -36,6 +39,12 @@ export default new Vuex.Store({
     },
     GET_ALL_CLASS_WAITING(state, payload) {
       state.waitingClassess = payload
+    },
+    GET_ID_CLASS(state, payload) {
+      state.idClass = payload
+    },
+    GET_WAITING_STUDENT(state, payload) {
+      state.waitingStudents = payload
     }
   },
   actions: {
@@ -43,7 +52,7 @@ export default new Vuex.Store({
       const { email, password } = payload
       axios({
         method: 'post',
-        url: 'http://localhost:3000/teachers/login',
+        url: 'https://rapoot-backend.herokuapp.com/teachers/login',
         data: {
           email, password
         }
@@ -54,14 +63,19 @@ export default new Vuex.Store({
           router.push({ name: 'MyClassTeacher' })
         })
         .catch(err => {
-          console.log(err)
+          console.log(err.response)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.name,
+          })
         })
     },
     loginStudent(context, payload) {
       const { email, password } = payload
       axios({
         method: 'post',
-        url: 'http://localhost:3000/students/login',
+        url: 'https://rapoot-backend.herokuapp.com/students/login',
         data: {
           email, password
         }
@@ -73,13 +87,18 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.name,
+          })
         })
     },
     registerTeacher(context, payload) {
       const { email, password, name, phoneNumber } = payload
       axios({
         method: 'post',
-        url: 'http://localhost:3000/teachers/register',
+        url: 'https://rapoot-backend.herokuapp.com/teachers/register',
         data: {
           email, password, name, phoneNumber
         }
@@ -89,14 +108,21 @@ export default new Vuex.Store({
           context.dispatch('loginTeacher', { email, password })
         })
         .catch(err => {
-          console.log(err)
+          console.log(err.response.data)
+          if (err.response.data.message) {
+            Swal.fire({
+              icon: 'question',
+              title: 'Email Format',
+              text: err.response.data.message,
+            })
+          }
         })
     },
     registerStudent(context, payload) {
       const { email, password, name, phoneNumber } = payload
       axios({
         method: 'post',
-        url: 'http://localhost:3000/students/register',
+        url: 'https://rapoot-backend.herokuapp.com/students/register',
         data: {
           email, password, name, phoneNumber
         }
@@ -112,7 +138,7 @@ export default new Vuex.Store({
     getClassTeacher(context) {
       axios({
         method: 'get',
-        url: 'http://localhost:3000/teachers/class',
+        url: 'https://rapoot-backend.herokuapp.com/teachers/class',
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -127,7 +153,7 @@ export default new Vuex.Store({
     getClassStudent(context) {
       axios({
         method: 'get',
-        url: 'http://localhost:3000/students/my-class',
+        url: 'https://rapoot-backend.herokuapp.com/students/my-class',
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -143,7 +169,7 @@ export default new Vuex.Store({
       const { id } = payload
       axios({
         method: 'get',
-        url: `http://localhost:3000/students/my-score/${id}`,
+        url: `https://rapoot-backend.herokuapp.com/students/my-score/${id}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -165,7 +191,7 @@ export default new Vuex.Store({
       const { name } = payload
       axios({
         method: 'post',
-        url: 'http://localhost:3000/teachers/add-class',
+        url: 'https://rapoot-backend.herokuapp.com/teachers/add-class',
         data: {
           name
         },
@@ -187,7 +213,7 @@ export default new Vuex.Store({
       const { id } = payload
       axios({
         method: 'get',
-        url: `http://localhost:3000/teachers/class/${id}`,
+        url: `https://rapoot-backend.herokuapp.com/teachers/class/${id}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -209,7 +235,7 @@ export default new Vuex.Store({
       const { idClass, idStudent } = payload
       axios({
         method: 'get',
-        url: `http://localhost:3000/teachers/${idClass}/${idStudent}`,
+        url: `https://rapoot-backend.herokuapp.com/teachers/${idClass}/${idStudent}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -227,11 +253,33 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    studentWaiting(context, payload) {
+      const { id } = payload
+      axios({
+        method: 'get',
+        url: `https://rapoot-backend.herokuapp.com/teachers/class/waiting/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          context.commit('GET_WAITING_STUDENT', res.data)
+          router.push({
+            name: 'WaitingClass',
+            params: {
+              idClass: id
+            }
+          })
+        })
+        .catch(err => {
+          console.log(err.response)
+        })
+    },
     updateScore(context, payload) {
       const { idClass, idStudent, score1, score2, score3, score4, score5, note } = payload
       axios({
         method: 'put',
-        url: `http://localhost:3000/teachers/score/${idClass}/${idStudent}`,
+        url: `https://rapoot-backend.herokuapp.com/teachers/score/${idClass}/${idStudent}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         },
@@ -252,6 +300,13 @@ export default new Vuex.Store({
               idClass
             }
           })
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: res.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
         })
         .catch(err => {
           console.log(err)
@@ -260,7 +315,7 @@ export default new Vuex.Store({
     getAllClass(context) {
       axios({
         method: 'get',
-        url: 'http://localhost:3000/students/all-class',
+        url: 'https://rapoot-backend.herokuapp.com/students/all-class',
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -275,7 +330,7 @@ export default new Vuex.Store({
     getClassWaiting(context) {
       axios({
         method: 'get',
-        url: 'http://localhost:3000/students/waiting-class',
+        url: 'https://rapoot-backend.herokuapp.com/students/waiting-class',
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -291,13 +346,99 @@ export default new Vuex.Store({
       const { id } = payload
       axios({
         method: 'post',
-        url: `http://localhost:3000/students/join-class/${id}`,
+        url: `https://rapoot-backend.herokuapp.com/students/join-class/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          console.log(res.data.message)
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: res.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    accept(context, payload) {
+      const { idClass, idStudent } = payload
+      axios({
+        method: 'patch',
+        url: `https://rapoot-backend.herokuapp.com/teachers/accept/${idClass}/${idStudent}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
       })
         .then(res => {
           console.log(res.data)
+          context.dispatch('studentWaiting', { id: idClass })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    reject(context, payload) {
+      const { idClass, idStudent } = payload
+      axios({
+        method: 'patch',
+        url: `https://rapoot-backend.herokuapp.com/teachers/reject/${idClass}/${idStudent}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          console.log(res.data)
+          context.dispatch('studentWaiting', { id: idClass })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    deleteStudent(context, payload) {
+      const { idClass, idStudent } = payload
+      axios({
+        method: 'delete',
+        url: `https://rapoot-backend.herokuapp.com/teachers/delete/${idClass}/${idStudent}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          console.log(res.data)
+          context.dispatch('getStudentClass', { id: idClass })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    addAgenda(context, payload) {
+      const { summary, description, startEvent, endEvent } = payload
+      axios({
+        method: 'post',
+        url: 'https://rapoot-backend.herokuapp.com/teachers/calender',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          summary, description, startEvent, endEvent
+        }
+      })
+        .then(res => {
+          router.push({
+            name: 'MyClassTeacher'
+          })
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: res.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
         })
         .catch(err => {
           console.log(err)

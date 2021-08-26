@@ -20,7 +20,7 @@
                 <h1 class="font-bold text-xl my-3">My Class Name</h1>
               </div>
               <button
-                @click="studentRegister(1)"
+                @click="studentRegister(idClass)"
                 class="shadow-xl p-5 bg-blue-500 text-white w-56"
               >
                 See Student Register
@@ -147,6 +147,7 @@
           <!-- Waiting Class -->
           <!-- Score Student -->
           <router-view />
+          <HFooter />
         </div>
       </div>
     </div>
@@ -155,24 +156,26 @@
 
 <script>
 import SideBarTeacher from "../components/SideBarTeacher.vue";
+import Swal from "sweetalert2";
+import HFooter from "vue-hacktiv8-footer";
 export default {
   name: "DTClass",
   components: {
     SideBarTeacher,
+    HFooter,
   },
   computed: {
     myStudents() {
       return this.$store.state.myStudents;
     },
+    idClass() {
+      return this.$store.state.idClass;
+    },
   },
   methods: {
     studentRegister(id) {
-      this.$router.push({
-        name: "WaitingClass",
-        params: {
-          idClass: id,
-        },
-      });
+      const payload = { id };
+      this.$store.dispatch("studentWaiting", payload);
     },
     score(idClass, idStudent) {
       const payload = {
@@ -180,6 +183,30 @@ export default {
         idStudent,
       };
       this.$store.dispatch("getOneStudent", payload);
+    },
+    deleteStudent(idClass, idStudent) {
+      const payload = {
+        idClass,
+        idStudent,
+      };
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You want to delete this student?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            "Deleted!",
+            "Student has been deleted from your class",
+            "success"
+          );
+          this.$store.dispatch("deleteStudent", payload);
+        }
+      });
     },
   },
 };

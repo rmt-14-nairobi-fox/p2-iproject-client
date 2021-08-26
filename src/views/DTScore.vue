@@ -164,6 +164,7 @@
             </div>
           </div>
           <router-view />
+          <HFooter />
         </div>
       </div>
     </div>
@@ -172,6 +173,7 @@
 
 <script>
 import SideBarTeacher from "../components/SideBarTeacher.vue";
+import HFooter from "vue-hacktiv8-footer";
 export default {
   name: "DTScore",
   data() {
@@ -188,6 +190,7 @@ export default {
   },
   components: {
     SideBarTeacher,
+    HFooter,
   },
   computed: {
     oneStudent() {
