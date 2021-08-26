@@ -74,21 +74,19 @@
 					px-4
 					border border-transparent
 					text-lg
-					font-medium
 					rounded-md
 					text-black
 					bg-blue-400
 					hover:bg-blue-500
 					focus:outline-none
+                    font-black
 				">
 					Sign in
 				</button>
 
 			</form>
 
-			<p class="mb-3 text-center text-sm text-gray-600">Or</p>
-
-			<p class="mb-2">
+			<p class="mt-8">
 				Don't have an account?
                 <router-link to="/register" class="font-medium text-blue-600 hover:text-blue-500">
                     Sign up

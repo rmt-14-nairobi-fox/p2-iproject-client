@@ -74,12 +74,12 @@
 					px-4
 					border border-transparent
 					text-lg
-					font-medium
 					rounded-md
 					text-black
 					bg-blue-400
 					hover:bg-blue-500
 					focus:outline-none
+                    font-black
 				">
 					Sign in
 				</button>

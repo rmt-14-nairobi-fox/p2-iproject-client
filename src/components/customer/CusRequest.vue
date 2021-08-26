@@ -1,8 +1,8 @@
 <template>
     <div class="w-full">
         <div>
-            <h1 class="text-4xl">Customer Request</h1>
-            <p class="text-gray-500 mt-2">list of request from customer</p>
+            <h1 class="text-4xl">Your Request</h1>
+            <p class="text-gray-500 mt-2">list of your request</p>
         </div>
 
         <div class="flex flex-col mt-8 overflow-x-auto ">
@@ -78,7 +78,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <tr v-for="(item, index) in reqData" :key="'admReq'+item.id">
+                            <tr v-for="(item, index) in reqData" :key="'cusReq'+item.id">
                                 <td class="px-6 py-4 text-sm text-left  text-gray-500">
                                     {{index+1}}
                                 </td>
@@ -115,15 +115,25 @@
                 </div>
             </div>
         </div>
+
+        <button @click="backHome" class="mt-16 bg-red-400 p-2 shadow-lg rounded-md text-white font-black">Back To Home</button>
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 export default {
-    name: 'AdmRequest',
+    name: 'CusRequest',
     computed: {
         ...mapState(['reqData'])
+    },
+    methods: {
+        ...mapMutations({
+            fillCurPage: 'FILL_CUR_PAGE'
+        }),
+        backHome() {
+            this.fillCurPage('listCard')
+        }
     }
 }
 </script>

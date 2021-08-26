@@ -1,14 +1,12 @@
 <template>
 <div>
     <adm-sidebar></adm-sidebar>
-    <div 
-      style="padding-left:320px;" 
-      class="h-screen w-full px-4 py-12">
-      <adm-farm v-show="curTable === 'admFarm'"></adm-farm>
-      <adm-request v-show="curTable === 'admReq'"></adm-request>
-    </div>
-    <div style="padding-left:300px;" class="w-full">
-      <HFooter></HFooter>
+    <div style="padding-left:300px;" class="flex flex-col justify-between h-screen">
+      <div class="px-4 py-12">
+        <adm-farm v-show="curTable === 'admFarm'"></adm-farm>
+        <adm-request v-show="curTable === 'admReq'"></adm-request>
+      </div>
+        <HFooter></HFooter>
     </div>
   </div>
 </template>
@@ -21,13 +19,13 @@ import AdmRequest from '../../components/admin/AdmRequest.vue'
 import { mapActions, mapState } from 'vuex'
 
 export default {
+  name:'AdmHome',
   components: { 
     AdmSidebar,
     HFooter,
     AdmFarm,
     AdmRequest
   },
-    name:'AdmHome',
     computed: {
       ...mapState(['curTable', 'userInfo'])
     },
