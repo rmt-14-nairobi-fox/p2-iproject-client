@@ -2,7 +2,7 @@
   <section id="login-page" class="form-register text-center text-white mt-2">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 box">
+        <div class="col-lg-6 box">
           <div class="title">
             <h1>Register</h1>
           </div>
@@ -16,7 +16,7 @@
             <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess"></GoogleLogin>
           </div>
         </div>
-        <div class="col-md-6 box">
+        <div class="col-lg-6 box">
           <div class="anime">アニメ</div>
           <div class="jumbotron-tag">
             <p>Hai Kawan, Anime merupakan salah satu animasi buatan Jepang, dan dengan mendaftar di web ini kalian bisa membantu orang orang menemukan anime yang cocok untuk mereka dari review kalian</p>
@@ -59,6 +59,7 @@ export default {
         .dispatch("loginGoogle", data)
         .then((res) => {
           localStorage.setItem("access_token", res.data.access_token);
+          localStorage.setItem("email", res.data.email);
           this.$store.commit("LOGIN_SUCCESS");
           this.$router.push("/");
           successHandler("Success to Login");

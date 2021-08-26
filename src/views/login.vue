@@ -54,6 +54,7 @@ export default {
         .dispatch("loginGoogle", data)
         .then((res) => {
           localStorage.setItem("access_token", res.data.access_token);
+          localStorage.setItem("email", res.data.email);
           this.$store.commit("LOGIN_SUCCESS");
           this.$router.push("/");
           successHandler("Success to Login");

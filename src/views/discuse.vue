@@ -5,9 +5,11 @@
     </div>
     <div class="row mt-5 blok-chat">
       <div class="body col-md-10">
-        <div class="message text-start" v-for="(msg, i) in messages" :key="i + 'msg'">
-          <p>{{ msg.message }}</p>
-          <small class="form-text" style="color: #313131">by : {{ msg.email }}</small>
+        <div class="" v-for="(msg, i) in messages" :key="i + 'msg'">
+          <div class="message text-start">
+            <p>{{ msg.message }}</p>
+            <small class="form-text" style="color: #313131">by : {{ msg.email }}</small>
+          </div>
         </div>
       </div>
     </div>
@@ -28,7 +30,6 @@ export default {
   data() {
     return {
       inputMessage: "",
-      listUser: [],
     };
   },
   sockets: {

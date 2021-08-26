@@ -135,7 +135,6 @@ export default {
 <style>
 .write-review {
   min-height: 100vh;
-  margin-top: 150px;
 }
 .write-review a {
   color: aqua;
