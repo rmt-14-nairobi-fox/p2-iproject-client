@@ -1,8 +1,6 @@
 <template>
   <div id="app" class="flex flex-col">
-    <div>
-      <router-view />
-    </div>
+    <router-view />
     <h-footer></h-footer>
   </div>
 </template>
