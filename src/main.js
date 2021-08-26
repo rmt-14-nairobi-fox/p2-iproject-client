@@ -13,7 +13,7 @@ import { io } from 'socket.io-client';
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
-const socket = io('http://localhost:3000');
+const socket = io('https://newromantimes.herokuapp.com');
 
 Vue.use(VueToast);
 
