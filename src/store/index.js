@@ -9,10 +9,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogin: false,
-    userInfo: {},
     curTable: 'admFarm',
+    curPage: 'listCard',
+    userInfo: {},
     farmData: [],
-    reqData: []
+    reqData: [],
+    farmDetail: {},
+    weather: {}
   },
   mutations: {
     SWITCH_IS_LOGIN(state, payload) {
@@ -30,6 +33,15 @@ export default new Vuex.Store({
     FILL_REQ_DATA(state, payload) {
       state.reqData = payload;
     },
+    FILL_FARM_DETAIL(state, payload) {
+      state.farmDetail = payload;
+    },
+    FILL_WEATHER(state, payload) {
+      state.weather = payload;
+    },
+    FILL_CUR_PAGE(state, payload) {
+      state.curPage = payload;
+    }
   },
   actions: {
     async loginAction(context, payload) {
@@ -98,6 +110,47 @@ export default new Vuex.Store({
       }
     },
 
+    async getOneFarm(context, payload) {
+      try {
+        const result = await axios.get(`${baseUrl}/farm/${payload}`, {
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        context.commit('FILL_FARM_DETAIL', result.data)
+
+      } catch (err) {
+        context.dispatch('swalErr', err)
+      }
+    },
+
+    async getWeather(context, payload) {
+      try {
+        const result = await axios.post(`${baseUrl}/weather`, {
+          location: payload
+        })
+
+        context.commit('FILL_WEATHER', result.data)
+        console.log(result.data);
+      } catch (err) {
+        context.dispatch('swalErr', err)
+      }
+    },
+
+    async createReq(context, payload) {
+      try {
+        await axios.post(`${baseUrl}/form`, payload, {
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        context.dispatch('swalSuc', 'succes adding request')
+
+      } catch (err) {
+        context.dispatch('swalErr', err)
+      }
+    },
+
     swalSuc(context, payload) {
       Swal.fire({
         position: 'top-end',
@@ -112,7 +165,7 @@ export default new Vuex.Store({
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: `${payload.response.data.message.join(', ')}`
+        text: `${payload.response.data.msg.join(', ')}`
       })
     }
 

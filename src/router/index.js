@@ -6,6 +6,7 @@ import AdmRegister from '../views/admin/AdmRegister.vue'
 import CusHome from '../views/customer/CusHome.vue'
 import CusLogin from '../views/customer/CusLogin.vue'
 import CusRegister from '../views/customer/CusRegister.vue'
+import DetailFarm from '../views/customer/DetailFarm.vue'
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,11 @@ const routes = [{
     path: '/register',
     name: 'CusRegister',
     component: CusRegister
+  },
+  {
+    path: '/farm/:farmId',
+    name: 'DetailFarm',
+    component: DetailFarm
   }
 ]
 

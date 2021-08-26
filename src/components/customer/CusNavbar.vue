@@ -27,7 +27,7 @@
                 <div class="font-normal">{{ userInfo.role }}</div>
             </div>
 
-            <button class="my-auto font-black"
+            <button @click="readReq" class="my-auto font-black"
             >Request
             </button>
 
@@ -45,14 +45,18 @@ export default {
     },
     methods:{
         ...mapMutations({
-            switchIsLogin: 'SWITCH_IS_LOGIN'
+            switchIsLogin: 'SWITCH_IS_LOGIN',
+            fillCurPage: 'FILL_CUR_PAGE'
         }),
-        ...mapActions(['swalSuc']),
+        ...mapActions(['swalSuc', 'getReq']),
         logout() {
             localStorage.clear();
             this.switchIsLogin(false);
             this.$router.push({ name: 'CusLogin' })
             this.swalSuc('logout succesful')
+        },
+        readReq() {
+            this.fillCurPage('listReq')
         }
     }
 }
