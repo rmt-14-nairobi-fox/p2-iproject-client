@@ -34,7 +34,7 @@ export default new Vuex.Store({
   actions: {
     async loginAction(context, payload) {
       try {
-        const result = await axios.post(`${baseUrl}/admin/login`, payload)
+        const result = await axios.post(`${baseUrl + payload.addRoute}/login`, payload.data)
         localStorage.setItem('access_token', result.data.access_token)
         context.commit('SWITCH_IS_LOGIN', true)
         context.dispatch('swalSuc', 'login successfull')
@@ -46,7 +46,7 @@ export default new Vuex.Store({
 
     async registerAction(context, payload) {
       try {
-        const result = await axios.post(`${baseUrl}/admin/register`, payload)
+        const result = await axios.post(`${baseUrl + payload.addRoute}/register`, payload)
         localStorage.setItem('access_token', result.data.access_token)
         context.commit('SWITCH_IS_LOGIN', true)
         context.dispatch('swalSuc', 'register successfull')

@@ -29,13 +29,18 @@ export default {
   },
     name:'AdmHome',
     computed: {
-      ...mapState(['curTable'])
+      ...mapState(['curTable', 'userInfo'])
     },
     methods: {
       ...mapActions(['getUser', 'getFarm', 'getReq'])
     },
     async created() {
         await this.getUser()
+
+        if (this.userInfo.role === 'customer') {
+          this.$router.push({ name: 'CusHome' })
+        }
+
         await this.getFarm()
         await this.getReq()
     }
