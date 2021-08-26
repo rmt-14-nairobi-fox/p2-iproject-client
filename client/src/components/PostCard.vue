@@ -1,7 +1,11 @@
 <template>
   <div class="bg-white rounded-lg shadow-2xl">
     <img
-      :src="post.imageUrl"
+      :src="
+        post.imageUrl === 'test add post 1'
+          ? 'https://images.unsplash.com/photo-1570263849386-fafb59c56a1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80'
+          : post.imageUrl
+      "
       alt="boy with camera"
       class="rounded-t-xl h-50 w-full object-cover"
     />

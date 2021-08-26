@@ -57,7 +57,7 @@ export default new Vuex.Store({
         const { name, type, imageUrl } = payload;
         await publicURI({
           method: "POST",
-          url: `/animalAdd`,
+          url: `/animal`,
           headers: { access_token: localStorage.getItem("access_token") },
           data: { name, type, imageUrl },
         });
