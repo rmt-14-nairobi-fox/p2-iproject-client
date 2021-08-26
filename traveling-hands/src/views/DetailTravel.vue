@@ -106,7 +106,7 @@ export default {
       }
     },
     addToWishlist(travelId) {
-      this.$store.dispatch("addToWishlist", travelId);
+      this.$store.dispatch("addDestinationToWishlist", travelId);
     },
   },
   created() {

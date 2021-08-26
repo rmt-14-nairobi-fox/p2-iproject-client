@@ -202,11 +202,11 @@ export default new Vuex.Store({
                 });
             }
         },
-        async addToWishlist(context, travelId) {
+        async addDestinationToWishlist(context, travelId) {
             try {
                 const result = await travelAxios({
                     method: "POST",
-                    url: `/wishlists/${travelId}`,
+                    url: `/destinations/${travelId}`,
                     headers: {
                         access_token: localStorage.getItem("access_token")
                     }
