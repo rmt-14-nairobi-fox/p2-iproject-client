@@ -61,6 +61,7 @@ export default {
       },*/
     addText() {
       this.$store.commit("SET_TEXT_INPUT", { text: this.content });
+      this.$store.dispatch("uploadStory");
     },
   },
 

@@ -17,10 +17,11 @@
       </div>
     </div>
     <div>
-      <button
-        class="
-          button
-          px-2
+        <button
+          @click="read(story.id)"
+          class="
+            button
+            px-2
           border-b border-yellow-300
           rounded
           text-black
@@ -40,5 +41,10 @@
 export default {
   name: "CardContent",
   props: ["story"],
+  methods: {
+    read(id){
+      this.$store.dispatch("readStory", {id})
+    }
+  }
 };
 </script>

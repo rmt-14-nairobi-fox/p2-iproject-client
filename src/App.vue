@@ -2,7 +2,7 @@
   <div>
     <Navbar />
     <router-view />
-    <Footer />
+    <Footer class="mt-6"/>
   </div>
 </template>
 
@@ -18,6 +18,9 @@ export default {
   },
   created() {
     this.$store.dispatch("getDataStoriesHome", { to: 0 });
+    if (localStorage.getItem('access_token')) {
+      this.$store.commit("SET_LOGIN_STATUS_TRUE")
+    }
   },
 };
 </script>

@@ -1,13 +1,7 @@
 <template>
-  <div class="flex justify-between mt-6 p-6">
-    <div>
-      <p>footer1</p>
-    </div>
-    <div>
-      <p>footer2</p>
-    </div>
-    <div>
-      <p>footer3</p>
+  <div class="flex justify-center p-6">
+    <div class="relative">
+      <p class="text-sm font-semilight">2021</p>
     </div>
   </div>
 </template>
