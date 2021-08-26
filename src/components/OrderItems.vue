@@ -23,7 +23,7 @@
           CANCEL
         </button>
         <button
-          @click.prevent="detailOrder(order.codeTransaction)"
+          @click.prevent="detailOrder(order.id)"
           type="button"
           class="
             mr-3
