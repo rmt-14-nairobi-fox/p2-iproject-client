@@ -23,6 +23,12 @@ export default {
   components: {
     HFooter,
     Navbar
+  },
+  created () {
+    this.$store.commit('SET_CURR_MENU', this.$route.name)
+    if (localStorage.access_token) {
+      this.$store.commit('SET_IS_LOGIN', true)
+    }
   }
 }
 </script>
@@ -31,5 +37,8 @@ export default {
   #app {
     background-color: #000000;
     background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
+  }
+  .social-links {
+    display: flex;
   }
 </style>
