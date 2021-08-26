@@ -6,7 +6,16 @@
       >
         <div class="md:flex">
           <div class="w-full p-4 px-5 py-5">
-            <div class="md:grid md:grid-cols-3 gap-2">
+            <div
+              class="text-center"
+              v-if="this.$store.state.cartData.length <= 0"
+            >
+              <h1>Your cart is empty</h1>
+            </div>
+            <div
+              v-if="this.$store.state.cartData.length > 0"
+              class="md:grid md:grid-cols-3 gap-2"
+            >
               <div class="col-span-2 p-5">
                 <h1 class="text-xl font-medium">Service Cart</h1>
                 <CartItem

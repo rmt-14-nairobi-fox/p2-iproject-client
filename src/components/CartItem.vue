@@ -41,8 +41,20 @@ export default {
   props: ["item"],
   methods: {
     deleteCartItem(id) {
-      this.$store.commit("DELETE_CART_ITEM", id);
-      this.$emit("sumTotalPrice");
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, cancel it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$store.commit("DELETE_CART_ITEM", id);
+          this.$emit("sumTotalPrice");
+        }
+      });
     },
   },
 };

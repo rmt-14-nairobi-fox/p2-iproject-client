@@ -79,7 +79,7 @@
                     class="
                       h-12
                       w-full
-                      bg-gray-500
+                      bg-blue-500
                       rounded
                       focus:outline-none
                       text-black
@@ -96,11 +96,11 @@
                     class="
                       h-12
                       w-full
-                      bg-red-500
+                      bg-green-500
                       rounded
                       focus:outline-none
                       text-black
-                      hover:bg-red-700
+                      hover:bg-green-700
                     "
                   >
                     Checkout Services
@@ -116,7 +116,6 @@
                       rounded
                       focus:outline-none
                       text-black
-                      hover:bg-gray-700
                     "
                   >
                     {{ this.$store.state.dataOrderDetail.isPayment }}

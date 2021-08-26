@@ -1,5 +1,8 @@
 <template>
-  <section class="container p-6 mx-auto bg-white dark:bg-gray-800">
+  <section
+    style="min-height: 100vh"
+    class="container p-6 mx-auto bg-white dark:bg-gray-800"
+  >
     <h2
       class="
         text-xl

@@ -55,7 +55,6 @@ export default new Vuex.Store({
       state.currencyUSD = payload;
     },
     DELETE_CART_ITEM(state, payload) {
-      console.log(payload);
       const newData = state.cartData.filter((el) => el.id !== payload);
       state.cartData = newData;
     },
@@ -64,7 +63,6 @@ export default new Vuex.Store({
     async loginGoogle(context, payload) {
       try {
         var profile = payload.getBasicProfile();
-        console.log(profile);
         var access_token = payload.getAuthResponse().id_token;
         const response = await localhost({
           method: "post",
@@ -97,11 +95,9 @@ export default new Vuex.Store({
           url: `https://api.frankfurter.app/latest?amount=${payload}&from=IDR&to=USD`,
           headers: { access_token: localStorage.getItem("access_token") },
         });
-        console.log(response, "currency");
+
         context.commit("COMMIT_CURRENCY", response.data);
-      } catch (error) {
-        console.log(error, "crrency");
-      }
+      } catch (error) {}
     },
     async goCancelOrder(context, payload) {
       try {
@@ -111,8 +107,17 @@ export default new Vuex.Store({
           headers: { access_token: localStorage.getItem("access_token") },
         });
         context.dispatch("fetchOrders");
+        Vue.$toast.open({
+          message: "You has been canceled the order!",
+          type: "success",
+          position: "top",
+        });
       } catch (error) {
-        console.log(error, "error fetch order");
+        Vue.$toast.open({
+          message: `${error.response.data}`,
+          type: "error",
+          position: "top",
+        });
       }
     },
     async fetchUserLogin(context) {
@@ -123,12 +128,9 @@ export default new Vuex.Store({
           headers: { access_token: localStorage.getItem("access_token") },
         });
         context.commit("COMMIT_USER_ONLINE", response.data);
-      } catch (error) {
-        console.log(error, "error fetch order");
-      }
+      } catch (error) {}
     },
     async fetchOrdersDetail(context, payload) {
-      console.log(payload);
       try {
         const response = await localhost({
           method: "get",
@@ -136,11 +138,8 @@ export default new Vuex.Store({
           headers: { access_token: localStorage.getItem("access_token") },
         });
         context.commit("COMMIT_ORDER_DETAIL", response.data);
-        console.log(response, "response");
         router.push(`/order/details/${payload}`);
-      } catch (error) {
-        console.log(error, "error fetch order");
-      }
+      } catch (error) {}
     },
     async fetchOrders(context) {
       try {
@@ -150,10 +149,7 @@ export default new Vuex.Store({
           headers: { access_token: localStorage.getItem("access_token") },
         });
         context.commit("COMMIT_DATA_ORDER", response.data);
-        console.log(response, "response");
-      } catch (error) {
-        console.log(error, "error fetch order");
-      }
+      } catch (error) {}
     },
     async goCheckout(context, payload) {
       try {
@@ -167,7 +163,11 @@ export default new Vuex.Store({
         context.commit("COMMIT_TOKEN_TRANSACTION", response.data);
         router.push("/payment");
       } catch (error) {
-        console.log(error, "error checkout");
+        Vue.$toast.open({
+          message: `${error.response.data}`,
+          type: "error",
+          position: "top",
+        });
       }
     },
     async fetchProvider(context, payload) {
@@ -175,12 +175,11 @@ export default new Vuex.Store({
         const response = await localhost({
           method: "get",
           url: `/cust/services/${payload}`,
+          headers: { access_token: localStorage.getItem("access_token") },
         });
-        console.log(response);
+
         context.commit("COMMIT_PRODUCT", response.data);
-      } catch (error) {
-        console.log(error.response, "di fetchProv");
-      }
+      } catch (error) {}
     },
     async fetchServices(context) {
       try {
@@ -190,9 +189,7 @@ export default new Vuex.Store({
         });
 
         context.commit("COMMIT_SERVICE", response.data);
-      } catch (error) {
-        console.log(error.response, "di fetchServ");
-      }
+      } catch (error) {}
     },
     async userLogin(context, payload) {
       try {
@@ -204,8 +201,18 @@ export default new Vuex.Store({
 
         localStorage.setItem("access_token", response.data.access_token);
         context.commit("LOGIN_STATUS", true);
+        Vue.$toast.open({
+          message: `Login Succes!`,
+          type: "success",
+          position: "top",
+        });
         router.push("/");
       } catch (error) {
+        Vue.$toast.open({
+          message: `${error.response.data}`,
+          type: "error",
+          position: "top",
+        });
         router.push("/login");
       }
     },
@@ -216,10 +223,18 @@ export default new Vuex.Store({
           url: "/users/register",
           data: payload,
         });
-        console.log(response, "response regist");
+        Vue.$toast.open({
+          message: `Create account success!`,
+          type: "success",
+          position: "top",
+        });
         router.push("/login");
       } catch (error) {
-        console.log(error, "di error regist");
+        Vue.$toast.open({
+          message: `${error.response.data}`,
+          type: "error",
+          position: "top",
+        });
       }
     },
   },

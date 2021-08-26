@@ -1,27 +1,10 @@
 <template>
   <tr class="border-b hover:bg-orange-100 bg-gray-100">
     <td class="p-3 px-5">{{ order.id }}</td>
-    <td class="p-3 px-5">{{ order.totalPrice }}</td>
-    <td class="p-3 px-5">{{ order.isPayment }} </td>
+    <td class="p-3 px-5">Rp. {{ order.totalPrice }}</td>
+    <td class="p-3 px-5">{{ order.isPayment }}</td>
     <td class="p-3 flex">
       <div v-if="order.isPayment === 'PENDING'">
-        <button
-          @click.prevent="checkoutHandler(order.tokenPayment)"
-          type="button"
-          class="
-            mr-3
-            text-sm
-            bg-green-500
-            hover:bg-green-700
-            text-white
-            py-1
-            px-2
-            rounded
-            focus:outline-none focus:shadow-outline
-          "
-        >
-          PAY
-        </button>
         <button
           @click.prevent="cancelTransaction(order.id)"
           type="button"
@@ -32,17 +15,18 @@
             hover:bg-red-700
             text-white
             py-1
-            px-2
+            px-4
             rounded
             focus:outline-none focus:shadow-outline
           "
         >
-          Cancel
+          CANCEL
         </button>
         <button
-          @click.prevent="detailOrder(order.id)"
+          @click.prevent="detailOrder(order.codeTransaction)"
           type="button"
           class="
+            mr-3
             text-sm
             bg-yellow-500
             hover:bg-yellow-700
@@ -55,17 +39,32 @@
         >
           DETAILS
         </button>
+        <button
+          @click.prevent="checkoutHandler(order.tokenPayment)"
+          type="button"
+          class="
+            text-sm
+            bg-green-500
+            hover:bg-green-700
+            text-white
+            py-1
+            px-2
+            rounded
+            focus:outline-none focus:shadow-outline
+          "
+        >
+          PAY
+        </button>
       </div>
       <div v-if="order.isPayment === 'PAID'">
         <button
           class="
             mr-3
             text-sm
-            bg-gray-500
-            hover:bg-gray-700
+            bg-blue-500
             text-white
             py-1
-            px-2
+            px-7
             rounded
             focus:outline-none focus:shadow-outline
           "
@@ -95,7 +94,6 @@
             mr-3
             text-sm
             bg-gray-500
-            hover:bg-gray-700
             text-white
             py-1
             px-2
@@ -141,7 +139,19 @@ export default {
       this.$store.commit("COMMIT_TOKEN_TRANSACTION", token);
     },
     cancelTransaction(id) {
-      this.$store.dispatch("goCancelOrder", id);
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, cancel it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$store.dispatch("goCancelOrder", id);
+        }
+      });
     },
   },
 };

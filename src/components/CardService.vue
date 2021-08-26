@@ -1,35 +1,31 @@
 <template>
-  <div
-    class="
-      col-span-4
-      sm:col-span-4
-      md:col-span-2
-      lg:col-span-1
-      xl:col-span-1
-      flex flex-col
-      items-center
-    "
-  >
-    <div class="bg-white rounded-lg mt-5">
-      <img :src="service.imgUrl" class="h-40 rounded-md" alt="" />
-    </div>
-    <div class="bg-white shadow-lg rounded-lg -mt-4 w-64">
-      <div class="py-5 px-5">
-        <span class="font-bold text-gray-800 text-lg">
-          <a
-            @click.prevent="seeProvider(service.id)"
-            href="#"
-            class="flex md:inline-flex p-4 items-center hover:text-red-500"
-          >
-            <span>{{ service.name }}</span>
-          </a></span
-        >
-        <div class="flex items-center justify-between">
-          <div class="text-sm text-gray-600 font-light">
-            {{ service.description }}
-          </div>
-        </div>
-      </div>
+  <div class="rounded bg-red-100 overflow-hidden shadow-lg">
+    <img
+      class="w-full"
+      style="min-height: 200px; max-height: 300px; object-fit: cover"
+      :src="service.imgUrl"
+      alt="Mountain"
+    />
+    <div class="px-6 py-4">
+      <a
+        @click.prevent="seeProvider(service.id)"
+        href="#"
+        class="
+          flex
+          font-bold
+          text-xl
+          mb-2
+          md:inline-flex
+          items-center
+          hover:text-red-500
+        "
+      >
+        <span>{{ service.name }}</span>
+      </a>
+
+      <p class="text-gray-700 text-base">
+        {{ service.description }}
+      </p>
     </div>
   </div>
   <!-- end cols -->

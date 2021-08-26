@@ -19,21 +19,23 @@
           ></div>
         </div>
 
-        <div class="max-w-xl px-6 py-12 lg:max-w-5xl lg:w-1/2">
+        <div class="max-w-xl px-6 py-12 bg-red-100 lg:max-w-5xl lg:w-1/2">
           <h2
             class="text-2xl font-bold text-gray-800 dark:text-white md:text-3xl"
           >
-            Pakai jasa para Provider, tingkatkan penghasilan mereka!
+            Permudah hidup anda dengan menggunakan jasa para Provider,
+            tingkatkan penghasilan mereka!
           </h2>
           <p class="mt-4 text-gray-600 dark:text-gray-400">
-            Saling tolong menolong adalah sifat dasar manusia yang tak
-            terelakkan, dengan memakai jasa para provider di PENGANGGURANS, anda
-            sudah menyelamatkan hidup mereka, dan keperluan anda dapat
+            Saling tolong menolong adalah sifat dasar manusia yang wajib
+            dilaksanakan, dengan memakai jasa para provider di PENGANGGURANS,
+            anda sudah menyelamatkan hidup mereka, dan keperluan anda dapat
             terselesaikan dengan mudah!
           </p>
 
           <div class="mt-8">
             <a
+              @click.prevent="toastStart"
               href="#"
               class="
                 px-5
@@ -61,6 +63,7 @@
           :service="service"
         ></CardService>
       </div>
+      <!-- </div> -->
       <!-- <div class="flex flex-row mx-auto">
       </div> -->
     </section>
@@ -76,28 +79,15 @@ export default {
   },
   created() {
     this.$store.dispatch("fetchServices");
-    // this.$store.dispatch("fetchUserLogin");
-  },
-  data() {
-    return {
-      isSidebarOpen: false,
-      isSettingsPanelOpen: false,
-      open: false,
-      searchOpen: false,
-    };
+    this.$store.dispatch("fetchUserLogin");
   },
   methods: {
-    toggleSidebar() {
-      this.isSidebarOpen = !this.isSidebarOpen;
-    },
-    SeachControl() {
-      this.searchOpen = !this.searchOpen;
-    },
-    openFalse() {
-      this.open = false;
-    },
-    toggleSettingsPanel() {
-      this.isSettingsPanelOpen = !this.isSettingsPanelOpen;
+    toastStart() {
+      this.$toast.open({
+        message: "Pilih itu service banyak di bawah!",
+        type: "info",
+        position: "top",
+      });
     },
   },
 };

@@ -7,7 +7,9 @@
         srcset=""
         style="height: 50px"
       />
-      <div class="text-2xl font-bold md:py-0 py-4">PENGANGGURANS</div>
+      <div class="text-2xl font-bold md:py-0 py-4">
+        <router-link to="/">PENGANGGURANS</router-link>
+      </div>
       <ul
         class="
           md:px-2
@@ -23,7 +25,7 @@
         <li>
           <a
             href="#"
-            class="flex md:inline-flex p-4 items-center hover:bg-gray-50"
+            class="flex md:inline-flex p-4 items-center hover:bg-red-700"
           >
             <span><router-link to="/">Home</router-link></span>
           </a>
@@ -32,7 +34,7 @@
           <a
             v-if="this.$store.state.isLogin"
             href="#"
-            class="flex md:inline-flex p-4 items-center hover:bg-gray-50"
+            class="flex md:inline-flex p-4 items-center hover:bg-red-700"
           >
             <span><router-link to="/orders">Your Orders</router-link></span>
           </a>
@@ -47,7 +49,7 @@
               md:inline-flex
               p-4
               items-center
-              hover:bg-gray-50
+              hover:bg-red-700
               space-x-2
             "
           >
@@ -72,7 +74,7 @@
               top-full
               right-0
               md:w-48
-              bg-white
+              bg-red-500
               md:shadow-lg md:rounded-b
             "
           >
@@ -83,7 +85,7 @@
               <a
                 @click.prevent="seeProvider(service.id)"
                 href="#"
-                class="flex px-4 py-3 hover:bg-red-100"
+                class="flex px-4 py-3 hover:bg-red-700"
               >
                 {{ service.name }}
               </a>
@@ -93,10 +95,29 @@
         <li v-if="this.$store.state.isLogin">
           <a
             href="#"
-            class="flex md:inline-flex p-4 items-center hover:bg-gray-50"
+            class="flex md:inline-flex p-4 items-center hover:bg-red-700"
           >
             <span
-              ><router-link to="/cart"
+              ><router-link to="/cart">
+                <span
+                  class="
+                    absolute
+                    inline-flex
+                    items-center
+                    justify-center
+                    ml-4
+                    px-2
+                    py-1
+                    mr-1
+                    text-xs
+                    font-bold
+                    leading-none
+                    text-blue-100
+                    bg-blue-600
+                    rounded-full
+                  "
+                >
+                  {{ this.$store.state.cartData.length }} </span
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-6 w-6"
@@ -128,6 +149,7 @@
             "
           >
             <img
+              class="rounded-full"
               :src="this.$store.state.dataLogin.imgUser"
               alt=""
               srcset=""
@@ -144,7 +166,7 @@
               top-full
               right-0
               md:w-48
-              bg-white
+              bg-red-500
               md:shadow-lg md:rounded-b
             "
           >
@@ -152,7 +174,7 @@
               <a
                 @click.prevent="logoutHandler"
                 href="#"
-                class="flex px-4 py-3 hover:bg-red-100"
+                class="flex px-4 py-3 hover:bg-red-700"
               >
                 <GoogleLogin :params="params" :logoutButton="true"
                   >Logout</GoogleLogin
@@ -165,7 +187,7 @@
           <a
             v-if="!this.$store.state.isLogin"
             href="#"
-            class="flex md:inline-flex p-4 items-center hover:bg-gray-50"
+            class="flex md:inline-flex p-4 items-center hover:bg-red-700"
           >
             <span><router-link to="/login">Login</router-link></span>
           </a>
@@ -214,23 +236,30 @@ export default {
     },
     logoutHandler() {
       try {
-        this.show = true;
-        setTimeout(() => {
-          this.show = false;
-        }, this.timeOut);
-
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {});
-        this.$store.commit("LOGIN_STATUS", false);
-        localStorage.clear();
-        this.$router.push({ name: "Login" });
-        setTimeout(() => {
-          this.$toast.open({
-            message: "Logout succes",
-            type: "success",
-            position: "top",
-          });
-        }, this.timeOut + 1000);
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, logout now!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {});
+            this.$store.commit("LOGIN_STATUS", false);
+            localStorage.clear();
+            this.$router.push({ name: "Login" });
+            setTimeout(() => {
+              this.$toast.open({
+                message: "Logout succes",
+                type: "success",
+                position: "top",
+              });
+            }, this.timeOut + 1000);
+          }
+        });
       } catch (error) {
         setTimeout(() => {
           this.$toast.open({

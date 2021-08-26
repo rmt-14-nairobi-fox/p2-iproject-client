@@ -166,7 +166,7 @@
                       appearance-none
                       focus:outline-none focus:shadow-outline
                     "
-                    id="firstName"
+                    id="phoneNumber"
                     type="text"
                     placeholder="+62 821-2345-6789"
                   />
@@ -193,7 +193,7 @@
                       appearance-none
                       focus:outline-none focus:shadow-outline
                     "
-                    id="lastName"
+                    id="zipCode"
                     type="text"
                     placeholder="35372"
                   />
@@ -222,7 +222,7 @@
                       appearance-none
                       focus:outline-none focus:shadow-outline
                     "
-                    id="firstName"
+                    id="street"
                     type="text"
                     placeholder="Jl. Setapak, Depan Gang"
                   />
@@ -249,7 +249,7 @@
                       appearance-none
                       focus:outline-none focus:shadow-outline
                     "
-                    id="lastName"
+                    id="city"
                     type="text"
                     placeholder="Lampung"
                   />
@@ -334,7 +334,7 @@ export default {
         phoneNumber: this.phoneNumber,
         address: `${this.street}, ${this.city}, Indonesia. ${this.zipCode}`,
       };
-      console.log(payload);
+
       this.$store.dispatch("userRegist", payload);
     },
   },

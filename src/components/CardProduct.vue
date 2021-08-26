@@ -17,11 +17,7 @@
     />
 
     <div class="py-5 text-center">
-      <a
-        href="#"
-        class="block text-2xl font-bold text-gray-800 dark:text-white"
-        >{{ prod.name }}</a
-      >
+      <p class="text-2xl font-bold">{{ prod.name }}</p>
       <span class="text-sm text-gray-700 dark:text-gray-200">{{
         prod.detail
       }}</span>

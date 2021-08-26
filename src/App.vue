@@ -4,7 +4,7 @@
 
     <router-view />
 
-    <div class="bottom-0">
+    <div>
       <HFooter></HFooter>
     </div>
   </div>
@@ -31,24 +31,10 @@ export default {
 };
 </script>
 <style>
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-} */
-/*
-#nav {
-  padding: 30px;
+.social-links {
+  display: flex;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-} */
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.footer-h8 {
+  position: sticky;
 }
 </style>
