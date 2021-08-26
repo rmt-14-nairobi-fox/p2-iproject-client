@@ -344,6 +344,20 @@ export default new Vuex.Store({
         console.log(err.response.data);
       }
     },
+
+    fetchComment(context, payload) {
+      return server.post(
+        '/comments',
+        {
+          post_id: payload,
+        },
+        {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        }
+      );
+    },
   },
   modules: {},
 });

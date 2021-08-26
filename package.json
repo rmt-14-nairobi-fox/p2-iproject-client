@@ -11,10 +11,12 @@
     "axios": "^0.21.1",
     "bootstrap-vue": "^2.1.0",
     "core-js": "^3.6.5",
+    "socket.io-client": "^4.1.3",
     "vue": "^2.6.11",
     "vue-google-login": "^2.0.5",
     "vue-hacktiv8-footer": "^0.0.9",
     "vue-router": "^3.2.0",
+    "vue-socket.io-extended": "^4.2.0",
     "vue-weather-widget": "^4.2.4",
     "vuex": "^3.4.0"
   },

@@ -48,16 +48,14 @@
       <p style="text-align: justify;" class="align-self-start">
         {{ post.message }}
       </p>
-      <div class="align-self-start d-flex flex-column">
+      <div class="align-self-start d-flex flex-column w-100">
         <!-- Comment Button -->
         <div>
           <a @click.prevent="toggleComment" href="#" class="h5 text-dark">
             <b-icon-chat />
-            <!-- Comment count -->
-            <span> 35</span>
           </a>
         </div>
-        <CommentBox v-if="showComment" />
+        <CommentBox v-if="showComment" :postId="post.id" />
       </div>
     </div>
     <div class="w-100 border-bottom" style="height: 1px;"></div>
