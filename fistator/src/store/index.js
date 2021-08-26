@@ -192,7 +192,7 @@ export default new Vuex.Store({
       }
     },
 
-    async deleteFish(_, payload) {
+    async deleteFish({dispatch}, payload) {
       console.log(payload)
       try {
         const response = await fishAxios.delete(`/wishlists/${payload}`, {
@@ -205,6 +205,7 @@ export default new Vuex.Store({
         })
         console.log(response)
         Swal.fire("Success!", "Fish has been deleted!", "success")
+        dispatch("getWishlist")
       } catch (err) {
         console.log(err)
         Swal.fire({

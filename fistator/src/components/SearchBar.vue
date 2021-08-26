@@ -37,7 +37,12 @@ export default {
         toFish(name) {
             const formattedName = name.split(" ").join("-").toLowerCase()
             this.$router.push(`/fish/${formattedName}`)
-        }
+        },
+        // filterFishes() {
+        //     this.filteredFishes = this.fishes.filter(el => {
+        //         return el.toLowerCase().startsWith(el.toLowerCase())
+        //     })
+        // }
     }
 }
 </script>
