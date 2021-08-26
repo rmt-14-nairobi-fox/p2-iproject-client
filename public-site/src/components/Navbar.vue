@@ -38,6 +38,7 @@
         </li>
       </ul>
     </div>
+
     <div class="w-1/2"></div>
     <div class="relative w-1/2 flex justify-end">
       <ul class="flex">
