@@ -3,7 +3,7 @@
     flex-direction: row-reverse;
     justify-content: left;
     align-items: flex-start;
-    background: url(https://bit.ly/3Dq55tw);
+    background: url(https://bit.ly/38hMCky);
     width: 100%;
     height: 100vh;
     background-size: 100%;
