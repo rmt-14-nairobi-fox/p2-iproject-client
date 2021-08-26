@@ -31,7 +31,7 @@
               
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="/add/project">Add Project</a></li>
-                <li><a class="dropdown-item" href="/get/apply">Get Apply My Project</a></li>
+                <li><a class="dropdown-item" href="/get/apply">Get Employee</a></li>
               </ul>
             </li>
             <li class="nav-item">
