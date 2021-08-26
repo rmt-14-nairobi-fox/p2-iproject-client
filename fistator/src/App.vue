@@ -4,8 +4,11 @@
       <Navbar/>
     </div>
     <router-view/>
-    <footer>
-    <HFooter style="align-content: flex-end;"/>
+    <footer style="position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;">
+    <HFooter/>
     </footer>
   </div>
 </template>
@@ -27,5 +30,4 @@ export default {
 }
 </script>
 <style>
-
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="display: flex; flex-direction: column; align-items: center">
         <div style="text-align: center; margin-top: 20px;">  
             <h1>Fish-to-Catch List</h1>
         <!-- Buat action, bikin card baru -->

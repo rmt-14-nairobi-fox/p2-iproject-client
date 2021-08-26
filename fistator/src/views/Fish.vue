@@ -14,18 +14,18 @@
             <p class="card-text">{{fish.population}}</p>
             <p v-show="fish.population === null" class="card-text">Not Available</p>
             <h3>Status</h3>
-            <p class="card-text">{{fish.status}}</p>
+            <p class="card-text" v-html="fish.status" style="text-align: left; margin: 0 200px 0 200px"></p>
             <p v-show="fish.status === null" class="card-text">Not Available</p>
             <h3>Availability</h3>
-            <p class="card-text">{{fish.availability}}</p>
+            <p class="card-text" v-html="fish.availability"></p>
             <p v-show="fish.availability === null" class="card-text">Not Available</p>
             <h3>Fishing Rate</h3>
             <!-- <p class="card-text">{{fish.fishingRate}}</p> -->
             <p v-if="fish.fishingRate === 'At recommended level.'" class="card-text"><button type="button" class="btn btn-success">Good</button></p>
             <p v-else-if="fish.fishingRate === 'Not subject to overfishing.'" class="card-text"><button type="button" class="btn btn-success">Good</button></p>
             <p v-else-if="fish.fishingRate === 'Reduced to end overfishing.'" class="card-text"><button type="button" class="btn btn-danger">Danger</button></p>
+            <p v-else-if="fish.fishingRate === null" class="card-text">Not Available</p>
             <p v-else class="card-text"><button type="button" class="btn btn-warning">Warning</button></p>
-            <p v-show="fish.fishingRate === null" class="card-text">Not Available</p>
             <a href="" class="btn btn-primary" @click.prevent="addFish(fish.name)" style="margin-bottom: 20px; margin-top: 100px;">Add to Fish-to-Catch</a>
             <a href="" class="btn btn-secondary" @click.prevent="toHome">Back to Home</a>
         </div>
