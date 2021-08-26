@@ -26,8 +26,8 @@
             <p v-else-if="fish.fishingRate === 'Reduced to end overfishing.'" class="card-text"><button type="button" class="btn btn-danger">Danger</button></p>
             <p v-else-if="fish.fishingRate === null" class="card-text">Not Available</p>
             <p v-else class="card-text"><button type="button" class="btn btn-warning">Warning</button></p>
-            <a href="" class="btn btn-primary" @click.prevent="addFish(fish.name)" style="margin-bottom: 20px; margin-top: 100px;">Add to Fish-to-Catch</a>
-            <a href="" class="btn btn-secondary" @click.prevent="toHome">Back to Home</a>
+            <a href="" class="btn btn-primary" @click.prevent="addFish(fish.name)" style="margin-bottom: 20px; margin-top: 50px;">Add to Fish-to-Catch</a>
+            <a href="" class="btn btn-secondary" @click.prevent="toHome" style="margin-bottom: 20px; margin-top: 20px;">Back to Home</a>
         </div>
     </div>
 </template>

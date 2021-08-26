@@ -134,6 +134,7 @@ export default new Vuex.Store({
             access_token: localStorage.getItem("access_token")
           }
         });
+        // if(response.data.length === 0)
         console.log(response)
         commit("SET_SELECTED_FISH", response.data)
       } catch (err) {
