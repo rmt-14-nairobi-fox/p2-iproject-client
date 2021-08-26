@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import mainServer from '../apis/server'
 
 Vue.use(Vuex)
 
@@ -17,6 +18,25 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    login (context, { email, password }) {
+      return mainServer({
+        method: 'POST',
+        url: '/login',
+        data: {
+          email,
+          password
+        }
+      })
+    },
+    glogin (context, payload) {
+      return mainServer({
+        method: 'POST',
+        url: '/glogin',
+        data: {
+          id_token: payload
+        }
+      })
+    }
   },
   modules: {
   }

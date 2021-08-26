@@ -134,9 +134,21 @@
 </template>
 
 <script>
+import GoogleLogin from 'vue-google-login'
 import { mapState } from 'vuex'
 export default {
   name: 'Navbar',
+  data () {
+    return {
+      logoutButton: true,
+      params: {
+        client_id: '222051788876-dfvtsdh3egl959lnop7lrphdulej23op.apps.googleusercontent.com'
+      }
+    }
+  },
+  components: {
+    GoogleLogin
+  },
   computed: {
     ...mapState(['currMenu', 'isLogin'])
   },
@@ -147,6 +159,7 @@ export default {
     logout () {
       localStorage.clear()
       this.$store.commit('SET_IS_LOGIN', false)
+      this.$store.commit('SET_CURR_MENU', 'Home')
       this.$router.push({
         name: 'Home'
       }).catch(() => {})
