@@ -12,6 +12,11 @@ export default {
       this.$store.dispatch('checkTokenAction');
     },
   },
+  sockets: {
+    connect() {
+      console.log('Connected');
+    },
+  },
   created() {
     this.checkToken();
   },
