@@ -8,7 +8,7 @@ import "./assets/tailwind.css";
 
 Vue.config.productionTip = false;
 
-const socket = io("http://localhost:10000", {
+const socket = io("https://word-app-nairobi.web.app", {
   withCredentials: true,
   extraHeaders: {
     "my-custom-header": "abcd"
