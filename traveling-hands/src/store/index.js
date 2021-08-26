@@ -40,6 +40,9 @@ export default new Vuex.Store({
         ADDING_WISHLIST_BY_DESTINATION_ID(state, data) {
             state.travel = data
         },
+        BRING_DATA_TO_FORM_EDIT(state, data) {
+            state.travel = data
+        }
     },
     actions: {
         async handleLogin(context, payload) {
@@ -156,25 +159,6 @@ export default new Vuex.Store({
                 });
             }
         },
-        async fetchTravel(context, travelId) {
-            try {
-                const result = await travelAxios({
-                    method: "GET",
-                    url: `/destinations/${travelId}`,
-                })
-                Vue.$toast.open({
-                    message: `Loading Data... please wait`,
-                    type: "info",
-                })
-                router.push(`/destinations/${travelId}`)
-                context.commit("FETCHING_ONE_TRAVEL_BY_PK", result.data)
-            } catch (err) {
-                Vue.$toast.open({
-                    message: 'Something went wrong!',
-                    type: 'error',
-                });
-            }
-        },
         async fetchAllWishlists(context) {
             try {
                 const result = await travelAxios({
@@ -229,6 +213,48 @@ export default new Vuex.Store({
             } catch (err) {
                 Vue.$toast.open({
                     message: `${err.message}`,
+                    type: 'error',
+                });
+            }
+        },
+        async fetchTravel(context, travelId) {
+            try {
+                const result = await travelAxios({
+                    method: "GET",
+                    url: `/destinations/${travelId}`,
+                })
+                Vue.$toast.open({
+                    message: `Loading Data... please wait`,
+                    type: "info",
+                })
+                router.push(`/destinations/${travelId}`)
+                context.commit("FETCHING_ONE_TRAVEL_BY_PK", result.data)
+            } catch (err) {
+                Vue.$toast.open({
+                    message: 'Something went wrong!',
+                    type: 'error',
+                });
+            }
+        },
+        async formEdit(context, travelId) {
+            try {
+                const result = await travelAxios({
+                    method: "GET",
+                    url: `destinations/${travelId}`,
+                    headers: {
+                        access_token: localStorage.getItem("access_token")
+                    }
+                })
+                console.log(result);
+                Vue.$toast.open({
+                    message: `Loading Data... please wait`,
+                    type: "info",
+                })
+                router.push(`/formEdit/${travelId}`)
+                context.commit("BRING_DATA_TO_FORM_EDIT", result.data)
+            } catch (err) {
+                Vue.$toast.open({
+                    message: 'Something went wrong!',
                     type: 'error',
                 });
             }

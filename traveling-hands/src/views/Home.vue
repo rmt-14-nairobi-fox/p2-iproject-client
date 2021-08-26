@@ -127,13 +127,11 @@ export default {
       this.$store.dispatch("fetchTravel", travelId);
     },
     deleteTravel(travelId) {
-      // console.log(travelId);
       this.$store.dispatch("deleteTravel", travelId);
 
     },
-    editTravel() { //travelId
-      this.$router.push("/formEdit");
-      // this.$store.dispatch("fetchTravel", travelId);
+    editTravel(travelId) {
+      this.$router.push("/formEdit", travelId);
     },
   },
   created() {

@@ -5,7 +5,6 @@ import Wishlist from "../views/Wishlist.vue"
 import SignIn from "../views/SignIn.vue";
 import SignUp from "../views/SignUp.vue";
 import FormCreate from "../views/FormCreate"
-import FormEdit from "../views/FormEdit"
 
 Vue.use(VueRouter);
 
@@ -38,7 +37,8 @@ const routes = [
   {
     path: "/formEdit/:id",
     name: "FormEdit",
-    component: FormEdit,
+    component: () =>
+    import(/* webpackChunkName: "about" */ "../views/FormEdit.vue"),
   },
   {
     path: "/helpCenter",

@@ -180,3 +180,21 @@
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  computed: {
+    travel() {
+      return this.$store.state.travel
+    }
+  },
+  methods: {
+    fetchTravel() {
+      this.$store.dispatch("formEdit")
+    }
+  },
+  created() {
+    this.fetchTravel()
+  }
+}
+</script>

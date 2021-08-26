@@ -12,7 +12,8 @@ Vue.use(VueToast, { position: "top-right" });
 // Vue.use(
 //   new VueSocketIO({
 //     debug: true,
-//     connection: "https://i-project-handson-vuex.herokuapp.com"
+//     // connection: "https://i-project-handson-vuex.herokuapp.com"
+//     // connection: "http://localhost:8080"
 //   })
 // )
 
