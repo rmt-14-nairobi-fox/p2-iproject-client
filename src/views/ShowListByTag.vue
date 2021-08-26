@@ -1,17 +1,21 @@
 <template>
 	<div class="flex mx-auto max-w-screen-md">
 		<div class="grid grid-cols-2 gap-8 p-4">
+			<FilterResult 
+				v-for="data in datas"
+				:key="data.id"
+				:data="data"
+			/>
 		</div>
-			<FilterResult />
 	</div>
 </template>
 
 <script>
-	import FilterResult from './../components/filterResult.vue'
+	import FilterResult from './../components/filterResult.vue';
 	export default{
 		name : "ShowList",
 		components:{
-			FilterResult
+			FilterResult,
 		},
 		computed : {
 			datas(){

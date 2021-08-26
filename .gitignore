@@ -24,3 +24,6 @@ pnpm-debug.log*
 
 # AUTH ID
 auth_config.json
+
+# firebase
+.firebase

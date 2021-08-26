@@ -15,19 +15,19 @@
         </div>
         <div class="max-h-screen border-1"></div>
       </div>
-      <div class="sticky top-0 mt-4">
-        <button @click="addLike(story.id)" class="bg-yellow-400 rounded px-6 py-2">+ like</button>
+      <div class="static top-0 flex flex-col mt-4">
+        <button @click="addLike(story.id)" class="bg-yellow-400 rounded px-6 py-2 w-1/3">+ like</button>
         <br>
         <span class="text-sm">total likes : {{story.StoriesLikes.length}}</span>
-      </div>
-    </div>
-    <div class="mx-auto bg-white rounded">
-      <div class="flex flex-col">
-        <div>
-          <CommentList :story="story"/>
-        </div>
-        <div>
-          <AddComment :story="story" />
+        <div class="mx-auto bg-white rounded">
+          <div class="flex flex-col">
+            <div>
+              <CommentList :story="story"/>
+            </div>
+            <div>
+              <AddComment :story="story" />
+            </div>
+          </div>
         </div>
       </div>
     </div>

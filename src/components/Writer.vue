@@ -3,23 +3,39 @@
     <div>
       <h1 class="text-2xl font-bold">{{ titleStory }}</h1>
       <div class="flex justify-between">
-        <p class="bg-gray-100 p-x-2 rounded-full w-1/3 text-center">
+        <p class="bg-gray-100 p-3 rounded-full w-1/3 text-center">
           tag : {{ tag }}
         </p>
-        <router-link to="read">
+        <div class="flex flex-col space-y-2">
           <button
-            @click="addText"
-            class="
-              items-center
-              button
-              px-2
-              border-b-2 border-yellow-300
-              rounded
-            "
-          >
-            Post your story
+              @click="backStep"
+              class="
+                items-center
+                button
+                px-2
+                border-b-2 border-yellow-300
+                rounded
+                text-right
+              "
+            >
+              Back
           </button>
-        </router-link>
+          <router-link to="read">
+            <button
+              @click="addText"
+              class="
+                items-center
+                button
+                px-2
+                border-b-2 border-yellow-300
+                rounded
+                text-right
+              "
+            >
+              Post your story
+            </button>
+          </router-link>
+        </div>
       </div>
     </div>
 
@@ -35,7 +51,9 @@
 </template>
 
 <script>
+import router from "@/router";
 export default {
+
   name: "Writer",
   data() {
     return {
@@ -46,23 +64,14 @@ export default {
     };
   },
   methods: {
-    /*onEditorBlur(quill) {
-        console.log('editor blur!', quill)
-      },
-      onEditorFocus(quill) {
-        console.log('editor focus!', quill)
-      },
-      onEditorReady(quill) {
-        console.log('editor ready!', quill)
-      },
-      onEditorChange({ quill, html, text }) {
-        console.log('editor change!', quill, html, text)
-        this.content = html
-      },*/
+    
     addText() {
       this.$store.commit("SET_TEXT_INPUT", { text: this.content });
       this.$store.dispatch("uploadStory");
     },
+    backStep(){
+      router.go(-1)
+    }
   },
 
   computed: {
@@ -77,9 +86,6 @@ export default {
     tag() {
       return this.$store.state.userInput.tag;
     },
-  },
-  mounted() {
-    console.log("this is current quill instance object", this.editor);
-  },
+  }
 };
 </script>

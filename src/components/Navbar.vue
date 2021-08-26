@@ -68,7 +68,6 @@
   <router-link to="/login">
     <button
     v-if="!this.$store.state.isLogin"
-    @click="signOut"
     class="
     inline-block
     text-sm
@@ -122,7 +121,7 @@
     methods : {
       signOut(){
         Swal.fire({
-          title : "Failed to register",
+          title : "Success",
           text : 'You are loged out',
           icon : 'success'
         })

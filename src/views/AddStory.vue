@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center max-h-screen space-x-6 p-6">
+  <div class="container mx-auto flex justify-center min-h-screen space-x-6 mt-8">
     <div class="box-content h-64 w-48 bg-gray-200 flex">
       <img :src="urlImagePreview" />
       <button v-if="urlImagePreview === '' " @click="openUploadModal" class="mx-auto my-auto px-2 bg-yellow-200 rounded">Upload Story Cover</button>
@@ -17,12 +17,13 @@
         </div>
         <div class="flex flex-col mt-2">
           <label>Synopsis</label>
-          <input
+          <textarea
             v-model="inputData.sinopsis"
             type="text"
             class="form-input rounded-md"
-            name=""
-          />
+            name="" >
+            
+          </textarea>
         </div>
         <div class="flex flex-col mt-2">
           <label>Tag</label>
@@ -46,8 +47,9 @@
                   text-yellow-400 text-xl
                   font-semilight
                   text-left
-                  mt-2
-                "
+                  mt-2 
+
+                  hover:border-red-300 hover:bg-gray-200"
               >
                 next
               </button>
@@ -60,6 +62,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
+
 export default {
   name: "Addstory",
   components: {},
@@ -79,6 +83,27 @@ export default {
     },
 
     openUploadModal(){
+      let timerInterval
+      Swal.fire({
+        html: 'Please wait.....',
+        timer: 5000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+          const b = Swal.getHtmlContainer().querySelector('b')
+          timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft()
+          }, 100)
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log('I was closed by the timer')
+        }
+      })
+
       window.cloudinary.openUploadWidget(
         { 
           cloud_name: 'stories-for-all',

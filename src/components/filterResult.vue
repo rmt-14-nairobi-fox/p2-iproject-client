@@ -20,14 +20,17 @@
 			"
 			>
 			read more..
-		</button>
+			</button>
+		</div>
 	</div>
-</div>
 </template>
 
 <script>
 	export default{
 		name: "FilterResult",
-		props:["data"]
+		props:["data"],
+		created(){
+			console.log(this.data, '<<<<<<<<<<<,,');
+		}
 	}
 </script>

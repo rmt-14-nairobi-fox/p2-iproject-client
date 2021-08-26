@@ -175,7 +175,13 @@ export default new Vuex.Store({
         router.push({name : 'Read', params : {title : data.title}})
       }
       catch(err){
-        console.log(err.response);
+        Swal.fire({
+          title : "Oops",
+          text : err.response.data.messages,
+          icon : 'warning'
+        })
+
+        router.push({path:'/login'})
       }
     },
 
@@ -233,7 +239,7 @@ export default new Vuex.Store({
         const { data } = await axios.get(`${baseUrl}/stories/searchbyfilter?filter=${filter}`)
         console.log(data);
         context.commit("SET_SHOW_FILTER_RESULT", data)
-        router.push('/filter')
+        router.push('/result')
       }
       catch(err){
         console.log(err);
