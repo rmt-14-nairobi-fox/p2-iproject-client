@@ -11,7 +11,7 @@
             >Email Address</label
           >
           <input
-            type="name"
+            type="email"
             id="emailLogin"
             placeholder="you@company.com"
             class="
@@ -32,7 +32,7 @@
             >Password</label
           >
           <input
-            type="text"
+            type="password"
             id="passwordLogin"
             name="name"
             placeholder="Your Password"
