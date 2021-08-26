@@ -336,6 +336,7 @@ export default new Vuex.Store({
 
         console.log(response.data);
         context.dispatch('fetchAllMyPost');
+        context.dispatch('fetchAllPost');
         Vue.$toast.success(response.data.message, {
           position: 'top-right',
         });
@@ -361,6 +362,7 @@ export default new Vuex.Store({
 
         console.log(response.data);
         context.dispatch('fetchAllMyPost');
+        context.dispatch('fetchAllPost');
         Vue.$toast.success(response.data.message, {
           position: 'top-right',
         });
