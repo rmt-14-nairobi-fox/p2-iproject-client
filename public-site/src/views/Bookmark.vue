@@ -1,15 +1,17 @@
 <template>
   <div class="w-full overflow-x-hidden border-t flex flex-col">
     <main class="w-full flex-grow p-6">
-      <h1 class="text-3xl text-black pb-6 mx-80">All your Bookmarks</h1>
-      <bookmarks-card
-        v-for="bookmark in bookmarks"
-        :key="bookmark + bookmark.id"
-        :accommodation="bookmark.Accommodation"
-        :bookmark="bookmark"
-      >
-        <div></div>
-      </bookmarks-card>
+      <h1 class="text-3xl text-black pb-6 mx-80 flex-row">
+        All your Bookmarks
+      </h1>
+      <div class="grid grid-cols-3 max-w-full gap-4">
+        <bookmarks-card
+          v-for="bookmark in bookmarks"
+          :key="bookmark + bookmark.id"
+          :accommodation="bookmark.Accommodation"
+          :bookmark="bookmark"
+        ></bookmarks-card>
+      </div>
     </main>
   </div>
 </template>

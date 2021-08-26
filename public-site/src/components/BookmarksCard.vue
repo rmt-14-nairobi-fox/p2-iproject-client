@@ -4,7 +4,7 @@
       bg-sidebar
       p-8
       rounded-2xl
-      max-w-6xl
+      w-full
       mx-auto
       mb-7
       hover:shadow-2xl
@@ -17,7 +17,7 @@
     "
   >
     <div @click="detailClick(accommodation.id)" class="flex max-h-72">
-      <div class="w-6/12 text-gray-800 bg-home-main p-16 flex items-center">
+      <div class="w-full text-gray-800 bg-home-main p-8 flex items-center">
         <div>
           <p class="text-xl mb-5">
             <span>Title:&nbsp;</span>
@@ -32,6 +32,7 @@
 
             Rp. {{ accommodation.price }} /month
           </p>
+          <h1 class="text-lg">Address</h1>
           <div class="flex">
             <div class="mr-8">
               <p class="text-xl capitalize">
@@ -53,13 +54,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="w-6/12 relative">
-        <img
-          class="h-full w-full object-cover"
-          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=550&q=80"
-          alt="Banner Desktop"
-        />
       </div>
     </div>
     <button

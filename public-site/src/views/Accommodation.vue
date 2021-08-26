@@ -33,7 +33,7 @@
               >
                 <img
                   class="object-center object-fill w-full"
-                  style="height: 220px"
+                  style="height: 300px"
                   :src="image.imageUrl"
                   alt=""
                 />
@@ -55,7 +55,7 @@
               <slide>
                 <img
                   class="object-center object-fill w-full"
-                  style="height: 220px"
+                  style="height: 300px"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png"
                   alt=""
                 />
@@ -67,6 +67,7 @@
         <!-- MAPBOXS -->
         <div class="rounded shadow-xl max-w-6xl relative">
           <MglMap
+            style="height: 300px"
             :accessToken="accessToken"
             :mapStyle.sync="mapStyle"
             @load="onMapLoaded($event, accommodation.lat, accommodation.long)"
@@ -241,9 +242,6 @@
           </div>
         </div>
       </div>
-      <div
-        class="mt-10 content-center mx-auto w-10/12 p-8 gap-8 bg-sidebar"
-      ></div>
     </main>
   </div>
 </template>

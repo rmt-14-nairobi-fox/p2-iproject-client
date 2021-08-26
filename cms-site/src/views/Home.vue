@@ -51,6 +51,9 @@
                 <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
                   Type
                 </th>
+                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody class="text-gray-700">

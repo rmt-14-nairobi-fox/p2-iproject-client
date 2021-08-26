@@ -55,7 +55,17 @@
           </div>
         </div>
       </div>
-      <div class="w-6/12 relative">
+      <div
+        v-if="accommodation.Images[0].imageUrl === undefined"
+        class="w-6/12 relative"
+      >
+        <img
+          class="h-full w-full object-cover"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png"
+          alt="Banner Desktop"
+        />
+      </div>
+      <div v-else class="w-6/12 relative">
         <img
           class="h-full w-full object-cover"
           :src="accommodation.Images[0].imageUrl"
