@@ -28,6 +28,7 @@
                 focus:outline-none
               "
               type="text"
+              v-model="travel.name"
             />
           </div>
           <div class="w-full md:w-full px-3 mb-6">
@@ -51,6 +52,7 @@
                 focus:outline-none
               "
               type="text"
+              v-model="travel.country"
             />
           </div>
           <div class="w-full md:w-full px-3 mb-6">
@@ -74,6 +76,7 @@
                 focus:outline-none
               "
               type="text"
+              v-model="travel.city"
             />
           </div>
           <div class="w-full md:w-full px-3 mb-6">
@@ -97,14 +100,23 @@
                 focus:outline-none
               "
               type="text"
+              v-model="travel.price"
             />
           </div>
           <div class="w-full md:w-full px-3 mb-6">
+            <img
+              v-if="showImage"
+              width="150"
+              height="50"
+              :src="showImage"
+              alt=""
+            />
             <label
               class="block tracking-wide text-gray-700 text-xs font-bold mb-2"
               >Image</label
             >
             <input
+              @change="imagesUrl"
               class="
                 appearance-none
                 block
@@ -127,8 +139,8 @@
               class="block tracking-wide text-gray-700 text-xs font-bold mb-2"
               >Category</label
             >
-              <!-- v-model="categoryId" -->
             <select
+              v-model="categoryId"
               class="
                 w-full
                 bg-white
@@ -142,20 +154,21 @@
                 focus:outline-none
               "
             >
-              <option value="" disabled>--- Select Category Product ---</option>
-              <!-- <option
+              <option :value="travel.Category.name" disabled></option>
+              <option
                 v-for="category in categories"
                 :key="category.id"
                 :value="category.id"
               >
                 {{ category.name }}
-              </option> -->
+              </option>
             </select>
           </div>
-          <br><br><br>
-          <br><br>
+          <br /><br /><br />
+          <br /><br />
           <div class="w-full md:w-full px-3 mb-6">
             <button
+              @click.prevent="clickEditButton"
               class="
                 appearance-none
                 block
@@ -183,18 +196,53 @@
 
 <script>
 export default {
+  name: "FormEdit",
+  data: function () {
+    return {
+      id: "",
+      name: "",
+      country: "",
+      city: "",
+      price: "",
+      showImage: "",
+      image: "",
+      categoryId: "",
+    };
+  },
   computed: {
     travel() {
-      return this.$store.state.travel
-    }
-  },
-  methods: {
-    fetchTravel() {
-      this.$store.dispatch("formEdit")
-    }
+      return this.$store.state.travel;
+    },
+    categories() {
+      return this.$store.state.categories;
+    },
   },
   created() {
-    this.fetchTravel()
-  }
-}
+    this.id = this.travel.id;
+    (this.name = this.travel.name), (this.country = this.travel.country);
+    this.city = this.travel.city;
+    this.price = this.travel.price;
+    this.categoryId = this.travel.categoryId;
+    this.$store.dispatch("fetchCategories");
+  },
+  methods: {
+    imagesUrl(imageUrl) {
+      // console.log(imageUrl);
+      this.image = imageUrl.target.files[0]; //from inspect console web
+      if (this.image) this.showImage = URL.createObjectURL(this.image);
+    },
+    clickEditButton() {
+      const data = {
+        id: this.id,
+        name: this.name,
+        country: this.country,
+        city: this.city,
+        price: this.price,
+        image: this.image,
+        categoryId: this.categoryId,
+      };
+      this.$store.dispatch("clickEditButton", data);
+    },
+  },
+};
 </script>

@@ -39,7 +39,7 @@
           class="my-3 text-gray-100 font-bold text-lg tracking-wide"
           v-if="isLoggedIn && user.role == 'admin'"
         >
-          Customer
+          Customers
         </div>
         <!-- 3 dots -->
         <svg
@@ -139,22 +139,22 @@ export default {
       inputMsg: "",
     };
   },
-  // sockets: {
-  //   broadcastMessage(data) {
-  //     // console.log(data, "sockets client");
-  //     this.$store.commit("PUSH_MESSAGE", data);
-  //   }, //sesuai yang ada di io.emit di app.js server
-  // },
+  sockets: {
+    broadcastMessage(data) {
+      // console.log(data, "sockets client");
+      this.$store.commit("PUSH_MESSAGE", data);
+    }, //sesuai yang ada di io.emit di app.js server
+  },
   methods: {
-    // sendMessage() {
-    //   const data = {
-    //     username: localStorage.getItem("username"),
-    //     message: this.inputMsg,
-    //   };
-    //   this.$store.commit("PUSH_MESSAGE", data);
-    //   this.$socket.emit("sendMessage", data);
-    //   this.inputMsg = "";
-    // },
+    sendMessage() {
+      const data = {
+        username: localStorage.getItem("username"),
+        message: this.inputMsg,
+      };
+      this.$store.commit("PUSH_MESSAGE", data);
+      this.$socket.client.emit("sendMessage", data);
+      this.inputMsg = "";
+    },
     checkAccessToken() {
       if (localStorage.getItem("access_token")) {
         this.$store.commit("CHANGE_IS_LOGGED_IN", true);

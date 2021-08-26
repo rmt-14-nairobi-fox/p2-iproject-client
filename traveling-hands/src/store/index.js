@@ -13,7 +13,8 @@ export default new Vuex.Store({
         wishlists: [],
         travel: {},
         wishlist: {},
-        user: {}
+        user: {},
+        categories: []
     },
     mutations: {
         PUSH_MESSAGE(state, payload) {
@@ -42,6 +43,9 @@ export default new Vuex.Store({
         },
         BRING_DATA_TO_FORM_EDIT(state, data) {
             state.travel = data
+        },
+        FETCHING_ALL_CATEGORIES(state, data) {
+            state.categories = data
         }
     },
     actions: {
@@ -245,13 +249,96 @@ export default new Vuex.Store({
                         access_token: localStorage.getItem("access_token")
                     }
                 })
-                console.log(result);
+                context.commit("BRING_DATA_TO_FORM_EDIT", result.data)
                 Vue.$toast.open({
                     message: `Loading Data... please wait`,
                     type: "info",
                 })
                 router.push(`/formEdit/${travelId}`)
-                context.commit("BRING_DATA_TO_FORM_EDIT", result.data)
+            } catch (err) {
+                Vue.$toast.open({
+                    message: 'Something went wrong!',
+                    type: 'error',
+                });
+            }
+        },
+        async clickEditButton(context, data) {
+            try {
+                const id = data.id
+                // const { id, name, country, city, price, image, categoryId } = data;
+                // const form = new FormData();
+                // form.append("name", name);
+                // form.append("country", country);
+                // form.append("city", city);
+                // form.append("price", price);
+                // form.append("images", image); // according file multer.js in middleware
+                // form.append("categoryId", categoryId);
+                // console.log(form);
+                await travelAxios({
+                    method: "PUT",
+                    url: `/destination/${id}`,
+                    headers: {
+                        access_token: localStorage.getItem("access_token")
+                    },
+                    data: data
+                })
+                Vue.$toast.open({
+                    message: `Editing data... please wait`,
+                    type: "info",
+                });
+                context.dispatch("findAllDestinations")
+                router.push('/')
+            } catch (err) {
+                Vue.$toast.open({
+                    message: `${err.message}`,
+                    type: 'error',
+                });
+            }
+        },
+        async clickCreateButton(context, data) {
+            try {
+                // const { name, country, city, price, image, categoryId } = data;
+                // const form = new FormData();
+                // form.append("name", name);
+                // form.append("country", country);
+                // form.append("city", city);
+                // form.append("price", price);
+                // form.append("images", image); // according file multer.js in middleware
+                // form.append("categoryId", categoryId);
+                // console.log(form);
+                await travelAxios({
+                    method: "POST",
+                    url: '/destination',
+                    headers: {
+                        access_token: localStorage.getItem("access_token")
+                    },
+                    data: data
+                })
+                Vue.$toast.open({
+                    message: `Creating data... please wait`,
+                    type: "info",
+                });
+                context.dispatch("findAllDestinations")
+                router.push('/')
+                Vue.$toast.success(`New Destination Added!`);
+            } catch (err) {
+                Vue.$toast.open({
+                    message: `${err.message}`,
+                    type: 'error',
+                });
+            }
+        },
+        async fetchCategories(context) {
+            try {
+                const result = await travelAxios({
+                    method: "GET",
+                    url: "/categories",
+                })
+                context.commit("FETCHING_ALL_CATEGORIES", result.data)
+                Vue.$toast.open({
+                    message: `Loading Data... please wait`,
+                    type: "info",
+                })
             } catch (err) {
                 Vue.$toast.open({
                     message: 'Something went wrong!',

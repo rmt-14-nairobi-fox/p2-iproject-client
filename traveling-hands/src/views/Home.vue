@@ -131,7 +131,7 @@ export default {
 
     },
     editTravel(travelId) {
-      this.$router.push("/formEdit", travelId);
+      this.$store.dispatch("formEdit", travelId)
     },
   },
   created() {

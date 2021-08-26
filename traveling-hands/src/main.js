@@ -6,14 +6,18 @@ import "./assets/tailwind.css";
 import VueToast from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-sugar.css";
 // import VueSocketIO from 'vue-socket.io'
+import VueSocketIOExt from 'vue-socket.io-extended';
+import { io } from 'socket.io-client';
 
+const socket = io('http://localhost:8080');
+Vue.use(VueSocketIOExt, socket);
 Vue.config.productionTip = false;
 Vue.use(VueToast, { position: "top-right" });
 // Vue.use(
 //   new VueSocketIO({
 //     debug: true,
 //     // connection: "https://i-project-handson-vuex.herokuapp.com"
-//     // connection: "http://localhost:8080"
+//     connection: "http://localhost:8080"
 //   })
 // )
 
