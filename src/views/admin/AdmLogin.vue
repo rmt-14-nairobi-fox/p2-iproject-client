@@ -33,8 +33,6 @@
                             text-gray-900
                             rounded-md
                             focus:outline-none
-                            focus:ring-green-500
-                            focus:border-green-500
                             focus:z-10
                         " 
                         placeholder="Email address" 
@@ -58,9 +56,8 @@
                             text-gray-900
                             rounded-md
                             focus:outline-none
-                            focus:ring-green-500
-                            focus:border-green-500
                             focus:z-10
+                            
                         " 
                         placeholder="Password" 
                     />
@@ -79,13 +76,10 @@
 					text-lg
 					font-medium
 					rounded-md
-					text-white
-					bg-green-600
-					hover:bg-green-700
+					text-black
+					bg-blue-400
+					hover:bg-blue-500
 					focus:outline-none
-					focus:ring-2
-					focus:ring-offset-2
-					focus:ring-green-500
 				">
 					Sign in
 				</button>
@@ -105,7 +99,7 @@
 
 			<p class="mb-2">
 				Don't have an account?
-                <router-link to="/admin/register" class="font-medium text-green-600 hover:text-green-500">
+                <router-link to="/admin/register" class="font-medium text-blue-600 hover:text-blue-500">
                     Sign up
                 </router-link>
 			</p>
