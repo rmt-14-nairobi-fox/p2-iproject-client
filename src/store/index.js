@@ -82,8 +82,14 @@ export default new Vuex.Store({
 
         context.dispatch('checkTokenAction');
         router.push({ name: 'Home' });
+        Vue.$toast.success('Logged in!', {
+          position: 'top-right',
+        });
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -91,9 +97,17 @@ export default new Vuex.Store({
       try {
         const response = await server.post('/users/register', payload);
         console.log(response.data);
+        Vue.$toast.success('Register success!', {
+          position: 'top-right',
+        });
         router.push('/auth/login');
       } catch (err) {
         console.log(err.response.data);
+        err.response.data.forEach((error) => {
+          Vue.$toast.error(error.message, {
+            position: 'top-right',
+          });
+        });
       }
     },
 
@@ -107,8 +121,14 @@ export default new Vuex.Store({
 
         context.dispatch('checkTokenAction');
         router.push({ name: 'Home' });
+        Vue.$toast.success('Logged in!', {
+          position: 'top-right',
+        });
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -124,6 +144,9 @@ export default new Vuex.Store({
         context.commit('SET_NEWSPREFS', newsPrefs);
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -138,6 +161,9 @@ export default new Vuex.Store({
         context.commit('SET_NEWS', response.data);
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -154,8 +180,14 @@ export default new Vuex.Store({
         );
 
         console.log(response.data);
+        Vue.$toast.success(response.data.message, {
+          position: 'top-right',
+        });
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -170,6 +202,9 @@ export default new Vuex.Store({
         context.commit('SET_SAVEDNEWS', response.data);
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -183,18 +218,30 @@ export default new Vuex.Store({
 
         console.log(response.data);
         context.dispatch('fetchSavedNews');
+        Vue.$toast.success(response.data.message, {
+          position: 'top-right',
+        });
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
     async getGraph(context) {
       try {
+        Vue.$toast.info('Loading graph...', {
+          position: 'top-right',
+        });
         const response = await server.get('/corona');
 
         context.commit('SET_GRAPH', response.data);
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -206,6 +253,9 @@ export default new Vuex.Store({
 
     async fetchWeather(context) {
       try {
+        Vue.$toast.info('Fetching weather data...', {
+          position: 'top-right',
+        });
         const position = await context.dispatch('getPosition');
         const coords = {
           lat: position.coords.latitude,
@@ -216,11 +266,17 @@ export default new Vuex.Store({
         context.commit('SET_WEATHER', response.data);
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
     async searchAction(context, payload) {
       try {
+        Vue.$toast.info('Searching news...', {
+          position: 'top-right',
+        });
         const response = await server.post('/news/search', payload, {
           headers: {
             access_token: localStorage.access_token,
@@ -230,6 +286,9 @@ export default new Vuex.Store({
         context.commit('SET_NEWS', response.data);
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -244,6 +303,9 @@ export default new Vuex.Store({
         context.commit('SET_POSTS', response.data);
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -258,6 +320,9 @@ export default new Vuex.Store({
         context.commit('SET_MYPOSTS', response.data);
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -271,8 +336,14 @@ export default new Vuex.Store({
 
         console.log(response.data);
         context.dispatch('fetchAllMyPost');
+        Vue.$toast.success(response.data.message, {
+          position: 'top-right',
+        });
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -290,8 +361,14 @@ export default new Vuex.Store({
 
         console.log(response.data);
         context.dispatch('fetchAllMyPost');
+        Vue.$toast.success(response.data.message, {
+          position: 'top-right',
+        });
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -305,8 +382,14 @@ export default new Vuex.Store({
 
         console.log(response.data);
         context.dispatch('fetchAllMyPost');
+        Vue.$toast.success(response.data.message, {
+          position: 'top-right',
+        });
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -318,8 +401,14 @@ export default new Vuex.Store({
           },
         });
         console.log(response.data);
+        Vue.$toast.success(response.data.message, {
+          position: 'top-right',
+        });
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data.message, {
+          position: 'top-right',
+        });
       }
     },
 
@@ -339,9 +428,16 @@ export default new Vuex.Store({
 
         context.dispatch('checkTokenAction');
 
-        router.push({ name: 'Home' });
+        router.go(-1);
+
+        Vue.$toast.success(response.data.message, {
+          position: 'top-right',
+        });
       } catch (err) {
         console.log(err.response.data);
+        Vue.$toast.error(err.response.data[0].message, {
+          position: 'top-right',
+        });
       }
     },
 

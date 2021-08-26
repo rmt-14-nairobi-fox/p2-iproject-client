@@ -101,6 +101,10 @@ export default {
       this.$store.commit('RESET_ALL');
 
       this.$router.push('/auth/login');
+
+      this.$toast.info('Logged out', {
+        position: 'top-right',
+      });
     },
   },
 };

@@ -54,7 +54,7 @@ export default {
     },
   },
   created() {
-    // this.fetchNews();
+    this.fetchNews();
   },
 };
 </script>
