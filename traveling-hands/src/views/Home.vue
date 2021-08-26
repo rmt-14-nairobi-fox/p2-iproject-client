@@ -110,7 +110,6 @@ tr th:nth-child(1) {
 </style>
 
 <script>
-import router from "../router/index";
 export default {
   computed: {
     travels() {
@@ -128,12 +127,12 @@ export default {
       this.$store.dispatch("fetchTravel", travelId);
     },
     deleteTravel(travelId) {
-      console.log(travelId);
+      // console.log(travelId);
       this.$store.dispatch("deleteTravel", travelId);
-      router.push("/");
+
     },
     editTravel() { //travelId
-      router.push("/formEdit");
+      this.$router.push("/formEdit");
       // this.$store.dispatch("fetchTravel", travelId);
     },
   },

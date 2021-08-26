@@ -41,6 +41,12 @@ const routes = [
     component: FormEdit,
   },
   {
+    path: "/helpCenter",
+    name: "HelpCenter",
+    component: () =>
+    import(/* webpackChunkName: "about" */ "../views/HelpCenter.vue"),
+  },
+  {
     path: "/destinations/:id",
     name: "DetailTravel",
     // route level code-splitting

@@ -104,6 +104,8 @@ export default {
         password: this.password,
       };
       this.$store.dispatch("handleRegister", payload);
+      this.email = ""
+      this.password = ""
     },
     clickSignIn() {
       this.$router.push("/login");

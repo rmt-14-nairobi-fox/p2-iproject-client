@@ -7,6 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
+        messages: [],
         isLoggedIn: false,
         travels: [],
         wishlists: [],
@@ -15,6 +16,9 @@ export default new Vuex.Store({
         user: {}
     },
     mutations: {
+        PUSH_MESSAGE(state, payload) {
+            state.messages.push(payload)
+        },
         FETCHING_ALL_TRAVELS(state, data) {
             state.travels = data;
         },
@@ -131,10 +135,7 @@ export default new Vuex.Store({
                 })
                 context.commit("USER_LOGGED_IN", result.data)
             } catch (err) {
-                Vue.$toast.open({
-                    message: `${err.message}`,
-                    type: 'error',
-                });
+                console.log(err.message);
             }
         },
         async findAllDestinations(context) {
@@ -191,7 +192,8 @@ export default new Vuex.Store({
                 });
             }
         },
-        async deleteTravel(travelId) {
+        async deleteTravel(context, travelId) {
+            // console.log(travelId, "store");
             try {
                 Vue.$toast.open({
                     message: `Deleting product... please wait`,
@@ -204,6 +206,7 @@ export default new Vuex.Store({
                         access_token: localStorage.getItem("access_token")
                     }
                 })
+                context.dispatch("findAllDestinations")
             } catch (err) {
                 Vue.$toast.open({
                     message: `Canceled!`,

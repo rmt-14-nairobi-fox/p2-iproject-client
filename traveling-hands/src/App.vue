@@ -44,6 +44,9 @@
             <router-link to="/formCreate">Create Destination</router-link>
           </li>
           <li class="ml-5 px-2 py-1" v-if="isLoggedIn">
+            <router-link to="/helpCenter">Help Center</router-link>
+          </li>
+          <li class="ml-5 px-2 py-1" v-if="isLoggedIn">
             <button @click="signOut">Sign Out</button>
           </li>
         </ul>
