@@ -346,17 +346,12 @@ export default new Vuex.Store({
     },
 
     fetchComment(context, payload) {
-      return server.post(
-        '/comments',
-        {
+      return server.get('/comments', {
+        headers: {
+          access_token: localStorage.access_token,
           post_id: payload,
         },
-        {
-          headers: {
-            access_token: localStorage.access_token,
-          },
-        }
-      );
+      });
     },
   },
   modules: {},
