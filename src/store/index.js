@@ -36,6 +36,17 @@ export default new Vuex.Store({
           id_token: payload
         }
       })
+    },
+    register (context, { username, email, password }) {
+      return mainServer({
+        method: 'POST',
+        url: '/register',
+        data: {
+          username,
+          email,
+          password
+        }
+      })
     }
   },
   modules: {
