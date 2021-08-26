@@ -139,12 +139,12 @@ export default {
       inputMsg: "",
     };
   },
-  sockets: {
-    broadcastMessage(data) {
-      console.log(data, "sockets client");
-      this.$store.commit("PUSH_MESSAGE", data);
-    }, //sesuai yang ada di io.emit di app.js server
-  },
+  // sockets: {
+    // broadcastMessage(data) {
+    //   // console.log(data, "sockets client");
+    //   this.$store.commit("PUSH_MESSAGE", data);
+    // }, //sesuai yang ada di io.emit di app.js server
+  // },
   methods: {
     sendMessage() {
       const data = {
@@ -152,7 +152,7 @@ export default {
         message: this.inputMsg,
       };
       this.$store.commit("PUSH_MESSAGE", data);
-      this.$socket.emit("sendMessage", data);
+      // this.$socket.emit("sendMessage", data);
       this.inputMsg = "";
     },
     checkAccessToken() {

@@ -124,7 +124,7 @@ export default {
   methods: {
     clickLogin() {
       localStorage.setItem("username", this.email);
-      this.$socket.emit("userLogin", this.email)
+      // this.$socket.emit("userLogin", this.email)
       const payload = {
         email: this.email,
         password: this.password,

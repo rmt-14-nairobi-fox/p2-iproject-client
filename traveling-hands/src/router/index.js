@@ -36,7 +36,7 @@ const routes = [
     component: FormCreate,
   },
   {
-    path: "/formEdit",
+    path: "/formEdit/:id",
     name: "FormEdit",
     component: FormEdit,
   },
