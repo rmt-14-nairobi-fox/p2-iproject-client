@@ -3,6 +3,12 @@ import Vuex from "vuex";
 import axios from "../apis/server";
 import router from "@/router/index";
 
+import VueToast from "vue-toast-notification";
+// Import one of the available themes
+//import 'vue-toast-notification/dist/theme-default.css';
+import "vue-toast-notification/dist/theme-sugar.css";
+Vue.use(VueToast);
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -48,9 +54,14 @@ export default new Vuex.Store({
           localStorage.setItem("user_Id", data.user_id);
           context.commit("FETCH_ISAUTH", true);
           router.push({ path: "/" }).catch(() => {});
+          Vue.$toast.open({
+            message: "Login success",
+            type: "success",
+            duration: 2000,
+          });
         })
         .catch((err) => {
-          console.log(err.response.data);
+          context.dispatch("errToast", err);
         });
     },
 
@@ -58,6 +69,11 @@ export default new Vuex.Store({
       localStorage.clear();
       context.commit("FETCH_ISAUTH", false);
       router.push({ path: "/login" }).catch(() => {});
+      Vue.$toast.open({
+        message: "Logout success",
+        type: "success",
+        duration: 2000,
+      });
     },
 
     registerFunction(context, payload) {
@@ -65,9 +81,14 @@ export default new Vuex.Store({
         .post("/public/register", payload)
         .then(() => {
           router.push({ path: "/login" }).catch(() => {});
+          Vue.$toast.open({
+            message: "Success registered!",
+            type: "success",
+            duration: 2000,
+          });
         })
         .catch((err) => {
-          console.log(err.response.data);
+          context.dispatch("errToast", err);
         });
     },
 
@@ -82,7 +103,7 @@ export default new Vuex.Store({
           context.commit("FETCH_ACCOMMODATIONS", data);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          context.dispatch("errToast", err);
         });
     },
 
@@ -97,9 +118,14 @@ export default new Vuex.Store({
           router
             .push({ path: `/accommodation/${data.id}/images` })
             .catch(() => {});
+          Vue.$toast.open({
+            message: "Accommodation has been added ",
+            type: "success",
+            duration: 2000,
+          });
         })
         .catch((err) => {
-          console.log(err.response.data);
+          context.dispatch("errToast", err);
         });
     },
 
@@ -114,7 +140,7 @@ export default new Vuex.Store({
           context.commit("FETCH_ACCOMMODATION", data);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          context.dispatch("errToast", err);
         });
     },
 
@@ -127,9 +153,14 @@ export default new Vuex.Store({
         })
         .then(() => {
           router.push({ path: "/" }).catch(() => {});
+          Vue.$toast.open({
+            message: "Accommodation has been edited ",
+            type: "success",
+            duration: 2000,
+          });
         })
         .catch((err) => {
-          console.log(err.response.data);
+          context.dispatch("errToast", err);
         });
     },
 
@@ -142,9 +173,14 @@ export default new Vuex.Store({
         })
         .then(() => {
           router.push({ path: "/" }).catch(() => {});
+          Vue.$toast.open({
+            message: "Accommodation has been deleted ",
+            type: "success",
+            duration: 2000,
+          });
         })
         .catch((err) => {
-          console.log(err.response.data);
+          context.dispatch("errToast", err);
         });
     },
 
@@ -159,7 +195,7 @@ export default new Vuex.Store({
           context.commit("FETCH_IMAGES", data);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          context.dispatch("errToast", err);
         });
     },
 
@@ -171,12 +207,17 @@ export default new Vuex.Store({
           },
         })
         .then(() => {
+          Vue.$toast.open({
+            message: "Image has been added ",
+            type: "success",
+            duration: 2000,
+          });
           // ! cara ini gk hemat
           context.dispatch("getAllImages", +payload.id);
           // context.dispatch("DELETE_IMAGES", data);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          context.dispatch("errToast", err);
         });
     },
 
@@ -191,10 +232,15 @@ export default new Vuex.Store({
           }
         )
         .then(() => {
+          Vue.$toast.open({
+            message: "Image has been deleted ",
+            type: "success",
+            duration: 2000,
+          });
           context.commit("ADD_NEW_IMAGE", +payload.imageId);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          context.dispatch("errToast", err);
         });
     },
 
@@ -211,14 +257,29 @@ export default new Vuex.Store({
           }
         )
         .then(() => {
-          console.log("done");
+          Vue.$toast.open({
+            message: "Status has been changed",
+            type: "success",
+            duration: 2000,
+          });
+          // console.log("done");
           // ! cara ini gk hemat
           // context.dispatch("getAllImages", +payload.id);
           // context.dispatch("DELETE_IMAGES", data);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          context.dispatch("errToast", err);
         });
+    },
+
+    errToast: function (context, err) {
+      if (err.response.data.message) {
+        err.response.data.message.map((el) => {
+          Vue.$toast.error(el);
+        });
+      } else {
+        Vue.$toast.error(err.response.data);
+      }
     },
   },
   getters: {},
