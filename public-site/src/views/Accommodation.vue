@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="overflow-auto">
     <main class="w-full flex-grow p-6">
       <div
         class="
@@ -294,7 +294,7 @@ export default {
     async onMapLoaded(event, lat, long) {
       // Here we cathing 'load' map event
       const asyncActions = event.component.actions;
-      this.coordinates = [long, lat];
+      this.coordinates = [+long, +lat];
 
       await asyncActions.flyTo({
         //   mapbox [long, lat]

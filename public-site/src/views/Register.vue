@@ -3,11 +3,8 @@
     <main class="w-full flex-grow p-6">
       <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-1/2 mt-6 pl-0 lg:pl-2">
-          <div class="leading-loose">
-            <form
-              class="p-10 bg-white rounded shadow-xl"
-              @submit.prevent="registerHandler"
-            >
+          <div class="leading-loose p-10 bg-white rounded shadow-xl">
+            <form class="" @submit.prevent="registerHandler">
               <p class="text-lg text-gray-800 font-medium pb-4">Register</p>
               <div class="">
                 <label class="block text-sm text-gray-600" for="cus_fullname">
@@ -140,6 +137,29 @@
                 </button>
               </div>
             </form>
+            <div class="mt-2 -m-5">
+              <button
+                @click="loginAuthHandler"
+                class="
+                  font-bold
+                  px-4
+                  py-1
+                  border-2
+                  tracking-wider
+                  font-light
+                  btn-google-color btn btn-google
+                  ml-5
+                "
+              >
+                <div class="flex flex-row">
+                  <img
+                    class="my-auto pr-2"
+                    src="https://img.icons8.com/color/16/000000/google-logo.png"
+                  />
+                  <strong>Login/Register Using Google</strong>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -174,8 +194,32 @@ export default {
       };
       this.$store.dispatch("registerFunction", payload);
     },
+    loginAuthHandler() {
+      this.$gAuth
+        .signIn()
+        .then((res) => {
+          const idToken = res.getAuthResponse().id_token;
+          return this.$store.dispatch("loginAuthFunction", idToken);
+        })
+        .then(() => {})
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>
 
-<style></style>
+<style>
+.btn-google {
+  color: #4285f4;
+  background-color: #ffffff;
+}
+
+.btn {
+  border-radius: 5px;
+  text-transform: capitalize;
+  font-size: 15px;
+  cursor: pointer;
+}
+</style>
