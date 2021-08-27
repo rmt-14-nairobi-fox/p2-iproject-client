@@ -5,6 +5,7 @@
       <div class="px-4 py-12">
         <adm-farm v-show="curTable === 'admFarm'"></adm-farm>
         <adm-request v-show="curTable === 'admReq'"></adm-request>
+        <detail-req v-show="curTable === 'actToFarm'"></detail-req>
       </div>
         <HFooter></HFooter>
     </div>
@@ -17,6 +18,7 @@ import HFooter from 'vue-hacktiv8-footer'
 import AdmFarm from '../../components/admin/AdmFarm.vue'
 import AdmRequest from '../../components/admin/AdmRequest.vue'
 import { mapActions, mapState } from 'vuex'
+import DetailReq from '../../components/admin/DetailReq.vue'
 
 export default {
   name:'AdmHome',
@@ -24,7 +26,8 @@ export default {
     AdmSidebar,
     HFooter,
     AdmFarm,
-    AdmRequest
+    AdmRequest,
+    DetailReq
   },
     computed: {
       ...mapState(['curTable', 'userInfo'])

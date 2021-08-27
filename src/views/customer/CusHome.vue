@@ -6,6 +6,7 @@
             <div class="pt-28 mx-auto container">
                 <cus-card v-show="curPage === 'listCard'"></cus-card>
                 <cus-request v-show="curPage === 'listReq'"></cus-request>
+
             </div>
         </div>
         

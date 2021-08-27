@@ -75,6 +75,15 @@
                                 ">
                                     admin
                                 </th>
+                                <th scope="col" class="
+                                    px-6
+                                    py-3
+                                    text-xs
+                                    uppercase
+                                    tracking-wider
+                                ">
+                                    action
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -109,6 +118,12 @@
                                     {{ item.admin }}
                                 </td>
 
+                                <td class=" px-6 py-4 text-sm text-gray-500">
+                                    <button @click="action(item.id, item.FarmId)" class="bg-blue-400 hover:bg-blue-500 p-1 shadow-sm rounded-md text-black ">
+                                        do action
+                                    </button>
+                                </td>
+
                             </tr>
                         </tbody>
                     </table>
@@ -119,11 +134,22 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapActions, mapMutations, mapState } from 'vuex'
 export default {
     name: 'AdmRequest',
     computed: {
         ...mapState(['reqData'])
+    },
+    methods: {
+        ...mapActions(['getDetailReq', 'getOneFarm']),
+        ...mapMutations({
+            fillCurTable: 'FILL_CUR_TABLE'
+        }),
+        async action(formId, farmId) {
+            await this.getDetailReq(formId)
+            await this.getOneFarm(farmId)
+            this.fillCurTable('actToFarm')
+        }
     }
 }
 </script>

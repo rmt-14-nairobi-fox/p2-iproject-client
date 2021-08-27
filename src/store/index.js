@@ -15,7 +15,9 @@ export default new Vuex.Store({
     farmData: [],
     reqData: [],
     farmDetail: {},
-    weather: {}
+    weather: {},
+    typeTable: [],
+    reqDetail: {}
   },
   mutations: {
     SWITCH_IS_LOGIN(state, payload) {
@@ -41,6 +43,12 @@ export default new Vuex.Store({
     },
     FILL_CUR_PAGE(state, payload) {
       state.curPage = payload;
+    },
+    FILL_TYPE_TABLE(state, payload) {
+      state.typeTable = payload;
+    },
+    FILL_REQ_DETAIL(state, payload) {
+      state.reqDetail = payload;
     }
   },
   actions: {
@@ -57,8 +65,9 @@ export default new Vuex.Store({
     },
 
     async registerAction(context, payload) {
+      console.log(payload);
       try {
-        const result = await axios.post(`${baseUrl + payload.addRoute}/register`, payload)
+        const result = await axios.post(`${baseUrl + payload.addRoute}/register`, payload.data)
         localStorage.setItem('access_token', result.data.access_token)
         context.commit('SWITCH_IS_LOGIN', true)
         context.dispatch('swalSuc', 'register successfull')
@@ -131,7 +140,6 @@ export default new Vuex.Store({
         })
 
         context.commit('FILL_WEATHER', result.data)
-        console.log(result.data);
       } catch (err) {
         context.dispatch('swalErr', err)
       }
@@ -145,6 +153,92 @@ export default new Vuex.Store({
           }
         })
         context.dispatch('swalSuc', 'succes adding request')
+
+      } catch (err) {
+        context.dispatch('swalErr', err)
+      }
+    },
+
+    async getType(context) {
+      try {
+        const result = await axios.get(`${baseUrl}/type`, {
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        context.commit('FILL_TYPE_TABLE', result.data)
+
+      } catch (err) {
+        context.dispatch('swalErr', err)
+      }
+    },
+
+    async createFarm(context, payload) {
+      try {
+        await axios.post(`${baseUrl}/farm`, payload, {
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        context.dispatch('swalSuc', 'succes adding new farm')
+
+      } catch (err) {
+        context.dispatch('swalErr', err)
+      }
+    },
+
+    async getDetailReq(context, payload) {
+      try {
+        const result = await axios.get(`${baseUrl}/admin/form/${payload}`, {
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        context.commit('FILL_REQ_DETAIL', result.data)
+
+      } catch (err) {
+        context.dispatch('swalErr', err)
+      }
+    },
+
+    async putFarm(context, payload) {
+      try {
+        await axios.put(`${baseUrl}/admin/farm/${payload.farmId}`, payload.editForm, {
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+
+        context.dispatch('swalSuc', 'farm data changed')
+
+      } catch (err) {
+        context.dispatch('swalErr', err)
+      }
+    },
+
+    async deletingFarm(context, payload) {
+      try {
+        await axios.delete(`${baseUrl}/admin/farm/${payload.farmId}`, {
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          },
+          data: {
+            formId: payload.formId
+          }
+        })
+        console.log();
+        context.dispatch('swalSuc', 'farm deleted')
+
+      } catch (err) {
+        context.dispatch('swalErr', err)
+      }
+    },
+
+    async sendEmail(context, payload) {
+      try {
+        await axios.post(`${baseUrl}/email`, payload)
+
+        context.dispatch('swalSuc', 'email has send to customer')
 
       } catch (err) {
         context.dispatch('swalErr', err)

@@ -29,12 +29,31 @@
                     {{ item.description }}
                 </p>
 
-                <div class="flex justify-between mt-5 px-8">
+                <div class="flex justify-between mt-5 ">
                     <p class="ml-3">{{ item.area }} ha</p>
                     
 
                     <p class="ml-3">{{ item.location }}</p>
                 </div>
+            </div>
+        </router-link>
+        
+        <router-link
+        to="/farm"
+        style="height: 200px"
+        class="
+            pointer
+            flex 
+            items-center  
+            bg-white 
+            rounded-lg 
+            shadow-2xl 
+            dark:bg-gray-800">
+            
+        
+
+            <div class="h-full w-full flex text-9xl">
+                <span class="m-auto">+</span>
             </div>
         </router-link>
     </div>
