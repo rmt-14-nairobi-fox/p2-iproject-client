@@ -46,7 +46,7 @@ export default {
     this.getProjectById(this.id);
   },
   async mounted() {
-    const API_URL = `http://localhost:3000/api/v1/project/`;
+    const API_URL = `https://freelance-app-hacktiv8.herokuapp.com/api/v1/project/`;
     const response = await axios.get(`${API_URL}/${this.id}`, {
       headers: {
         Authorization: localStorage.getItem("token"),
