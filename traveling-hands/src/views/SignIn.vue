@@ -1,5 +1,6 @@
 <template>
   <section>
+    <br><br>
     <div id="login-page" style="text-align: center">
       <h2>Sign in</h2>
       <small style="color: dimgray">Sign in to access your account</small>
@@ -81,8 +82,8 @@
             >
               Sign up
             </button>
-            <br />
-            Or Sign In with Google
+            <!-- <br /> -->
+            <!-- Or Sign In with Google -->
           </small>
         </div>
         <br />

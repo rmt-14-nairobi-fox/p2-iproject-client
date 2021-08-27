@@ -1,5 +1,6 @@
 <template>
   <section>
+    <br><br>
     <div id="register-page" style="text-align: center">
       <h2>Sign Up</h2>
       <small style="color: dimgray">Sign up to access your account</small>
