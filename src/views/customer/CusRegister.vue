@@ -13,13 +13,13 @@
 		<div class="max-w-md w-full text-center">
 
 			<h2 class="mb-8 text-4xl font-extrabold text-gray-900">
-				Admin Register
+				Register
 			</h2>
 
-			<form @submit.prevent="admRegister" class="mb-8" action="#">
+			<form @submit.prevent="cusRegister" class="mb-8" action="#">
 				<div class="rounded-md shadow-sm">
 					<input
-						v-model="admRegisterData.email"
+						v-model="cusRegisterData.email"
 						type="email" 
 						autocomplete="email" 
 						class="
@@ -40,8 +40,30 @@
 				</div>
 
 				<div class="mt-2 rounded-md shadow-sm">
+					<input
+						v-model="cusRegisterData.phone"
+						type="number" 
+						autocomplete="number" 
+						class="
+							appearance-none
+							relative
+							block
+							w-full
+							px-3
+							py-2
+							placeholder-gray-500
+							text-gray-900
+							rounded-md
+							focus:outline-none
+							focus:z-10
+						" 
+						placeholder="Email address" 
+                    />
+				</div>
+
+				<div class="mt-2 rounded-md shadow-sm">
 					<input 
-						v-model="admRegisterData.password"
+						v-model="cusRegisterData.password"
 						type="password" 
 						autocomplete="password" 
 						class="
@@ -84,9 +106,9 @@
 
 			</form>
 
-			<p class="mb-2">
+			<p>
 				Have an account?
-                <router-link to="/admin/login" class="font-medium text-blue-600 hover:text-blue-500"> 
+                <router-link to="/login" class="font-medium text-blue-600 hover:text-blue-500"> 
                     Sign in 
                 </router-link>
 			</p>
@@ -95,15 +117,17 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex'
+import { mapState, mapActions } from 'vuex'
+
 
 export default {
-    name: 'AdmRegister',
+    name:'CusRegister',
     data() {
         return {
-            admRegisterData: {
+            cusRegisterData: {
                 email: '',
-                password: ''
+                password: '',
+				phone: 0
             }
         }
     },
@@ -112,16 +136,16 @@ export default {
     },
     methods: {
         ...mapActions(['registerAction']),
-        async admRegister() {
+        async cusRegister() {
             await this.registerAction({
-                data: this.admRegisterData,
-                addRoute: '/admin'
+                data: this.cusRegisterData,
+                addRoute: ''
             })
             if (this.isLogin) {
-                for (const key in this.admRegisterData) {
-                    this.admRegisterData[key] = ''
+                for (const key in this.cusRegisterData) {
+                    this.cusRegisterData[key] = ''
                 }
-                this.$router.push({ name: 'AdmHome' })
+                this.$router.push({ name: 'CusHome' })
             }
         }
     }

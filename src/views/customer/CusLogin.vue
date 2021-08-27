@@ -12,13 +12,13 @@
 		<div class="max-w-md w-full text-center">
 
 			<h2 class="mb-8 text-4xl font-extrabold text-gray-900">
-				Admin Log In
+				Log In
 			</h2>
 
-			<form @submit.prevent="admLogin" class="mb-3" action="#">
+			<form @submit.prevent="cusLogin" class="mb-3" action="#">
 				<div class="rounded-md shadow-sm">
 					<input
-                        v-model="admLoginData.email"
+                        v-model="cusLoginData.email"
                         type="email" 
                         name="email" 
                         autocomplete="email" 
@@ -41,7 +41,7 @@
 
 				<div class="mt-2 rounded-md shadow-sm">
 					<input 
-                        v-model="admLoginData.password"
+                        v-model="cusLoginData.password"
                         type="password" 
                         name="password" 
                         autocomplete="password" 
@@ -86,20 +86,9 @@
 
 			</form>
 
-			<p class="mb-3 text-center text-sm text-gray-600">Or</p>
-
-            <!-- <div class="flex justify-center mb-8">
-                <GoogleLogin 
-                    :params="params" 
-                    :renderParams="renderParams" 
-                    :onSuccess="onSuccess" 
-                >
-                </GoogleLogin>
-            </div> -->
-
-			<p class="mb-2">
+			<p class="mt-8">
 				Don't have an account?
-                <router-link to="/admin/register" class="font-medium text-blue-600 hover:text-blue-500">
+                <router-link to="/register" class="font-medium text-blue-600 hover:text-blue-500">
                     Sign up
                 </router-link>
 			</p>
@@ -108,13 +97,13 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
-    name: 'AdmLogin',
+    name:'CusLogin',
     data() {
         return {
-            admLoginData:{
+            cusLoginData:{
                 email: '',
                 password:''
             }
@@ -125,16 +114,17 @@ export default {
     },
     methods: {
         ...mapActions(['loginAction']),
-        async admLogin() {
-            await this.loginAction({
-                data: this.admLoginData,
-                addRoute: '/admin'
+        async cusLogin() {
+            await this.loginAction(
+                {
+                data: this.cusLoginData,
+                addRoute: ''
             })
             if (this.isLogin) {
-                for (const key in this.admLoginData) {
-                    this.admLoginData[key] = ''
+                for (const key in this.cusLoginData) {
+                    this.cusLoginData[key] = ''
                 }
-                this.$router.push({ name: 'AdmHome' })
+                this.$router.push({ name: 'CusHome' })
             }
         }
     }

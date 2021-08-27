@@ -14,13 +14,14 @@
 
         <div class="space-y-24">
             <h1 
+                style="color: var(--blueButton)"
                 class="
                     text-5xl 
                     text-center 
                     mt-9 
-                    text-gray-50"
-                >
-                Kebunku
+                "
+            >
+                KebunKu
             </h1>
 
             <div class="mx-5 space-y-3">

@@ -1,8 +1,8 @@
 <template>
     <div class="w-full">
         <div>
-            <h1 class="text-4xl">Customer Request</h1>
-            <p class="text-gray-500 mt-2">list of request from customer</p>
+            <h1 class="text-4xl">Your Request</h1>
+            <p class="text-gray-500 mt-2">list of your request</p>
         </div>
 
         <div class="flex flex-col mt-8 overflow-x-auto ">
@@ -75,19 +75,10 @@
                                 ">
                                     admin
                                 </th>
-                                <th scope="col" class="
-                                    px-6
-                                    py-3
-                                    text-xs
-                                    uppercase
-                                    tracking-wider
-                                ">
-                                    action
-                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <tr v-for="(item, index) in reqData" :key="'admReq'+item.id">
+                            <tr v-for="(item, index) in reqData" :key="'cusReq'+item.id">
                                 <td class="px-6 py-4 text-sm text-left  text-gray-500">
                                     {{index+1}}
                                 </td>
@@ -118,37 +109,30 @@
                                     {{ item.admin }}
                                 </td>
 
-                                <td class=" px-6 py-4 text-sm text-gray-500">
-                                    <button @click="action(item.id, item.FarmId)" class="bg-blue-400 hover:bg-blue-500 p-1 shadow-sm rounded-md text-black ">
-                                        do action
-                                    </button>
-                                </td>
-
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
+        <button @click="backHome" class="mt-16 bg-red-400 p-2 shadow-lg rounded-md text-white font-black">Back To Home</button>
     </div>
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 export default {
-    name: 'AdmRequest',
+    name: 'CusRequest',
     computed: {
         ...mapState(['reqData'])
     },
     methods: {
-        ...mapActions(['getDetailReq', 'getOneFarm']),
         ...mapMutations({
-            fillCurTable: 'FILL_CUR_TABLE'
+            fillCurPage: 'FILL_CUR_PAGE'
         }),
-        async action(formId, farmId) {
-            await this.getDetailReq(formId)
-            await this.getOneFarm(farmId)
-            this.fillCurTable('actToFarm')
+        backHome() {
+            this.fillCurPage('listCard')
         }
     }
 }
