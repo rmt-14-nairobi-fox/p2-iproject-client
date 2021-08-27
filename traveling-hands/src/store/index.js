@@ -333,6 +333,7 @@ export default new Vuex.Store({
             }
         },
         async checkOutPackage(context, payload) {
+            // console.log(payload);
             try {
                 Vue.$toast.open({
                     message: `Sending Email... please wait`,
@@ -346,6 +347,7 @@ export default new Vuex.Store({
                     },
                     data: payload
                 })
+                // console.log("berhasil axios");
                 context.dispatch("fetchAllWishlists")
                 Vue.$toast.success("Email Sent!, Please check your email inbox");
             } catch (err) {

@@ -100,7 +100,6 @@ export default {
       this.$store.dispatch("fetchAllWishlists");
     },
     checkOutPackage(name, city) {
-      console.log("masuk checkout");
       this.$store.dispatch("checkOutPackage", { name, city })
     }
   },
