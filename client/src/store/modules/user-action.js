@@ -43,6 +43,22 @@ const actions = {
         }
     },
 
+    async employeeRegister(context, payload) {
+        try {
+            const response = await axios.post(`${API_URL}/employee/register`, payload);
+    
+            if(response) {
+                localStorage.setItem('token', response.data)
+                // console.log(response)
+                router.push('/home')
+            }
+            
+        } catch (err) {
+            console.log(err)
+
+        }
+    },
+
     async loginEmployee(context, payload) {
         // console.log(payload);
         try {

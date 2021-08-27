@@ -21,6 +21,7 @@ const actions = {
                 "Authorization": localStorage.getItem('token')
             }
         })
+        console.log(response.data)
         commit('setJobs', response.data)
     },
 
@@ -61,6 +62,20 @@ const actions = {
             }
         })
         commit('getJobs', response.data)
+    },
+
+    async searchJobs(context, e) {
+        const limit = e.target.value
+
+        const response = await axios.get(`${API_URL}?name=${limit}`, {
+            headers: {
+                "Authorization": localStorage.getItem('token')
+            }
+        })
+
+        console.log(limit)
+        console.log(response.data)
+        // context.commit('setJobs', response.data.rows)
     }
 }
 

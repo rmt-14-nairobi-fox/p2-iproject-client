@@ -1,5 +1,5 @@
 import axios from "axios"
-import router from "../../router"
+// import router from "../../router"
 
 const API_URL = 'http://localhost:3000/api/v1/userproject'
 
@@ -48,8 +48,10 @@ const actions = {
                 }
             })
 
-            commit('updateApplyJobs', response.data)
-            router.push('/Home')
+            // console.log(response.data.id)
+
+            commit('updateApplyJobs', response.data.id)
+            // router.push('/Home')
             // console.log(response.data)
         } catch (err) {
             console.log(err)

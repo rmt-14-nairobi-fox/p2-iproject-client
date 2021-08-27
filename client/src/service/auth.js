@@ -12,7 +12,7 @@ const socialMediaAuth = (provider) => {
         var token = credential.accessToken;
         var user = result.user;
 
-        console.log('User', user.email, 'Token::', token)
+        console.log('User', user, 'Token::', token)
         axios.post(`http://localhost:3000/api/v1/user/employee/github`, {
             username: user.email,
             email: user.email,

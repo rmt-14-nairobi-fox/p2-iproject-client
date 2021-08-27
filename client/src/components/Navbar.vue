@@ -1,6 +1,6 @@
 <template>
   <div id="navbar">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary" >
       <div class="container-fluid">
         <a class="navbar-brand" href="/Home">
           <img
@@ -31,7 +31,8 @@
               
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="/add/project">Add Project</a></li>
-                <li><a class="dropdown-item" href="/get/apply">Get Employee</a></li>
+                <li><a class="dropdown-item" href="/add/position">Add Position</a></li>
+                <li><a class="dropdown-item" href="#">Get Employee</a></li>
               </ul>
             </li>
             <li class="nav-item">
@@ -42,17 +43,18 @@
               <a class="nav-link" href="/" v-else>Log In</a>
             </li>
           </ul>
-          <form class="d-flex">
             <input
+              @change="searchJobs($event)"
+              style="width: 300px"
               class="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
+              :value="message"
             />
             <button class="btn btn-outline-success" type="submit">
               Search
             </button>
-          </form>
         </div>
       </div>
     </nav>
@@ -65,11 +67,12 @@ export default {
   data() {
     return {
       access_token: localStorage.getItem("token"),
-      access_role: JSON.parse(atob(localStorage.getItem('token').split('.')[1]))
+      access_role: JSON.parse(atob(localStorage.getItem('token').split('.')[1])),
+      message: ''
     };
   },
   methods: {
-    ...mapActions(["logout"]),
+    ...mapActions(["logout", "searchJobs"]),
     onHandleLogout(e) {
       e.preventDefault();
       this.logout();
