@@ -4,7 +4,7 @@
       <div class="p-6 flex flex-col bg-gray-50 rounded mt-4 shadow w-3/5">
           <div class="h-screen">
           <h1 class="text-xl text-center">{{story.title}}</h1>
-          <p class="text-sm text-center font-semilight">Writen by : Your Full name</p>
+          <p class="text-sm font-semibold text-center font-semilight">Writen by : {{story.User.name}}</p>
           <quill-editor
           id="shownText"
           class="mt-4"

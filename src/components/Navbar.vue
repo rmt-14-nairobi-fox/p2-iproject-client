@@ -14,7 +14,7 @@
           <input 
           v-model="search"
           class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-          type="search" name="search" placeholder="search category/title">
+          type="search" name="search" placeholder="search title">
           <button @click="filter" type="submit" class="absolute right-0 top-0 mt-5 mr-4">
             <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
@@ -28,7 +28,7 @@
   </div>
   <div class="flex flex-col">
     <div class="grid grid-cols-2 gap-2">
-      <div v-if="this.$store.state.isLogin">
+      <div v-if="isLogin">
         <p
           class="
           inline-block
@@ -46,7 +46,7 @@
           <router-link to="addstory">Share Story</router-link>
         </p>
     </div>
-    <div v-if="this.$store.state.isLogin">
+    <div v-if="isLogin">
       <button
         @click="signOut"
         class="
@@ -67,7 +67,7 @@
   <div>
     <router-link to="/login">
       <button
-        v-if="!this.$store.state.isLogin"
+        v-if="!isLogin"
         class="
         inline-block
         text-sm
@@ -87,7 +87,7 @@
   <div>
     <router-link to="/registration">
       <button
-      v-if="!this.$store.state.isLogin"
+      v-if="!isLogin"
       class="
       inline-block
       text-sm
@@ -106,10 +106,10 @@
   </div>
   </div>
   <div class="flex flex-center space-x-1 items-center">
-    <p v-if="this.$store.state.isLogin" class="text-sm">Hey, {{name}}</p>
+    <!-- <p v-if="isLogin" class="text-sm">Hey, {{name}}</p> -->
     <router-link to="/created">
     <button
-     v-if="this.$store.state.isLogin" 
+     v-if="isLogin" 
      @click="seeCreated"
      class="text-sm text-white text-right bg-indigo-400 rounded px-2">See your creation</button>
     </router-link>
@@ -151,8 +151,8 @@
       }
     },
     computed : {
-      name(){
-        return this.$store.state.loginData.name
+      isLogin(){
+        return this.$store.state.isLogin
       }
     }
   };

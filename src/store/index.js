@@ -169,27 +169,11 @@ export default new Vuex.Store({
           gender
         })
 
-        let timerInterval
             Swal.fire({
               title : 'Success',  
-              html: 'Redirecting to home.....',
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading()
-                const b = Swal.getHtmlContainer().querySelector('b')
-                timerInterval = setInterval(() => {
-                  b.textContent = Swal.getTimerLeft()
-                }, 100)
-              },
-              willClose: () => {
-                clearInterval(timerInterval)
-              }
-            }).then((result) => {
-              if (result.dismiss === Swal.DismissReason.timer) {
-                console.log('I was closed by the timer')
-              }
-            })
+              text : 'You are redirecting to Home',
+              icon : 'success'
+              })
 
         localStorage.setItem("access_token", data.access_token)
         context.commit("SET_LOGIN_STATUS_TRUE")

@@ -49,9 +49,6 @@
 						<div class="flex mb-4">
 							<GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" class="mt-3 rounded-xl mx-auto" />
 						</div>
-						<div class="flex mb-4">
-							<button @click.prevent="githubLogin" class="mx-auto">GITHUB LOGIN</button>
-						</div>
 						<div class="text-center">
 							<router-link to="/registration"
 								class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800">
