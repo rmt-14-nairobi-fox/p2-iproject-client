@@ -40,6 +40,28 @@
 				</div>
 
 				<div class="mt-2 rounded-md shadow-sm">
+					<input
+						v-model="cusRegisterData.phone"
+						type="number" 
+						autocomplete="number" 
+						class="
+							appearance-none
+							relative
+							block
+							w-full
+							px-3
+							py-2
+							placeholder-gray-500
+							text-gray-900
+							rounded-md
+							focus:outline-none
+							focus:z-10
+						" 
+						placeholder="Email address" 
+                    />
+				</div>
+
+				<div class="mt-2 rounded-md shadow-sm">
 					<input 
 						v-model="cusRegisterData.password"
 						type="password" 
@@ -104,7 +126,8 @@ export default {
         return {
             cusRegisterData: {
                 email: '',
-                password: ''
+                password: '',
+				phone: 0
             }
         }
     },
