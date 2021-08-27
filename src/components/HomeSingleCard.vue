@@ -66,7 +66,7 @@ export default {
   name: "SingleCard",
   computed : {
     findRecomendation(){
-      return this.$store.state.homeShowStories.stories[0]
+      return this.$store.state.rand
     }
   },
   methods :{

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-const baseUrl = "http://localhost:3000";
+const baseUrl = "https://storytells.herokuapp.com";
 import axios from "axios";
 import Swal from "sweetalert2"
 
@@ -18,7 +18,8 @@ export default new Vuex.Store({
     pageFilterShowStory: [],
     loginData: null,
     userCreations:[],
-    editStory:null
+    editStory:null,
+    rand: []
   },
   mutations: {
     SET_USER_INPUT_VALUE: (state, payload) => {
@@ -58,6 +59,9 @@ export default new Vuex.Store({
     },
     SET_DATA_EDIT: (state, data) => {
       state.editStory = data
+    },
+    SET_RAND: (state, data) => {
+      state.rand = data.choice
     }
   },
   actions: {
@@ -91,7 +95,6 @@ export default new Vuex.Store({
             access_token : localStorage.getItem("access_token")
           }
         })
-        // context.dispatch("readStory", {id})
         const {data} = await axios.get(`${baseUrl}/stories/read/${id}`, {
           headers : {
             access_token : localStorage.getItem("access_token")
@@ -139,30 +142,15 @@ export default new Vuex.Store({
         context.commit("SET_LOGIN_DATA", data)
         context.commit("SET_LOGIN_STATUS_TRUE")
         router.push('/')
-        let timerInterval
         Swal.fire({
-          html: 'Redirect to home.....',
-          timer: 2000,
-          timerProgressBar: true,
-          didOpen: () => {
-            Swal.showLoading()
-            const b = Swal.getHtmlContainer().querySelector('b')
-            timerInterval = setInterval(() => {
-              b.textContent = Swal.getTimerLeft()
-            }, 100)
-          },
-          willClose: () => {
-            clearInterval(timerInterval)
-          }
-        }).then((result) => {
-          if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
-          }
+          title : 'Login Success',
+          text : 'Redirect to home please wait',
+          icon : 'success'
         })
       }
       catch(err){
         Swal.fire({
-          title : "Failed to register",
+          title : "Failed to login",
           text : err.response.data.messages,
           icon : 'warning'
         })
@@ -180,12 +168,39 @@ export default new Vuex.Store({
           date_birth,
           gender
         })
+
+        let timerInterval
+            Swal.fire({
+              title : 'Success',  
+              html: 'Redirecting to home.....',
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading()
+                const b = Swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                  b.textContent = Swal.getTimerLeft()
+                }, 100)
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then((result) => {
+              if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+              }
+            })
+
         localStorage.setItem("access_token", data.access_token)
         context.commit("SET_LOGIN_STATUS_TRUE")
         router.push('/')
       }
       catch(err){
-        console.log(err);
+        Swal.fire({
+          title : "Failed to register",
+          text : err.response.data.messages,
+          icon : 'warning'
+        })
       }
     },
 
@@ -202,9 +217,16 @@ export default new Vuex.Store({
         router.push({name : 'Read', params : {title : data.title}})
       }
       catch(err){
+        console.log(err.response);
+        let errMsg = ''
+        if (err.response.data.messages) {
+          errMsg = err.response.data.messages
+        }else if(err.response.data.messages === "Internal Server Error"){
+          errMsg = 'Invalid input add Story'
+        }
         Swal.fire({
           title : "Oops",
-          text : "You need to login first",
+          text : errMsg,
           icon : 'warning'
         })
 
@@ -226,12 +248,17 @@ export default new Vuex.Store({
             access_token : localStorage.getItem("access_token")
           }
         })
-        console.log(data);
-        context.commit("SET_READ_STORY_STATE", data)
-        // router.push({name : 'Read', params : {title : data.title}})
+        context.commit("SET_TEXT_INPUT", {text:""})
+        context.dispatch("readStory", {id:data.id})
       }
       catch(err){
-        console.log(err);
+        console.log(err.response.name);
+        Swal.fire({
+          title : "Oops",
+          text : err.response.name,
+          icon : 'warning'
+        })
+        router.push({path:'addstory'})
       }
     },
 
@@ -337,6 +364,32 @@ export default new Vuex.Store({
           }
         })
         context.dispatch("readStory", {id:id})
+      }
+      catch(err){
+        console.log(err);
+      }
+    },
+
+    githubLogin : async function(){
+    	const client='b84b484aa5e53a45cd5b'
+    	try{
+    		const data = await axios.get('https://github.com/login/oauth/authorize', {
+    			params : {
+    				client_id : client,
+    				redirect_uri : `${baseUrl}/login`
+    			}
+    		})
+    		console.log(data);
+    	}
+    	catch(err){
+    		console.log(err);
+    	}
+    },
+
+    getChoice : async function(context){
+      try{
+        const {data} = await axios.get(`${baseUrl}/stories/random`)
+        context.commit("SET_RAND", data)
       }
       catch(err){
         console.log(err);

@@ -83,25 +83,11 @@ export default {
     },
 
     openUploadModal(){
-      let timerInterval
+      
       Swal.fire({
-        html: 'Please wait.....',
-        timer: 5000,
-        timerProgressBar: true,
-        didOpen: () => {
-          Swal.showLoading()
-          const b = Swal.getHtmlContainer().querySelector('b')
-          timerInterval = setInterval(() => {
-            b.textContent = Swal.getTimerLeft()
-          }, 100)
-        },
-        willClose: () => {
-          clearInterval(timerInterval)
-        }
-      }).then((result) => {
-        if (result.dismiss === Swal.DismissReason.timer) {
-          console.log('I was closed by the timer')
-        }
+        title : "Please Wait",
+        text : "it may take up to 5 seconds if it is the first time you are using this feature",
+        icon : 'warning'
       })
 
       window.cloudinary.openUploadWidget(

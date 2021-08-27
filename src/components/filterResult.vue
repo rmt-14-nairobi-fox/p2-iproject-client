@@ -7,6 +7,7 @@
 				<p class="text-xl">{{data.title}}</p>
 				<p class="text-sm">{{data.sinopsis}} </p>
 				<button
+				@click="read(data.id)"
 				class="
 				button
 				px-2
@@ -29,5 +30,10 @@
 	export default{
 		name: "FilterResult",
 		props:["data"],
+		methods: {
+			read(id){
+				this.$store.dispatch("readStory", {id})
+			}
+		}
 	}
 </script>

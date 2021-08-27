@@ -105,12 +105,13 @@
   </router-link>       
   </div>
   </div>
-  <div>
+  <div class="flex flex-center space-x-1 items-center">
+    <p v-if="this.$store.state.isLogin" class="text-sm">Hey, {{name}}</p>
     <router-link to="/created">
     <button
      v-if="this.$store.state.isLogin" 
      @click="seeCreated"
-     class="text-sm text-white text-right bg-indigo-200 rounded px-2">See your colletion</button>
+     class="text-sm text-white text-right bg-indigo-400 rounded px-2">See your creation</button>
     </router-link>
   </div>
   </div>
@@ -120,6 +121,7 @@
 
 <script>
   import Swal from 'sweetalert2'
+  import router from '@/router'
   export default {
     name: "Navbar",
     data(){
@@ -137,6 +139,7 @@
         localStorage.clear()
         this.$store.commit("SET_USER_LOGOUT")
         this.$store.commit("SET_LOGIN_DATA", null)
+        router.push('/login')
       },
 
       filter(){
@@ -145,6 +148,11 @@
 
       seeCreated(){
         this.$store.dispatch("seeCreated")
+      }
+    },
+    computed : {
+      name(){
+        return this.$store.state.loginData.name
       }
     }
   };

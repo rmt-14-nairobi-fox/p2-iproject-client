@@ -21,6 +21,7 @@ export default {
     if (localStorage.getItem('access_token')) {
       this.$store.commit("SET_LOGIN_STATUS_TRUE")
     }
+    this.$store.dispatch("getChoice")
   },
 };
 </script>

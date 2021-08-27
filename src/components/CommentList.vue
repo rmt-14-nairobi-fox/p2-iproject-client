@@ -18,9 +18,6 @@
 			Comment,
 		},
 		props: ["story"],
-		created(){
-			console.log(this.story, '<<<<<,');
-		},
 		computed : {
 			comments() {
 				return this.story.UserComment

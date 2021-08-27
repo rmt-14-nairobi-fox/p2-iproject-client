@@ -22,5 +22,8 @@ export default {
     ContentHome,
     SingleCard,
   },
+  created(){
+    this.$store.dispatch("getChoice")
+  }
 };
 </script>

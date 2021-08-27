@@ -52,6 +52,8 @@
 
 <script>
 import router from "@/router";
+import Swal from 'sweetalert2';
+
 export default {
 
   name: "Writer",
@@ -64,10 +66,17 @@ export default {
     };
   },
   methods: {
-    
+
     addText() {
+      
+      Swal.fire({
+        title : "Wait a minute",
+        text : "....",
+        icon : 'info'
+      })    
       this.$store.commit("SET_TEXT_INPUT", { text: this.content });
       this.$store.dispatch("uploadStory");
+
     },
     backStep(){
       router.go(-1)

@@ -18,6 +18,7 @@
 </template>
 
 <script>
+	import Swal from 'sweetalert2';
 	export default{
 		name : "AddComment",
 		data(){
@@ -28,7 +29,10 @@
 		props : ["story"],
 		methods : {
 			addComment(){
-				console.log(this.story.id);
+				Swal.fire({
+					text : "You may comment 1 time",
+					icon : 'info'
+				})			      
 				this.$store.dispatch("AddCommentPost", {reaction:this.reaction, id:this.story.id})
 				this.reaction = ''
 			}

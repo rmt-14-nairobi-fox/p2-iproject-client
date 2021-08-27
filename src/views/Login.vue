@@ -7,7 +7,7 @@
 				<!-- Col -->
 				<div
 					class="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
-					style="background-image: url('https://source.unsplash.com/K4mSJ7kc0As/600x800')"
+					style="background-image: url('https://res.cloudinary.com/stories-for-all/image/upload/v1630025059/TERANG_xoirv1.jpg')"
 				></div>
 				<!-- Col -->
 				<div class="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
@@ -48,6 +48,9 @@
 						</div>
 						<div class="flex mb-4">
 							<GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" class="mt-3 rounded-xl mx-auto" />
+						</div>
+						<div class="flex mb-4">
+							<button @click.prevent="githubLogin" class="mx-auto">GITHUB LOGIN</button>
 						</div>
 						<div class="text-center">
 							<router-link to="/registration"
@@ -92,6 +95,10 @@
 			onSuccess : function(googleUser){
 				const id_token = googleUser.getAuthResponse().id_token;
 				this.$store.dispatch("gLogin", id_token)
+			},
+
+			githubLogin(){
+				this.$store.dispatch("oauthGithub")
 			}
 		}	
 	}

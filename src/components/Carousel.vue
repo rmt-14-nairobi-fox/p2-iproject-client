@@ -14,18 +14,14 @@
         />
         <div
           class="carousel-item absolute opacity-0 rounded-full"
-          style="height: 50vh"
-        >
+          style="height: 50vh">
           <div
             class="
               block
               h-full
               w-full
-              bg-indigo-500
-              text-white text-5xl text-center
-            "
-          >
-            Slide 1
+              text-white text-5xl text-center">
+            <img src="https://res.cloudinary.com/stories-for-all/image/upload/v1630023367/1_ajzipu.jpg">
           </div>
         </div>
         <label
@@ -53,8 +49,7 @@
             inset-y-0
             left-0
             my-auto
-          "
-          >‹</label
+          ">‹</label
         >
         <label
           for="carousel-2"
@@ -102,8 +97,8 @@
               w-full
               bg-orange-500
               text-white text-5xl text-center
-            "
-          >
+            ">
+            <img src="https://res.cloudinary.com/stories-for-all/image/upload/v1630023378/2_cqxmwe.jpg">
             Slide 2
           </div>
         </div>
@@ -181,9 +176,8 @@
               w-full
               bg-green-500
               text-white text-5xl text-center
-            "
-          >
-            Slide 3
+            ">
+            <img src="https://res.cloudinary.com/stories-for-all/image/upload/v1630023382/3_p3e71x.jpg">
           </div>
         </div>
         <label
