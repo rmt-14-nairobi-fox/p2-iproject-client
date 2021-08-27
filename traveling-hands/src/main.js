@@ -9,7 +9,7 @@ import "vue-toast-notification/dist/theme-sugar.css";
 import VueSocketIOExt from 'vue-socket.io-extended';
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:8080');
+const socket = io('https://i-project-handson-vuex.herokuapp.com');
 Vue.use(VueSocketIOExt, socket);
 Vue.config.productionTip = false;
 Vue.use(VueToast, { position: "top-right" });
