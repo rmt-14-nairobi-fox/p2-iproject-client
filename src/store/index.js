@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'https://kebunku-hacktiv8.herokuapp.com'
 
 Vue.use(Vuex)
 
