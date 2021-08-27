@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     currMenu: '',
-    isLogin: false
+    isLogin: false,
+    listP: []
   },
   mutations: {
     SET_CURR_MENU (state, payload) {
@@ -15,6 +16,9 @@ export default new Vuex.Store({
     },
     SET_IS_LOGIN (state, payload) {
       state.isLogin = payload
+    },
+    SET_LIST_P (state, payload) {
+      state.listP = payload
     }
   },
   actions: {
@@ -47,6 +51,31 @@ export default new Vuex.Store({
           password
         }
       })
+    },
+    fetchPetition (context) {
+      mainServer({
+        method: 'GET',
+        url: '/public/home'
+      })
+        .then(({ data }) => {
+          context.commit('SET_LIST_P', data)
+        }).catch(({ response: { data } }) => {
+          console.log(data.message)
+        })
+    },
+    signPet (context, payload) {
+      mainServer({
+        method: 'POST',
+        url: `/signs/${payload}`,
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+        .then(({ data }) => {
+          console.log('Sign succcess')
+        }).catch(({ response: { data } }) => {
+          console.log(data.message)
+        })
     }
   },
   modules: {
