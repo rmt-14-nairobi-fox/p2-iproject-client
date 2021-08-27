@@ -1,7 +1,8 @@
 import axios from 'axios';
 import router from '../../router';
 
-const API_URL = `http://localhost:3000/api/v1/user`
+// const API_URL = `http://localhost:3000/api/v1/user`
+const API_URL = `https://freelance-app-hacktiv8.herokuapp.com/api/v1/user`
 
 const actions = {
     async register(context, payload) {
