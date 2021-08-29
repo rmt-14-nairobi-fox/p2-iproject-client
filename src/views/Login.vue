@@ -1,8 +1,9 @@
 <template>
-  <body class="font-mono bg-gray-400">
+  <body class="font-mono bg-gray-300">
+    <Header></Header>
     <!-- Container -->
     <div class="container mx-auto">
-      <div class="flex justify-center px-6 my-12">
+      <div class="flex justify-center px-6">
         <!-- Row -->
         <div class="w-full xl:w-3/4 lg:w-11/12 flex">
           <!-- Col -->
@@ -149,15 +150,20 @@
         </div>
       </div>
     </div>
+    <HFooter></HFooter>
   </body>
 </template>
 
 <script>
+import HFooter from "vue-hacktiv8-footer";
+import Header from "../components/Header.vue";
 import GoogleLogin from "vue-google-login";
 export default {
   name: "Login",
   components: {
     GoogleLogin,
+    HFooter,
+    Header,
   },
   data() {
     return {
@@ -200,9 +206,15 @@ export default {
 </script>
 
 <style scoped>
+.header {
+  background-color: rgb(128, 0, 60);
+}
 .login {
   background: url("https://i.pinimg.com/originals/3e/8e/a9/3e8ea960694b21d78937038365b0a14f.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+}
+.social-links {
+  display: flex;
 }
 </style>

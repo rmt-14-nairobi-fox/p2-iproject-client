@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="flex justify-center items-center">
-      <div class="pr-8">
+      <div class="pr-8 mr-20">
         <span class="text-xs font-medium">RP.{{ order.Product.price }}</span>
       </div>
       <div><i class="fa fa-close text-xs font-medium"></i></div>

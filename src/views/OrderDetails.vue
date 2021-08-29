@@ -20,15 +20,16 @@
                   <div class="flex items-center">
                     <i class="fa fa-arrow-left text-sm pr-2"></i>
                   </div>
-                  <div class="flex justify-center items-end">
-                    <span class="text-sm font-medium text-gray-400 mr-1"
+                  <div class="flex justify-center items-end mr-2">
+                    <span class="text-sm font-medium text-gray-400 mr-3"
                       >Total:</span
                     >
-                    <span class="text-lg font-bold text-gray-800">
+                    <span class="text-1xl font-bold text-gray-800 mr-1">
                       Rp.
                       {{ this.$store.state.dataOrderDetail.totalPrice }}</span
                     >
                     <span
+                      class="font-bold"
                       v-if="this.$store.state.dataOrderDetail.totalPrice > 1"
                     >
                       ($ {{ this.$store.state.currencyUSD.rates.USD }})
@@ -57,7 +58,7 @@
                   <label class="text-xs text-gray-500">Email</label>
                   <p>{{ this.$store.state.dataLogin.email }}</p>
                 </div>
-                <div class="grid grid-cols-3 gap-2 pt-2 mb-3">
+                <div class="flex justify-center flex-col pt-3">
                   <div class="col-span-2">
                     <label class="text-xs text-gray-500">Address</label>
                     <p>{{ this.$store.state.dataLogin.address }}</p>

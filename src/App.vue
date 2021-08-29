@@ -1,17 +1,11 @@
 <template>
   <div id="app">
-    <Navbar></Navbar>
-
-    <router-view />
-
-    <div>
-      <HFooter></HFooter>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 <script>
-import Navbar from "./components/Navbar.vue";
-import HFooter from "vue-hacktiv8-footer";
+import Navbar from "./components/Sidebar.vue";
+
 export default {
   name: "App",
   created() {
@@ -26,15 +20,34 @@ export default {
   },
   components: {
     Navbar,
-    HFooter,
   },
 };
 </script>
 <style>
+#app {
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+body {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
 .social-links {
   display: flex;
 }
+
 .footer-h8 {
   position: sticky;
+  height: 10vh;
+  bottom: 0;
+}
+
+.logo-hacktiv8 {
+  position: static;
+  max-height: 80px;
 }
 </style>

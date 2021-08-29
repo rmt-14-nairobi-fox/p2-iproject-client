@@ -76,7 +76,7 @@ export default new Vuex.Store({
         });
         localStorage.setItem("access_token", response.data.access_token);
         context.commit("LOGIN_STATUS", true);
-        router.push({ name: "Home" });
+        router.push("/");
       } catch (error) {
         setTimeout(() => {
           Vue.$toast.open({
@@ -179,6 +179,7 @@ export default new Vuex.Store({
         });
 
         context.commit("COMMIT_PRODUCT", response.data);
+        router.push(`/products/${payload}`);
       } catch (error) {}
     },
     async fetchServices(context) {
