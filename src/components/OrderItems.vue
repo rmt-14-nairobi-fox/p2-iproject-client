@@ -1,8 +1,21 @@
 <template>
-  <tr class="border-b hover:bg-orange-100 bg-gray-100">
-    <td class="p-3 px-5">{{ order.id }}</td>
+  <tr class="border-b text-left hover:bg-orange-100 bg-gray-100">
+    <td class="p-3 px-5">{{ order.codeTransaction }}</td>
     <td class="p-3 px-5">Rp. {{ order.totalPrice }}</td>
-    <td class="p-3 px-5">{{ order.isPayment }}</td>
+    <td class="p-3 px-5" style="font-style: italic">
+      <!-- <button
+        class="rounded-full"
+        :class="
+          order.isPayment == 'PENDING'
+            ? 'pending'
+            : order.isPayment == 'PAID'
+            ? 'paid'
+            : 'canceled'
+        "
+      >
+      </button> -->
+      {{ order.isPayment }}
+    </td>
     <td class="p-3 flex">
       <div v-if="order.isPayment === 'PENDING'">
         <button
@@ -157,4 +170,23 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.pending {
+  /* width: 150px;
+  background-color: rgb(255, 166, 0);
+  color: white; */
+  font-style: italic;
+}
+.paid {
+  /* width: 150px;
+  background-color: green;
+  color: white; */
+  font-style: italic;
+}
+.canceled {
+  /* width: 150px;
+  color: white;
+  background-color: rgba(255, 51, 51, 0.912); */
+  font-style: italic;
+}
+</style>

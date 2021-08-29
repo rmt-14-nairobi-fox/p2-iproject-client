@@ -1,5 +1,5 @@
 <template>
-  <div class="text-gray-900 bg-gray-200">
+  <div class="orders">
     <div class="text-center text-xl">
       <h1 class="text-5xl">Your Orders Lists</h1>
       <p v-if="this.$store.state.dataOrder.length <= 0" class="pt-5">
@@ -45,4 +45,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.orders {
+  height: 100%;
+  width: 100%;
+}
+</style>

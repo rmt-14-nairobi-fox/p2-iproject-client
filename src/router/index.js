@@ -9,79 +9,67 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
     path: "/login",
     name: "Login",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Login.vue"),
   },
   {
     path: "/register",
     name: "Register",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Register.vue"),
   },
   {
-    path: "/products/:id",
-    name: "Products",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Products.vue"),
-  },
-  {
-    path: "/payment",
-    name: "Payment",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../components/Payment.vue"),
-  },
-  {
-    path: "/cart",
-    name: "Cart",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Cart.vue"),
-  },
-  {
-    path: "/orders",
-    name: "Orders",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Orders.vue"),
-  },
-  {
-    path: "/order/details/:id",
-    name: "OrderDetails",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/OrderDetails.vue"),
+    path: "",
+    component: Home,
+    children: [
+      {
+        path: "",
+        component: () =>
+          import(/* webpackChunkName: "Overview" */ "../views/Overview.vue"),
+      },
+      {
+        path: "/services",
+        name: "Services",
+        component: () =>
+          import(/* webpackChunkName: "Messages" */ "../views/Services.vue"),
+      },
+      {
+        path: "products/:id",
+        name: "Products",
+        component: () =>
+          import(/* webpackChunkName: "Messages" */ "../views/Products.vue"),
+      },
+      {
+        path: "orders",
+        name: "Orders",
+        component: () =>
+          import(/* webpackChunkName: "Profile" */ "../views/Orders.vue"),
+      },
+      {
+        path: "/order/details/:id",
+        name: "OrderDetails",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/OrderDetails.vue"),
+      },
+      {
+        path: "cart",
+        name: "Cart",
+        component: () =>
+          import(/* webpackChunkName: "Settings" */ "../views/Cart.vue"),
+      },
+      {
+        path: "payment",
+        name: "Payment",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../components/Payment.vue"),
+      },
+    ],
   },
   {
     path: "*",
     name: "NotFound",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/NotFound.vue"),
   },
@@ -95,7 +83,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.name === "Login" && localStorage.getItem("access_token")) {
-    next({ name: "Home" });
+    next({ path: "" });
     Vue.$toast.open({
       message: "You already login!",
       type: "info",
@@ -103,7 +91,7 @@ router.beforeEach((to, from, next) => {
     });
   }
   if (to.name === "Register" && localStorage.getItem("access_token")) {
-    next({ name: "Home" });
+    next({ path: "" });
     Vue.$toast.open({
       message: "You already login!",
       type: "info",
@@ -111,7 +99,7 @@ router.beforeEach((to, from, next) => {
     });
   }
   if (to.name === "Products" && !localStorage.getItem("access_token")) {
-    next({ name: "Home" });
+    next({ path: "" });
     Vue.$toast.open({
       message: "Please login first!",
       type: "info",
@@ -119,7 +107,7 @@ router.beforeEach((to, from, next) => {
     });
   }
   if (to.name === "Checkout" && !localStorage.getItem("access_token")) {
-    next({ name: "Home" });
+    next({ path: "" });
     Vue.$toast.open({
       message: "Please login first!",
       type: "info",
@@ -127,7 +115,7 @@ router.beforeEach((to, from, next) => {
     });
   }
   if (to.name === "Payment" && !localStorage.getItem("access_token")) {
-    next({ name: "Home" });
+    next({ path: "" });
     Vue.$toast.open({
       message: "Please login first!",
       type: "info",
@@ -135,7 +123,7 @@ router.beforeEach((to, from, next) => {
     });
   }
   if (to.name === "Orders" && !localStorage.getItem("access_token")) {
-    next({ name: "Home" });
+    next({ path: "" });
     Vue.$toast.open({
       message: "Please login first!",
       type: "info",
@@ -143,7 +131,7 @@ router.beforeEach((to, from, next) => {
     });
   }
   if (to.name === "OrderDetails" && !localStorage.getItem("access_token")) {
-    next({ name: "Home" });
+    next({ path: "" });
     Vue.$toast.open({
       message: "Please login first!",
       type: "info",
@@ -151,7 +139,7 @@ router.beforeEach((to, from, next) => {
     });
   }
   if (to.name === "Cart" && !localStorage.getItem("access_token")) {
-    next({ name: "Home" });
+    next({ path: "" });
     Vue.$toast.open({
       message: "Please login first!",
       type: "info",

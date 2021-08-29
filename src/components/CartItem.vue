@@ -2,15 +2,17 @@
   <div class="flex justify-between items-center mt-6 pt-6 border-t">
     <div class="flex items-center">
       <img :src="item.User.imgUser" width="80" />
+
       <div class="flex flex-col ml-3">
         <span class="text-md font-medium">{{ item.name }}</span>
         <span class="text-xs font-light text-gray-400">{{
           item.User.username
         }}</span>
+        <span class="text-xs font-light text-gray-400"> {{ item.detail }}</span>
       </div>
     </div>
     <div class="flex justify-center items-center">
-      <div class="pr-8">
+      <div class="pr-10">
         <span class="text-xs font-medium">RP.{{ item.price }}</span>
       </div>
       <div>

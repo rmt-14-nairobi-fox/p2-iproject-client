@@ -63,6 +63,7 @@
         <span class="mx-1">Take Service</span>
       </button>
       <button
+        @click.prevent="chatProv"
         class="
           flex
           items-center
@@ -80,7 +81,7 @@
           dark:bg-gray-800
           hover:bg-yellow-300
           dark:hover:bg-gray-700
-          focus:outline-none focus:bg-blue-500
+          focus:outline-none focus:bg-yellow-500
           dark:focus:bg-gray-700
         "
       >
@@ -113,6 +114,13 @@ export default {
       this.$store.commit("COMMIT_ADD_CART", product);
       this.$toast.open({
         message: "Succes add service to cart!",
+        type: "success",
+        position: "top",
+      });
+    },
+    chatProv() {
+      this.$toast.open({
+        message: "Comming soon...",
         type: "success",
         position: "top",
       });

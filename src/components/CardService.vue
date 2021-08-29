@@ -1,8 +1,11 @@
 <template>
-  <div class="rounded bg-red-100 overflow-hidden shadow-lg">
+  <div
+    class="rounded bg-red-100 overflow-hidden shadow-lg"
+    style="max-height: 40vh"
+  >
     <img
       class="w-full"
-      style="min-height: 200px; max-height: 300px; object-fit: cover"
+      style="min-height: 100px; max-height: 130px; object-fit: cover"
       :src="service.imgUrl"
       alt="Mountain"
     />
@@ -13,7 +16,7 @@
         class="
           flex
           font-bold
-          text-xl
+          text-l
           mb-2
           md:inline-flex
           items-center
@@ -23,7 +26,7 @@
         <span>{{ service.name }}</span>
       </a>
 
-      <p class="text-gray-700 text-base">
+      <p class="text-gray-700 text-sm">
         {{ service.description }}
       </p>
     </div>
