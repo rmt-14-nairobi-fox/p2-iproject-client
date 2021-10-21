@@ -9,14 +9,14 @@
         <h2 class="w-3/12 text-2xl font-md main-dark-text">Minimum :</h2>
         <div class="w-9/12 rounded-md main-dark-bg accent-orange-text flex items-center justify-between pr-3">
           <input type="text" class=" shadow-inner rounded-md main-dark-bg accent-orange-text py-1 px-3" v-model="minPrice">
-          <h1>{{currency}}</h1>
+          <h1>USD</h1>
         </div>
       </div>
       <div class="w-5/12 flex pr-5">
         <h2 class=" w-3/12 text-2xl font-md main-dark-text">Maximum :</h2>
         <div class="w-9/12 rounded-md main-dark-bg accent-orange-text flex items-center justify-between pr-3">
           <input type="text" class=" shadow-inner rounded-md main-dark-bg accent-orange-text py-1 px-3" v-model="maxPrice">
-          <h1>{{currency}}</h1>
+          <h1>USD</h1>
         </div>
         <!-- <input type="text" class="w-9/12 shadow-inner rounded-md main-dark-bg accent-orange-text py-1 px-3" v-model="maxPrice"> -->
       </div>
@@ -63,8 +63,8 @@ export default {
         maxPrice: this.maxPrice
       }
       if (this.watcher.Coin.symbol !== 'BTC') {
-        data.minPrice = data.minPrice / this.btcPrice / this.currencyRatio
-        data.maxPrice = data.maxPrice / this.btcPrice / this.currencyRatio
+        data.minPrice = data.minPrice / this.btcPrice
+        data.maxPrice = data.maxPrice / this.btcPrice
       }
       if (data.minPrice >= this.watcher.Coin.price && data.minPrice !== 0) {
         console.log('minimum Treshold cannot be bigger than current price')
@@ -90,8 +90,6 @@ export default {
       this.minPrice = this.watcher.minPrice
       this.maxPrice = this.watcher.maxPrice
     }
-    this.minPrice = this.minPrice * this.currencyRatio
-    this.maxPrice = this.maxPrice * this.currencyRatio
   }
 
 }

@@ -9,7 +9,6 @@
       <h1 class="mr-3 accent-orange-text font-thin text-xl">X</h1>
       <div class="flex items-center">
         <img class="h-12 mr-1" src="https://ik.imagekit.io/ztg2jcaeb0e/Companies/LOGO_H5raSFUVQ.png?updatedAt=1627915336751" >
-        <h1 class="mr-3 accent-orange-text font-light text-2xl">Baskoro Pandu</h1>
       </div>
     </div>
     <div class="footer-h8-bottom-row">
